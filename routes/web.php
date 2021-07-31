@@ -24,3 +24,6 @@ Route::get('auth/twitter/login', [TwitterLoginController::class, 'redirectToProv
 Route::get('auth/twitter/callback',[TwitterLoginController::class, 'handleProviderCallback']);
 // ログアウトURL
 Route::get('auth/twitter/logout', [TwitterLoginController::class, 'logout']);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
