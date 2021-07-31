@@ -46,7 +46,7 @@ class TwitterLoginController extends Controller
          }
          Log::info('Twitterから取得しました。', ['user' => $twitterUser]);
          Auth::login($user);
-         return redirect('/');
+         return redirect('/home');
      }
 
      public function logout()
