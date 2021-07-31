@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TwitterLoginController;
-use App\Http\Controllers\AppController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +14,9 @@ use App\Http\Controllers\AppController;
 |
 */
 
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('welcome');
-})->name('login');
+});
 
 // ログインURL
 Route::get('auth/twitter/login', [TwitterLoginController::class, 'redirectToProvider']);
@@ -25,6 +24,3 @@ Route::get('auth/twitter/login', [TwitterLoginController::class, 'redirectToProv
 Route::get('auth/twitter/callback',[TwitterLoginController::class, 'handleProviderCallback']);
 // ログアウトURL
 Route::get('auth/twitter/logout', [TwitterLoginController::class, 'logout']);
-
-// SPA用ルート
-Route::get('/{any}', [AppController::class, 'index'])->where('any', '.*');
