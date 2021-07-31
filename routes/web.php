@@ -18,5 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('auth/login/twitter', [TwitterLoginController::class, 'redirectToProvider']);
+// ログインURL
+Route::get('auth/twitter/login', [TwitterLoginController::class, 'redirectToProvider']);
+// コールバックURL
 Route::get('auth/twitter/callback',[TwitterLoginController::class, 'handleProviderCallback']);
+// ログアウトURL
+Route::get('auth/twitter/logout', [TwitterLoginController::class, 'logout']);
