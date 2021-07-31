@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TwitterLoginController;
+use App\Http\Controllers\AppController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,10 @@ Route::get('auth/twitter/login', [TwitterLoginController::class, 'redirectToProv
 Route::get('auth/twitter/callback',[TwitterLoginController::class, 'handleProviderCallback']);
 // ログアウトURL
 Route::get('auth/twitter/logout', [TwitterLoginController::class, 'logout']);
+// TODO Auth系のルートはスーパーアドミン以外アクセス不可とする
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('{any}', [AppController::class, 'index'])
+    ->where('any', '.*')
+    ->middleware('auth')
+    ->name('home');
