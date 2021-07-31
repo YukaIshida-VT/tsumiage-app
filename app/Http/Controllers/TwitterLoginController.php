@@ -31,26 +31,21 @@ class TwitterLoginController extends Controller
         } catch (Exception $e) {
             return redirect('auth/twitter');
         }
-         if(User::where('email', $twitterUser->getEmail())->exists()){
-            //ツイッターで作成されたユーザーならそのままパスする
-            $user = User::where('email', $twitterUser->getEmail())->first();
-            if(!$user->twitter){
-                dd("すでに同じメールアドレスが登録されています。");
-            }
+         if(User::where('email', $twitterUser->getId())->exists()){
+            $user = User::where('email', $twitterUser->getId())->first();
          }else{
             $user = new User();
             //ユーザーに必要な情報
             $user->name = $twitterUser->getName();
-            $user->email = $twitterUser->getEmail() ?? 'no_email@exaple.com';
+            $user->email = $twitterUser->id;
             $user->password = md5(Str::uuid());
-            $user->profile_photo_path = $twitterUser->getAvatar();
-            $user->twitter = true;
+            $user->avatar = $twitterUser->getAvatar();
             $user->nickname = $twitterUser->getNickname();
             $user->save();
             
          }
          Log::info('Twitterから取得しました。', ['user' => $twitterUser]);
          Auth::login($user);
-         return redirect('/dashboard');
+         return redirect('/');
      }
 }

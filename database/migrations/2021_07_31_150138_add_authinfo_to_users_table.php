@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAuthonfoToUsersTable extends Migration
+class AddAuthinfoToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,8 @@ class AddAuthonfoToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->boolean('twitter')->default(false)->comment('Twitterでログインフラグ');
-            $table->text('nickname')->nullable()->comment('TwitterID');
-            $table->text('profile_photo_path')->nullable()->comment('Twitterプロフィール画像パス');
+            $table->text('nickname')->nullable();
+            $table->text('avatar')->nullable()->comment('Twitterプロフィール画像パス');
         });
     }
 
