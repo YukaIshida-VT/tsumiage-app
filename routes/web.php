@@ -16,7 +16,8 @@ use App\Http\Controllers\AppController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // TODO ツイッターログイン済であればhomeにリダイレクト
+    return view('twitterLogin');
 });
 
 // ログインURL
