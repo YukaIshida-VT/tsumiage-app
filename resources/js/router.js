@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from "./views/Home";
-import ContactsCreate from "./views/ContactsCreate";
+import TsumiageCreate from "./views/TsumiageCreate";
 import ContactsShow from "./views/ContactsShow";
 import ContactsEdit from "./views/ContactsEdit";
 import ContactsIndex from "./views/ContactsIndex";
@@ -14,22 +14,22 @@ export default new VueRouter({
     routes: [
         {
             path: '/home', component: Home,
-            meta: { title: 'Home' }
+            meta: { title: 'ホーム' }
         }, {
             path: '/contacts', component: ContactsIndex,
             meta: { title: 'Contacts' }
         }, {
-            path: '/contacts/create', component: ContactsCreate,
-            meta: { title: 'Add New Contact' }
+            path: '/tsumiage/create', component: TsumiageCreate,
+            meta: { title: '積み上げ入力' }
         }, {
             path: '/contacts/:id', component: ContactsShow, name: 'ContactsShow',
-            meta: { title: 'Details for Contact' }
+            meta: { title: '積み上げ詳細' }
         }, {
             path: '/contacts/:id/edit', component: ContactsEdit,
-            meta: { title: 'Edit Contact' }
+            meta: { title: '積み上げ編集' }
         }, {
             path: '/birthdays', component: BirthdaysIndex,
-            meta: { title: 'This Month\'s Birthdays' }
+            meta: { title: '積み上げ集計' }
         }, {
             path: '/logout', component: Logout
         }
