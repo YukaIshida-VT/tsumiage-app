@@ -35,7 +35,6 @@ class TwitterLoginController extends Controller
             $user = User::where('email', $twitterUser->getId())->first();
          }else{
             $user = new User();
-            //ユーザーに必要な情報
             $user->name = $twitterUser->getName();
             $user->email = $twitterUser->id;
             $user->password = md5(Str::uuid());
