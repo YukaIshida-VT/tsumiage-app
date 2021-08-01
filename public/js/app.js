@@ -2557,6 +2557,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "TsumiageCreate",
@@ -2574,6 +2575,9 @@ __webpack_require__.r(__webpack_exports__);
       errors: null
     };
   },
+  mounted: function mounted() {
+    this.displayToday();
+  },
   methods: {
     submitForm: function submitForm() {
       var _this = this;
@@ -2583,6 +2587,13 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (errors) {
         _this.errors = errors.response.data.errors;
       });
+    },
+    displayToday: function displayToday() {
+      var now = new Date();
+      var Year = now.getFullYear();
+      var Month = now.getMonth() + 1;
+      var Day = now.getDate();
+      document.getElementById("DateTimeDisp").innerHTML = Year + "年" + Month + "月" + Day + "日";
     }
   }
 });
@@ -40588,6 +40599,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c("div", { staticClass: "mb-4", attrs: { id: "DateTimeDisp" } }),
+    _vm._v(" "),
     _c(
       "form",
       {

@@ -1,5 +1,6 @@
 <template>
     <div>
+        <div id="DateTimeDisp" class="mb-4"></div>
         <form @submit.prevent="submitForm">
             <InputField name="tsumiage1" label="積み上げその1" :errors="errors"
             placeholder="" @update:field="form.tsumiage1 = $event" />
@@ -43,6 +44,10 @@
             }
         },
 
+        mounted() {
+            this.displayToday();
+        },
+
         methods: {
             submitForm: function () {
                 axios.post('/api/contacts', this.form)
@@ -52,7 +57,16 @@
                     .catch(errors => {
                         this.errors = errors.response.data.errors;
                     });
-            }
+            },
+
+            displayToday: function () {
+                var now = new Date();
+                var Year = now.getFullYear();
+                var Month = now.getMonth()+1;
+                var Day = now.getDate();
+
+                document.getElementById("DateTimeDisp").innerHTML = Year + "年" + Month + "月" + Day + "日";
+            },
         }
     }
 </script>
