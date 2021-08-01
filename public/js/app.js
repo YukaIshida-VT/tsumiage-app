@@ -2211,8 +2211,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "UserCircle",
@@ -40047,18 +40045,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass:
-        "rounded-full border border-gray-400 text-white bg-blue-400 w-10 h-10 flex justify-center items-center"
-    },
-    [
-      _c("img", {
-        attrs: { src: _vm.authUser.data.attributes.avatar, alt: "" }
-      })
-    ]
-  )
+  return _c("img", {
+    staticClass: "rounded-full border border-gray-400 w-14 h-14",
+    attrs: { src: _vm.authUser.data.attributes.avatar, alt: "twitter avatar" }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true

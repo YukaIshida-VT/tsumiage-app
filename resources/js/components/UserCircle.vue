@@ -1,7 +1,5 @@
 <template>
-    <div class="rounded-full border border-gray-400 text-white bg-blue-400 w-10 h-10 flex justify-center items-center">
-        <img :src="authUser.data.attributes.avatar" alt="">
-    </div>
+        <img :src="authUser.data.attributes.avatar" alt="twitter avatar" class="rounded-full border border-gray-400 w-14 h-14">
 </template>
 
 <script>
