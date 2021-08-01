@@ -73,6 +73,10 @@
             SearchBar
         },
 
+        mounted() {
+            this.$store.dispatch('fetchAuthUser');
+        },
+
         created() {
             this.title = this.$route.meta.title;
 
