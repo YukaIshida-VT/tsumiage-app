@@ -13,7 +13,7 @@ Vue.use(VueRouter);
 export default new VueRouter({
     routes: [
         {
-            path: '/', component: ExampleComponent,
+            path: '/home', component: ExampleComponent,
             meta: { title: 'Welcome' }
         }, {
             path: '/contacts', component: ContactsIndex,
