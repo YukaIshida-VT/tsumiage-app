@@ -44,7 +44,7 @@
 
                     <div class="flex items-center">
                         <SearchBar />
-                        <UserCircle :name="user.name" />
+                        <UserCircle />
                     </div>
                 </div>
 
@@ -60,6 +60,7 @@
 <script>
     import UserCircle from './UserCircle';
     import SearchBar from '../components/SearchBar';
+    import { mapGetters } from 'vuex';
 
     export default {
         name: "App",
@@ -67,6 +68,12 @@
         props: [
             'user'
         ],
+
+        computed: {
+            ...mapGetters({
+                authUser: 'authUser'
+            })
+        },
 
         components: {
             UserCircle,
