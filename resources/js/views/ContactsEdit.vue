@@ -30,7 +30,7 @@
     import InputField from '../components/InputField';
 
     export default {
-        name: "ContactsCreate",
+        name: "ContactsEdit",
 
         components: {
             InputField
