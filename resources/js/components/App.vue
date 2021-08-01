@@ -84,7 +84,7 @@
             },
 
             title() {
-                document.title = this.title + ' | Jot - The SPA App'
+                document.title = this.title + ' | Tsumiage App'
             }
         }
     }

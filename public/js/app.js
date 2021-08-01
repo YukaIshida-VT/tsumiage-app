@@ -1952,7 +1952,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.title = to.meta.title;
     },
     title: function title() {
-      document.title = this.title + ' | Jot - The SPA App';
+      document.title = this.title + ' | Tsumiage App';
     }
   }
 });
