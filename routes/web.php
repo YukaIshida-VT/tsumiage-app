@@ -25,7 +25,7 @@ Route::get('auth/twitter/login', [TwitterLoginController::class, 'redirectToProv
 // コールバックURL
 Route::get('auth/twitter/callback',[TwitterLoginController::class, 'handleProviderCallback']);
 // ログアウトURL
-Route::get('auth/twitter/logout', [TwitterLoginController::class, 'logout']);
+Route::get('auth/twitter/logout', [TwitterLoginController::class, 'logout'])->name('twitterLogout');
 // TODO Auth系のルートはスーパーアドミン以外アクセス不可とする
 Auth::routes();
 
