@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-200 text-gray-800 antialiased font-sans">Start</div>
+  <div class="">Welcome to Jot!!!!</div>
 </template>
 
 <script>
