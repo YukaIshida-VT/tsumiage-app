@@ -36,7 +36,7 @@ class TwitterLoginController extends Controller
          }else{
             $user = new User();
             $user->name = $twitterUser->getName();
-            $user->email = $twitterUser->id;
+            $user->email = $twitterUser->getId();
             $user->password = md5(Str::uuid());
             $user->api_token = Str::random(32);
             $user->avatar = $twitterUser->getAvatar();
