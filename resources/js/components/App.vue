@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="flex items-center">
-                        <SearchBar />
+                        <div class="pr-4 text-sm">{{ authUser.data.attributes.name }}さん</div>
                         <UserCircle />
                     </div>
                 </div>

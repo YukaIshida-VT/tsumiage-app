@@ -39709,7 +39709,13 @@ var render = function() {
               _c(
                 "div",
                 { staticClass: "flex items-center" },
-                [_c("SearchBar"), _vm._v(" "), _c("UserCircle")],
+                [
+                  _c("div", { staticClass: "pr-4 text-sm" }, [
+                    _vm._v(_vm._s(_vm.authUser.data.attributes.name) + "さん")
+                  ]),
+                  _vm._v(" "),
+                  _c("UserCircle")
+                ],
                 1
               )
             ]
@@ -40047,7 +40053,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("img", {
-    staticClass: "rounded-full border border-gray-400 w-14 h-14",
+    staticClass: "rounded-full border border-gray-400 w-10 h-10",
     attrs: { src: _vm.authUser.data.attributes.avatar, alt: "twitter avatar" }
   })
 }

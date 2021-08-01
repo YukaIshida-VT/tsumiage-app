@@ -1,5 +1,5 @@
 <template>
-        <img :src="authUser.data.attributes.avatar" alt="twitter avatar" class="rounded-full border border-gray-400 w-14 h-14">
+        <img :src="authUser.data.attributes.avatar" alt="twitter avatar" class="rounded-full border border-gray-400 w-10 h-10">
 </template>
 
 <script>
