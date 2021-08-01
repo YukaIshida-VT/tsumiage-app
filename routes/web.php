@@ -21,7 +21,7 @@ Route::get('/', function () {
 });
 
 // ログインURL
-Route::get('auth/twitter/login', [TwitterLoginController::class, 'redirectToProvider']);
+Route::get('auth/twitter/login', [TwitterLoginController::class, 'redirectToProvider'])->name('twitterLogin');
 // コールバックURL
 Route::get('auth/twitter/callback',[TwitterLoginController::class, 'handleProviderCallback']);
 // ログアウトURL
