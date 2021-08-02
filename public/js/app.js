@@ -2563,43 +2563,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ItemsEdit",
@@ -2623,11 +2586,16 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: {
-        'name': '',
-        'email': '',
-        'company': '',
-        'birthday': '',
-        'contact_id': ''
+        'item1': '',
+        'item2': '',
+        'item3': '',
+        'item4': '',
+        'item5': '',
+        'item6': '',
+        'item7': '',
+        'item8': '',
+        'item9': '',
+        'item10': ''
       },
       errors: null
     };
@@ -40862,304 +40830,22 @@ var render = function() {
         }
       },
       [
-        _c("InputField", {
-          attrs: {
-            name: "item1",
-            label: "項目1",
-            errors: _vm.errors,
-            placeholder: "",
-            data: _vm.form.item1
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.item1 = $event
+        _vm._l(5, function(n) {
+          return _c("InputField", {
+            key: n,
+            attrs: {
+              name: "item" + n,
+              label: "項目" + n,
+              errors: _vm.errors,
+              placeholder: "",
+              data: "form.item" + n
+            },
+            on: {
+              "update:field": function($event) {
+                _vm.form.item = $event
+              }
             }
-          }
-        }),
-        _vm._v(" "),
-        _c("InputField", {
-          attrs: {
-            name: "item2",
-            label: "項目2",
-            errors: _vm.errors,
-            placeholder: "",
-            data: _vm.form.item2
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.item2 = $event
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("InputField", {
-          attrs: {
-            name: "item3",
-            label: "項目3",
-            errors: _vm.errors,
-            placeholder: "",
-            data: _vm.form.item3
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.item3 = $event
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("InputField", {
-          attrs: {
-            name: "item4",
-            label: "項目4",
-            errors: _vm.errors,
-            placeholder: "",
-            data: _vm.form.item4
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.item4 = $event
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("InputField", {
-          attrs: {
-            name: "item5",
-            label: "項目5",
-            errors: _vm.errors,
-            placeholder: "",
-            data: _vm.form.item5
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.item5 = $event
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("InputField", {
-          attrs: {
-            name: "item6",
-            label: "項目6",
-            errors: _vm.errors,
-            placeholder: "",
-            data: _vm.form.item6
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.item6 = $event
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("InputField", {
-          attrs: {
-            name: "item7",
-            label: "項目7",
-            errors: _vm.errors,
-            placeholder: "",
-            data: _vm.form.item7
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.item7 = $event
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("InputField", {
-          attrs: {
-            name: "item8",
-            label: "項目8",
-            errors: _vm.errors,
-            placeholder: "",
-            data: _vm.form.item8
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.item8 = $event
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("InputField", {
-          attrs: {
-            name: "item9",
-            label: "項目9",
-            errors: _vm.errors,
-            placeholder: "",
-            data: _vm.form.item9
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.item9 = $event
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("InputField", {
-          attrs: {
-            name: "item10",
-            label: "項目10",
-            errors: _vm.errors,
-            placeholder: "",
-            data: _vm.form.item10
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.item10 = $event
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("InputField", {
-          attrs: {
-            name: "item11",
-            label: "項目11",
-            errors: _vm.errors,
-            placeholder: "",
-            data: _vm.form.item11
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.item11 = $event
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("InputField", {
-          attrs: {
-            name: "item12",
-            label: "項目12",
-            errors: _vm.errors,
-            placeholder: "",
-            data: _vm.form.item12
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.item12 = $event
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("InputField", {
-          attrs: {
-            name: "item13",
-            label: "項目13",
-            errors: _vm.errors,
-            placeholder: "",
-            data: _vm.form.item13
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.item13 = $event
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("InputField", {
-          attrs: {
-            name: "item14",
-            label: "項目14",
-            errors: _vm.errors,
-            placeholder: "",
-            data: _vm.form.item14
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.item14 = $event
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("InputField", {
-          attrs: {
-            name: "item15",
-            label: "項目15",
-            errors: _vm.errors,
-            placeholder: "",
-            data: _vm.form.item15
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.item15 = $event
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("InputField", {
-          attrs: {
-            name: "item16",
-            label: "項目16",
-            errors: _vm.errors,
-            placeholder: "",
-            data: _vm.form.item16
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.item16 = $event
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("InputField", {
-          attrs: {
-            name: "item17",
-            label: "項目17",
-            errors: _vm.errors,
-            placeholder: "",
-            data: _vm.form.item17
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.item17 = $event
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("InputField", {
-          attrs: {
-            name: "item18",
-            label: "項目18",
-            errors: _vm.errors,
-            placeholder: "",
-            data: _vm.form.item18
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.item18 = $event
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("InputField", {
-          attrs: {
-            name: "item19",
-            label: "項目19",
-            errors: _vm.errors,
-            placeholder: "",
-            data: _vm.form.item19
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.item19 = $event
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("InputField", {
-          attrs: {
-            name: "item20",
-            label: "項目20",
-            errors: _vm.errors,
-            placeholder: "",
-            data: _vm.form.item20
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.item20 = $event
-            }
-          }
+          })
         }),
         _vm._v(" "),
         _c(
@@ -41188,7 +40874,7 @@ var render = function() {
           1
         )
       ],
-      1
+      2
     )
   ])
 }
