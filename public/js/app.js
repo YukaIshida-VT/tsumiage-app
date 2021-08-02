@@ -39785,60 +39785,64 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "h-screen bg-white" }, [
-    _c("div", { staticClass: "flex" }, [
-      _c(
-        "div",
-        {
-          staticClass:
-            "pl-6 bg-gray-200 w-48 h-screen border-r-2 border-gray-400"
-        },
-        [_c("Nav")],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "flex flex-col flex-1 h-screen overflow-y-hidden" },
-        [
+    _vm.authUser
+      ? _c("div", { staticClass: "flex" }, [
           _c(
             "div",
             {
               staticClass:
-                "h-16 px-6 border-b border-gray-400 flex items-center justify-between"
+                "pl-6 bg-gray-200 w-48 h-screen border-r-2 border-gray-400"
             },
-            [
-              _c("div", [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(_vm.title) +
-                    "\n                "
-                )
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "flex items-center" },
-                [
-                  _c("div", { staticClass: "pr-4 text-sm" }, [
-                    _vm._v(_vm._s(_vm.authUser.data.attributes.name) + "さん")
-                  ]),
-                  _vm._v(" "),
-                  _c("UserCircle")
-                ],
-                1
-              )
-            ]
+            [_c("Nav")],
+            1
           ),
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "flex flex-col overflow-y-hidden flex-1" },
-            [_c("router-view", { staticClass: "p-6 overflow-x-hidden" })],
-            1
+            { staticClass: "flex flex-col flex-1 h-screen overflow-y-hidden" },
+            [
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "h-16 px-6 border-b border-gray-400 flex items-center justify-between"
+                },
+                [
+                  _c("div", [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(_vm.title) +
+                        "\n                "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "flex items-center" },
+                    [
+                      _c("div", { staticClass: "pr-4 text-sm" }, [
+                        _vm._v(
+                          _vm._s(_vm.authUser.data.attributes.name) + "さん"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("UserCircle")
+                    ],
+                    1
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "flex flex-col overflow-y-hidden flex-1" },
+                [_c("router-view", { staticClass: "p-6 overflow-x-hidden" })],
+                1
+              )
+            ]
           )
-        ]
-      )
-    ])
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
