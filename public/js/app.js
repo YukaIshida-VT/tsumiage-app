@@ -2540,8 +2540,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _components_InputField__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/InputField */ "./resources/js/components/InputField.vue");
-var _this3 = undefined;
-
 //
 //
 //
@@ -2571,51 +2569,50 @@ var _this3 = undefined;
   components: {
     InputField: _components_InputField__WEBPACK_IMPORTED_MODULE_0__.default
   },
-  mounted: function mounted() {
-    var _this = this;
-
-    axios.get('/api/contacts/' + this.$route.params.id).then(function (response) {
-      _this.form = response.data.data;
-      _this.loading = false;
-    })["catch"](function (error) {
-      _this.loading = false;
-
-      if (error.response.status === 404) {
-        _this.$router.push('/contacts');
-      }
-    });
+  mounted: function mounted() {// axios.get('/api/contacts/' + this.$route.params.id)
+    //     .then(response => {
+    //         this.form = response.data.data;
+    //         this.loading = false;
+    //     })
+    //     .catch(error => {
+    //         this.loading = false;
+    //         if (error.response.status === 404) {
+    //             this.$router.push('/contacts');
+    //         }
+    //     });
   },
   data: function data() {
     return {
       form: {
-        'item1': '',
-        'item2': '',
-        'item3': '',
-        'item4': '',
-        'item5': '',
-        'item6': '',
-        'item7': '',
-        'item8': '',
-        'item9': '',
-        'item10': ''
+        item1: '',
+        item2: '',
+        item3: '',
+        item4: '',
+        item5: '',
+        item6: '',
+        item7: '',
+        item8: '',
+        item9: '',
+        item10: ''
       },
       errors: null
     };
   },
   methods: {
     submitForm: function submitForm() {
-      var _this2 = this;
-
-      axios.patch('/api/contacts/' + this.$route.params.id, this.form).then(function (response) {
-        _this2.$router.push(response.data.links.self);
-      })["catch"](function (errors) {
-        _this2.errors = errors.response.data.errors;
-      });
+      console.log(this.form); //     axios.patch('/api/contacts/' + this.$route.params.id, this.form)
+      //         .then(response => {
+      //             this.$router.push(response.data.links.self);
+      //         })
+      //         .catch(errors => {
+      //             this.errors = errors.response.data.errors;
+      //         });
     },
-    itemUpdate: function itemUpdate(n, e) {
-      console.log(n);
+    itemUpdate: function itemUpdate($event, n) {
+      var self = this;
       var keyName = 'item' + n;
-      _this3.form[keyName] = e;
+      self.form[keyName] = $event;
+      console.log(self.form);
     }
   }
 });
@@ -40853,7 +40850,7 @@ var render = function() {
             },
             on: {
               "update:field": function($event) {
-                return _vm.itemUpdate(n, _vm.e)
+                return _vm.itemUpdate($event, n)
               }
             }
           })
