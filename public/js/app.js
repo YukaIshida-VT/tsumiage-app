@@ -2540,6 +2540,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _components_InputField__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/InputField */ "./resources/js/components/InputField.vue");
+var _this3 = undefined;
+
 //
 //
 //
@@ -2609,6 +2611,11 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (errors) {
         _this2.errors = errors.response.data.errors;
       });
+    },
+    itemUpdate: function itemUpdate(n, e) {
+      console.log(n);
+      var keyName = 'item' + n;
+      _this3.form[keyName] = e;
     }
   }
 });
@@ -40842,7 +40849,7 @@ var render = function() {
             },
             on: {
               "update:field": function($event) {
-                _vm.form.item = $event
+                return _vm.itemUpdate(n, _vm.e)
               }
             }
           })

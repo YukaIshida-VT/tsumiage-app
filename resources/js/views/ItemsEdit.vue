@@ -9,7 +9,7 @@
         <form @submit.prevent="submitForm" class="pt-6">
     
             <InputField v-for="n in 5" :key="n" :name="'item' + n" :label="'項目' + n" :errors="errors"
-                placeholder="" @update:field="form.item = $event" :data="'form.item' + n" />
+                placeholder="" @update:field="itemUpdate(n, e)" :data="'form.item' + n" />
 
             <div class="flex justify-end">
                 <router-link to="/home" class="py-2 px-4 rounded text-red-700 border mr-5 hover:border-red-700">
@@ -74,6 +74,12 @@
                     .catch(errors => {
                         this.errors = errors.response.data.errors;
                     });
+            },
+
+            itemUpdate: (n, e) => {
+                console.log(n);
+                var keyName = 'item' + n;
+                this.form[keyName] = e;
             }
         }
     }
