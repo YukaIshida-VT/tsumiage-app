@@ -6,6 +6,7 @@ import ContactsShow from "./views/ContactsShow";
 import ContactsEdit from "./views/ContactsEdit";
 import ContactsIndex from "./views/ContactsIndex";
 import BirthdaysIndex from "./views/BirthdaysIndex";
+import ItemsEdit from "./views/ItemsEdit";
 import Logout from "./Actions/Logout";
 
 Vue.use(VueRouter);
@@ -28,6 +29,9 @@ export default new VueRouter({
             path: '/contacts/:id/edit', component: ContactsEdit,
             meta: { title: '積み上げ編集' }
         }, {
+            path: '/items/edit', component: ItemsEdit,
+            meta: { title: '積み上げ項目編集' }
+        }, {    
             path: '/birthdays', component: BirthdaysIndex,
             meta: { title: '積み上げ集計' }
         }, {
