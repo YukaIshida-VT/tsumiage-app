@@ -47,7 +47,8 @@ class TwitterLoginController extends Controller
             $user->avatar = $twitterUser->getAvatar();
             $user->nickname = $twitterUser->getNickname();
             $user->save();
-            
+
+            $user->tsumiageItem()->create();
          }
          Log::info('Twitterから取得しました。', ['user' => $twitterUser]);
          Auth::login($user);
