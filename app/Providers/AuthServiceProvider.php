@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Models\TsumiageItem' => 'App\Policies\TsumiageItemlPolicy',
+        'App\Models\TsumiageItem' => 'App\Policies\TsumiageItemPolicy',
     ];
 
     /**

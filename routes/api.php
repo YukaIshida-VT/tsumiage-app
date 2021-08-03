@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthUserController;
-use App\Http\Controllers\TsumiageItemsController;
+use App\Http\Controllers\TsumiageItemController;
 
 Route::middleware('auth:api')->group(function(){
     Route::get('auth-user', [AuthUserController::class, 'show']);
@@ -12,5 +12,8 @@ Route::middleware('auth:api')->group(function(){
         return $request->user();
     });
 
-    Route::patch('/items/{item}', [TsumiageItemsController::class, 'update']);
+    Route::get('/items/{item}', [TsumiageItemController::class, 'show']);
+
+    // Route::patch('/items/{item}', [TsumiageItemController::class, 'update']);
 });
+

@@ -9,7 +9,7 @@
         <form @submit.prevent="submitForm" class="pt-6">
     
             <InputField v-for="n in 5" :key="n" :name="'item' + n" :label="'項目' + n" :errors="errors"
-                placeholder="" @update:field="itemUpdate($event, n)" :data="'form.item' + n" />
+                placeholder="" @update:field="itemUpdate($event, n)" :data="form[n]" />
 
             <div class="flex justify-end">
                 <router-link to="/home" class="py-2 px-4 rounded text-red-700 border mr-5 hover:border-red-700">
@@ -32,33 +32,33 @@
         },
 
         mounted() {
-            // axios.get('/api/contacts/' + this.$route.params.id)
-            //     .then(response => {
-            //         this.form = response.data.data;
-            //         this.loading = false;
-            //     })
-            //     .catch(error => {
-            //         this.loading = false;
+            axios.get('/api/items/' + this.$route.params.id)
+                .then(response => {
+                    this.form = response.data.data.attributes;
+                    // this.loading = false;
+                })
+                .catch(error => {
+                    // this.loading = false;
 
-            //         if (error.response.status === 404) {
-            //             this.$router.push('/contacts');
-            //         }
-            //     });
+                    if (error.response.status === 404) {
+                        this.$router.push('/home');
+                    }
+                });
         },
 
         data: function() {
             return {
                 form: {
-                    item1 : '',
-                    item2 : '',
-                    item3 : '',
-                    item4 : '',
-                    item5 : '',
-                    item6 : '',
-                    item7 : '',
-                    item8 : '',
-                    item9 : '',
-                    item10 : '',
+                    1 : '',
+                    2 : '',
+                    3 : '',
+                    4 : '',
+                    5 : '',
+                    6 : '',
+                    7 : '',
+                    8 : '',
+                    9 : '',
+                    10 : '',
                 },
 
                 errors: null,

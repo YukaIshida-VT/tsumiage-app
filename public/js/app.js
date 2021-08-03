@@ -2580,31 +2580,31 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     InputField: _components_InputField__WEBPACK_IMPORTED_MODULE_0__.default
   },
-  mounted: function mounted() {// axios.get('/api/contacts/' + this.$route.params.id)
-    //     .then(response => {
-    //         this.form = response.data.data;
-    //         this.loading = false;
-    //     })
-    //     .catch(error => {
-    //         this.loading = false;
-    //         if (error.response.status === 404) {
-    //             this.$router.push('/contacts');
-    //         }
-    //     });
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/items/' + this.$route.params.id).then(function (response) {
+      _this.form = response.data.data.attributes; // this.loading = false;
+    })["catch"](function (error) {
+      // this.loading = false;
+      if (error.response.status === 404) {
+        _this.$router.push('/home');
+      }
+    });
   },
   data: function data() {
     return {
       form: {
-        item1: '',
-        item2: '',
-        item3: '',
-        item4: '',
-        item5: '',
-        item6: '',
-        item7: '',
-        item8: '',
-        item9: '',
-        item10: ''
+        1: '',
+        2: '',
+        3: '',
+        4: '',
+        5: '',
+        6: '',
+        7: '',
+        8: '',
+        9: '',
+        10: ''
       },
       errors: null
     };
@@ -40863,7 +40863,7 @@ var render = function() {
               label: "項目" + n,
               errors: _vm.errors,
               placeholder: "",
-              data: "form.item" + n
+              data: _vm.form[n]
             },
             on: {
               "update:field": function($event) {

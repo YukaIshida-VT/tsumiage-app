@@ -30,7 +30,7 @@ class TsumiageItemPolicy
      */
     public function view(User $user, TsumiageItem $tsumiageItem)
     {
-        //
+        return $user->id == $tsumiageItem->user_id;
     }
 
     /**
