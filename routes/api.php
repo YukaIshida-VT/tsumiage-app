@@ -12,5 +12,5 @@ Route::middleware('auth:api')->group(function(){
         return $request->user();
     });
 
-    Route::post('/items', [TsumiageItemsController::class, 'store']);
+    Route::patch('/items/{item}', [TsumiageItemsController::class, 'update']);
 });

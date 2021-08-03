@@ -29,7 +29,7 @@ export default new VueRouter({
             path: '/contacts/:id/edit', component: ContactsEdit,
             meta: { title: '積み上げ編集' }
         }, {
-            path: '/items/edit', component: ItemsEdit,
+            path: '/items/:id/edit', component: ItemsEdit,
             meta: { title: '積み上げ項目編集' }
         }, {    
             path: '/birthdays', component: BirthdaysIndex,
