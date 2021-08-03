@@ -67,6 +67,7 @@
 
         methods: {
             submitForm: function() {
+                // 次ここのsubmitから実装(テーブルどうするか？１ユーザー１レコード？)
                 console.log(this.form);
             //     axios.patch('/api/contacts/' + this.$route.params.id, this.form)
             //         .then(response => {

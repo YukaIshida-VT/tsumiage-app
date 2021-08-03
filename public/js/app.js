@@ -2095,6 +2095,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2136,8 +2143,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Nav"
+  name: "Nav",
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)({
+    authUser: 'authUser'
+  }))
 });
 
 /***/ }),
@@ -2600,6 +2611,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submitForm: function submitForm() {
+      // 次ここのsubmitから実装(テーブルどうするか？１ユーザー１レコード？)
       console.log(this.form); //     axios.patch('/api/contacts/' + this.$route.params.id, this.form)
       //         .then(response => {
       //             this.$router.push(response.data.links.self);
@@ -2835,7 +2847,7 @@ vue__WEBPACK_IMPORTED_MODULE_8__.default.use(vue_router__WEBPACK_IMPORTED_MODULE
       title: '積み上げ編集'
     }
   }, {
-    path: '/items/edit',
+    path: '/items/:id/edit',
     component: _views_ItemsEdit__WEBPACK_IMPORTED_MODULE_6__.default,
     meta: {
       title: '積み上げ項目編集'
@@ -40147,7 +40159,12 @@ var render = function() {
         "router-link",
         {
           staticClass: "flex items-center py-2 hover:text-blue-600 text-sm",
-          attrs: { to: "/items/edit" }
+          attrs: {
+            to:
+              "/items/" +
+              _vm.authUser.data.attributes.tsumiage_item.data.tsumiage_item_id +
+              "/edit"
+          }
         },
         [
           _c(

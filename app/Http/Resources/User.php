@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\TsumiageItem as TsumiageItemResource;
 
 class User extends JsonResource
 {
@@ -23,6 +24,7 @@ class User extends JsonResource
                     'twitter_id' => $this->email,
                     'nickname' => $this->nickname,
                     'avatar' => $this->avatar,
+                    'tsumiage_item' => new TsumiageItemResource($this->tsumiageItem),
                 ]
             ],
             'links' => [
