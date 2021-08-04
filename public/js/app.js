@@ -2046,7 +2046,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['name', 'label', 'placeholder', 'errors', 'data'],
   data: function data() {
     return {
-      value: ''
+      value: this.data
     };
   },
   computed: {
@@ -2574,6 +2574,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ItemsEdit",
@@ -2584,9 +2598,12 @@ __webpack_require__.r(__webpack_exports__);
     var _this = this;
 
     axios.get('/api/items/' + this.$route.params.id).then(function (response) {
-      _this.form = response.data.data.attributes; // this.loading = false;
+      _this.form = response.data.data.attributes;
+      _this.itemNum = response.data.data.item_num;
+      _this.loading = false;
     })["catch"](function (error) {
-      // this.loading = false;
+      _this.loading = false;
+
       if (error.response.status === 404) {
         _this.$router.push('/home');
       }
@@ -2604,9 +2621,21 @@ __webpack_require__.r(__webpack_exports__);
         7: '',
         8: '',
         9: '',
-        10: ''
+        10: '',
+        11: '',
+        12: '',
+        13: '',
+        14: '',
+        15: '',
+        16: '',
+        17: '',
+        18: '',
+        19: '',
+        20: ''
       },
-      errors: null
+      errors: null,
+      itemNum: 0,
+      loading: true
     };
   },
   methods: {
@@ -2615,7 +2644,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var submitArray = {};
 
-      for (var i = 1; i < 11; i++) {
+      for (var i = 1; i < this.itemNum + 1; i++) {
         var key = 'item' + i;
         submitArray[key] = this.form[i];
       }
@@ -40847,64 +40876,116 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c(
-      "form",
-      {
-        staticClass: "pt-6",
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-            return _vm.submitForm.apply(null, arguments)
-          }
-        }
-      },
-      [
-        _vm._l(5, function(n) {
-          return _c("InputField", {
-            key: n,
-            attrs: {
-              name: "item" + n,
-              label: "項目" + n,
-              errors: _vm.errors,
-              placeholder: "",
-              data: _vm.form[n]
-            },
-            on: {
-              "update:field": function($event) {
-                return _vm.itemUpdate($event, n)
+    _vm.loading
+      ? _c("div", [_vm._v("Loading...")])
+      : _c("div", [
+          _c(
+            "form",
+            {
+              staticClass: "pt-6",
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.submitForm.apply(null, arguments)
+                }
               }
-            }
-          })
-        }),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "flex justify-end" },
-          [
-            _c(
-              "router-link",
-              {
-                staticClass:
-                  "py-2 px-4 rounded text-red-700 border mr-5 hover:border-red-700",
-                attrs: { to: "/home" }
-              },
-              [_vm._v("\n                Cancel\n            ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "bg-blue-500 py-2 px-4 text-white rounded hover:bg-blue-400"
-              },
-              [_vm._v("Save")]
-            )
-          ],
-          1
-        )
-      ],
-      2
-    )
+            },
+            [
+              _vm._l(_vm.itemNum, function(n) {
+                return _c("InputField", {
+                  key: n,
+                  attrs: {
+                    name: "item" + n,
+                    label: "項目" + n,
+                    errors: _vm.errors,
+                    placeholder: "",
+                    data: _vm.form[n]
+                  },
+                  on: {
+                    "update:field": function($event) {
+                      return _vm.itemUpdate($event, n)
+                    }
+                  }
+                })
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex justify-start" }, [
+                _vm.itemNum < 20
+                  ? _c(
+                      "button",
+                      {
+                        staticClass:
+                          "p-1 rounded text-sm border mr-3 hover:text-blue-800",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            _vm.itemNum += 1
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    項目追加\n                "
+                        )
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.itemNum > 0
+                  ? _c(
+                      "button",
+                      {
+                        staticClass:
+                          "p-1 rounded text-sm border mr-5 hover:text-red-800",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            _vm.itemNum -= 1
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                    項目削除\n                "
+                        )
+                      ]
+                    )
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "flex justify-end" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass:
+                        "py-2 px-4 rounded text-red-700 border mr-5 hover:border-red-700",
+                      attrs: { to: "/home" }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    キャンセル\n                "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass:
+                        "bg-blue-500 py-2 px-4 text-white rounded hover:bg-blue-400"
+                    },
+                    [_vm._v("保存")]
+                  )
+                ],
+                1
+              )
+            ],
+            2
+          )
+        ])
   ])
 }
 var staticRenderFns = []

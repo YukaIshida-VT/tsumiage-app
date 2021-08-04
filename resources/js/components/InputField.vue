@@ -17,7 +17,7 @@
 
         data: function () {
             return {
-                value: ''
+                value: this.data
             }
         },
 

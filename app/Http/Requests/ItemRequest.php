@@ -23,12 +23,17 @@ class ItemRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'item1' => 'required',
-            'item2' => 'required',
-            'item3' => 'required',
-            'item4' => 'required',
-            'item5' => 'required',
-        ];
+        $data = $this->all();
+
+        $returnArray = [];
+
+        for ($i = 1; $i <= 21; $i++) {
+            $key = 'item' . $i;
+            if (array_key_exists($key, $data)) {
+                $returnArray[$key] = 'required';
+            }
+        }
+
+        return $returnArray;
     }
 }

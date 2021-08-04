@@ -26,6 +26,7 @@ class CreateTsumiageItemsTable extends Migration
             $table->string('item8')->nullable();
             $table->string('item9')->nullable();
             $table->string('item10')->nullable();
+            $table->string('item11')->nullable();
             $table->string('item12')->nullable();
             $table->string('item13')->nullable();
             $table->string('item14')->nullable();

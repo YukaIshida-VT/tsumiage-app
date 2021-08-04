@@ -18,6 +18,7 @@ class TsumiageItem extends JsonResource
             'data' => [
                 'type' => 'tsumiage-item',
                 'tsumiage_item_id' => $this->id,
+                'item_num' => $this->getItemNum($this->id),
                 'attributes'=> [
                     '1' => $this->item1,
                     '2' => $this->item2,
