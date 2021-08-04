@@ -14,6 +14,6 @@ Route::middleware('auth:api')->group(function(){
 
     Route::get('/items/{item}', [TsumiageItemController::class, 'show']);
 
-    // Route::patch('/items/{item}', [TsumiageItemController::class, 'update']);
+    Route::patch('/items/{item}', [TsumiageItemController::class, 'update']);
 });
 

@@ -53,7 +53,7 @@ class TsumiageItemPolicy
      */
     public function update(User $user, TsumiageItem $tsumiageItem)
     {
-        //
+        return $user->id == $tsumiageItem->user_id;
     }
 
     /**

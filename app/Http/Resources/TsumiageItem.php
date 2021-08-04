@@ -43,7 +43,7 @@ class TsumiageItem extends JsonResource
                 ]
             ],
             'links' => [
-                'self' => url('/users/' . $this->user_id),
+                'self' => '/items/' . $this->id . '/edit',
             ]
         ];
     }

@@ -2611,20 +2611,24 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     submitForm: function submitForm() {
-      // 次ここのsubmitから実装(テーブルどうするか？１ユーザー１レコード？)
-      console.log(this.form); //     axios.patch('/api/contacts/' + this.$route.params.id, this.form)
-      //         .then(response => {
-      //             this.$router.push(response.data.links.self);
-      //         })
-      //         .catch(errors => {
-      //             this.errors = errors.response.data.errors;
-      //         });
+      var _this2 = this;
+
+      var submitArray = {};
+
+      for (var i = 1; i < 11; i++) {
+        var key = 'item' + i;
+        submitArray[key] = this.form[i];
+      }
+
+      axios.patch('/api/items/' + this.$route.params.id, submitArray).then(function (response) {
+        alert("保存しました");
+      })["catch"](function (errors) {
+        _this2.errors = errors.response.data.errors;
+      });
     },
     itemUpdate: function itemUpdate($event, n) {
       var self = this;
-      var keyName = 'item' + n;
-      self.form[keyName] = $event;
-      console.log(self.form);
+      self.form[n] = $event;
     }
   }
 });

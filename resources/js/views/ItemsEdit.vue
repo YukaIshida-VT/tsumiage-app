@@ -67,22 +67,24 @@
 
         methods: {
             submitForm: function() {
-                // 次ここのsubmitから実装(テーブルどうするか？１ユーザー１レコード？)
-                console.log(this.form);
-            //     axios.patch('/api/contacts/' + this.$route.params.id, this.form)
-            //         .then(response => {
-            //             this.$router.push(response.data.links.self);
-            //         })
-            //         .catch(errors => {
-            //             this.errors = errors.response.data.errors;
-            //         });
+                var submitArray = {};
+                for (let i = 1; i < 11; i++) {
+                    let key = 'item' + i;
+                    submitArray[key] = this.form[i];
+                }
+
+                axios.patch('/api/items/' + this.$route.params.id, submitArray)
+                    .then(response => {
+                        alert("保存しました");
+                    })
+                    .catch(errors => {
+                        this.errors = errors.response.data.errors;
+                    });
             },
 
             itemUpdate: function($event, n) {
                 var self = this;
-                var keyName = 'item' + n;
-                self.form[keyName] = $event;
-                console.log(self.form);
+                self.form[n] = $event;
             }
         }
     }
