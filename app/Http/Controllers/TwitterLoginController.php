@@ -35,7 +35,7 @@ class TwitterLoginController extends Controller
             $user = User::where('email', $twitterUser->getId())->first();
 
             if ($twitterUser->getAvatar() != $user->avatar) {
-                // ツイッターでアバターが更新されたいた場合はデータベースの情報も更新する
+                // ツイッターでアバターが更新されていた場合はデータベースの情報も更新する
                 User::where('email', $twitterUser->getId())->update(['avatar' => $twitterUser->getAvatar()]);
             }
          }else{
