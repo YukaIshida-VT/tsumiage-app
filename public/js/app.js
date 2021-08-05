@@ -2694,42 +2694,127 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "TsumiageCreate",
+  name: "ItemsEdit",
   components: {
     InputField: _components_InputField__WEBPACK_IMPORTED_MODULE_0__.default
   },
+  mounted: function mounted() {
+    this.displayToday(); // axios.get('/api/items/' + this.$route.params.id)
+    //     .then(response => {
+    //         this.form = response.data.data.attributes;
+    //         this.itemNum = response.data.data.item_num;
+    //         this.loading = false;
+    //     })
+    //     .catch(error => {
+    //         this.loading = false;
+    //         if (error.response.status === 404) {
+    //             this.$router.push('/home');
+    //         }
+    //     });
+  },
   data: function data() {
     return {
-      form: {
-        'tsumiage1': '',
-        'tsumiage2': '',
-        'tsumiage3': '',
-        'tsumiage4': ''
+      item: {
+        1: '',
+        2: '',
+        3: '',
+        4: '',
+        5: '',
+        6: '',
+        7: '',
+        8: '',
+        9: '',
+        10: ''
       },
-      errors: null
+      planTime: {
+        1: '',
+        2: '',
+        3: '',
+        4: '',
+        5: '',
+        6: '',
+        7: '',
+        8: '',
+        9: '',
+        10: ''
+      },
+      actualTime: {
+        1: '',
+        2: '',
+        3: '',
+        4: '',
+        5: '',
+        6: '',
+        7: '',
+        8: '',
+        9: '',
+        10: ''
+      },
+      errors: null,
+      itemNum: 3,
+      loading: true,
+      today: null
     };
-  },
-  mounted: function mounted() {
-    this.displayToday();
   },
   methods: {
     submitForm: function submitForm() {
       var _this = this;
 
-      axios.post('/api/contacts', this.form).then(function (response) {
-        _this.$router.push(response.data.links.self);
+      var submitArray = {};
+      submitArray['tsumiage'] = {};
+
+      for (var i = 1; i < this.itemNum + 1; i++) {
+        var tsumiage = {};
+        tsumiage['item'] = this.item[i];
+        tsumiage['plan_time'] = this.planTime[i];
+        tsumiage['actual_time'] = this.actualTime[i];
+        tsumiage['today'] = this.today;
+        submitArray['tsumiage'][i] = tsumiage;
+      }
+
+      axios.post('/api/tsumiage', submitArray).then(function (response) {
+        alert("保存しました");
       })["catch"](function (errors) {
         _this.errors = errors.response.data.errors;
       });
     },
+    itemUpdate: function itemUpdate($event, n) {
+      var self = this;
+      self.item[n] = $event;
+    },
+    planTimeUpdate: function planTimeUpdate($event, n) {
+      var self = this;
+      self.planTime[n] = $event;
+    },
+    actualTimeUpdate: function actualTimeUpdate($event, n) {
+      var self = this;
+      self.actualTime[n] = $event;
+    },
     displayToday: function displayToday() {
       var now = new Date();
       var Year = now.getFullYear();
-      var Month = now.getMonth() + 1;
-      var Day = now.getDate();
-      document.getElementById("DateTimeDisp").innerHTML = Year + "年" + Month + "月" + Day + "日";
+      var Month = ("00" + (now.getMonth() + 1)).slice(-2);
+      var Day = ("00" + now.getDate()).slice(-2);
+      document.getElementById("DateTimeDisp").innerHTML = Year + "/" + Month + "/" + Day;
+      this.today = Year + Month + Day;
     }
   }
 });
@@ -2869,8 +2954,8 @@ vue__WEBPACK_IMPORTED_MODULE_8__.default.use(vue_router__WEBPACK_IMPORTED_MODULE
       title: '積み上げ詳細'
     }
   }, {
-    path: '/contacts/:id/edit',
-    component: _views_ContactsEdit__WEBPACK_IMPORTED_MODULE_3__.default,
+    path: '/tsumiage/:id/edit',
+    component: TsumiageEdit,
     meta: {
       title: '積み上げ編集'
     }
@@ -40976,6 +41061,7 @@ var render = function() {
     _c(
       "form",
       {
+        staticClass: "pt-6",
         on: {
           submit: function($event) {
             $event.preventDefault()
@@ -40984,61 +41070,100 @@ var render = function() {
         }
       },
       [
-        _c("InputField", {
-          attrs: {
-            name: "tsumiage1",
-            label: "積み上げその1",
-            errors: _vm.errors,
-            placeholder: ""
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.tsumiage1 = $event
-            }
-          }
+        _vm._l(_vm.itemNum, function(n) {
+          return _c("div", [
+            _c(
+              "div",
+              { staticClass: "flex justify-items-center mx-auto" },
+              [
+                _c("InputField", {
+                  key: "item" + n,
+                  staticClass: "pr-2",
+                  attrs: {
+                    name: "item" + n,
+                    label: "積み上げ" + n,
+                    errors: _vm.errors,
+                    placeholder: "積み上げ",
+                    data: _vm.item[n]
+                  },
+                  on: {
+                    "update:field": function($event) {
+                      return _vm.itemUpdate($event, n)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("InputField", {
+                  key: "plan_time" + n,
+                  staticClass: "pr-2",
+                  attrs: {
+                    name: "plan_time" + n,
+                    errors: _vm.errors,
+                    placeholder: "予定作業時間(分)",
+                    data: _vm.planTime[n]
+                  },
+                  on: {
+                    "update:field": function($event) {
+                      return _vm.planTimeUpdate($event, n)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("InputField", {
+                  key: "actual_time" + n,
+                  attrs: {
+                    name: "actual_time" + n,
+                    errors: _vm.errors,
+                    placeholder: "実績作業時間(分)",
+                    data: _vm.actualTime[n]
+                  },
+                  on: {
+                    "update:field": function($event) {
+                      return _vm.actualTimeUpdate($event, n)
+                    }
+                  }
+                })
+              ],
+              1
+            )
+          ])
         }),
         _vm._v(" "),
-        _c("InputField", {
-          attrs: {
-            name: "tsumiage2",
-            label: "積み上げその2",
-            errors: _vm.errors,
-            placeholder: ""
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.tsumiage2 = $event
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("InputField", {
-          attrs: {
-            name: "tsumiage3",
-            label: "積み上げその3",
-            errors: _vm.errors,
-            placeholder: ""
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.tsumiage3 = $event
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c("InputField", {
-          attrs: {
-            name: "tsumiage4",
-            label: "積み上げその4",
-            errors: _vm.errors,
-            placeholder: ""
-          },
-          on: {
-            "update:field": function($event) {
-              _vm.form.tsumiage4 = $event
-            }
-          }
-        }),
+        _c("div", { staticClass: "flex justify-start" }, [
+          _vm.itemNum < 10
+            ? _c(
+                "button",
+                {
+                  staticClass:
+                    "p-1 rounded text-sm border mr-3 hover:text-blue-800",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.itemNum += 1
+                    }
+                  }
+                },
+                [_vm._v("\n                積み上げ追加\n            ")]
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.itemNum > 0
+            ? _c(
+                "button",
+                {
+                  staticClass:
+                    "p-1 rounded text-sm border mr-5 hover:text-red-800",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.itemNum -= 1
+                    }
+                  }
+                },
+                [_vm._v("\n                積み上げ削除\n            ")]
+              )
+            : _vm._e()
+        ]),
         _vm._v(" "),
         _c(
           "div",
@@ -41051,7 +41176,7 @@ var render = function() {
                   "py-2 px-4 rounded text-red-700 border mr-5 hover:border-red-700",
                 attrs: { to: "/home" }
               },
-              [_vm._v("\n                Cancel\n            ")]
+              [_vm._v("\n                キャンセル\n            ")]
             ),
             _vm._v(" "),
             _c(
@@ -41060,13 +41185,13 @@ var render = function() {
                 staticClass:
                   "bg-blue-500 py-2 px-4 text-white rounded hover:bg-blue-400"
               },
-              [_vm._v("今日の積み上げ作成")]
+              [_vm._v("保存")]
             )
           ],
           1
         )
       ],
-      1
+      2
     )
   ])
 }

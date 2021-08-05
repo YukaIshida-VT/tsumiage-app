@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(TsumiageItem::class);
     }
+
+    public function tsumiages()
+    {
+        return $this->hasMany(Tsumiage::class);
+    }
 }

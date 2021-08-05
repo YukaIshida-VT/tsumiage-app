@@ -26,7 +26,7 @@ export default new VueRouter({
             path: '/contacts/:id', component: ContactsShow, name: 'ContactsShow',
             meta: { title: '積み上げ詳細' }
         }, {
-            path: '/contacts/:id/edit', component: ContactsEdit,
+            path: '/tsumiage/:id/edit', component: TsumiageEdit,
             meta: { title: '積み上げ編集' }
         }, {
             path: '/items/:id/edit', component: ItemsEdit,

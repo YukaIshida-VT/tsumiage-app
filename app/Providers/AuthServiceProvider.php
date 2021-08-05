@@ -14,6 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Models\TsumiageItem' => 'App\Policies\TsumiageItemPolicy',
+        'App\Models\Tsumiage' => 'App\Policies\TsumiagePolicy',
     ];
 
     /**
