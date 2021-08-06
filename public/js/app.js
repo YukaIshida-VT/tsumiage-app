@@ -2718,6 +2718,13 @@ __webpack_require__.r(__webpack_exports__);
       var self = this;
       self.actualTime[n] = $event;
     },
+    deleteItem: function deleteItem() {
+      var self = this;
+      self.item[self.itemNum] = '';
+      self.planTime[self.itemNum] = '';
+      self.actualTime[self.itemNum] = '';
+      self.itemNum -= 1;
+    },
     displayToday: function displayToday() {
       var now = new Date();
       var Year = now.getFullYear();
@@ -41081,7 +41088,7 @@ var render = function() {
                   attrs: { type: "button" },
                   on: {
                     click: function($event) {
-                      _vm.itemNum -= 1
+                      return _vm.deleteItem()
                     }
                   }
                 },

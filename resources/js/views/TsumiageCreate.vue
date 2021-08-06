@@ -21,7 +21,7 @@
                     積み上げ追加
                 </button>
                 <button v-if="itemNum > 0" type="button" class="p-1 rounded text-sm border mr-5 hover:text-red-800"
-                @click="itemNum -= 1">
+                @click="deleteItem()">
                     積み上げ削除
                 </button>
             </div>
@@ -118,6 +118,14 @@
             actualTimeUpdate: function($event, n) {
                 var self = this;
                 self.actualTime[n] = $event;
+            },
+
+            deleteItem: function() {
+                var self = this;
+                self.item[self.itemNum] = '';
+                self.planTime[self.itemNum] = '';
+                self.actualTime[self.itemNum] = '';
+                self.itemNum -= 1;
             },
 
             displayToday: function () {
