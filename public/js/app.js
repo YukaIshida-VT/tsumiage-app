@@ -2642,6 +2642,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _components_InputField__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/InputField */ "./resources/js/components/InputField.vue");
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+var _methods;
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2681,111 +2691,103 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "TsumiageEdit",
   components: {
-    InputField: _components_InputField__WEBPACK_IMPORTED_MODULE_0__.default
+    InputField: _components_InputField__WEBPACK_IMPORTED_MODULE_0__.default,
+    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_1__.default
   },
   mounted: function mounted() {
-    this.displayToday(); // axios.get('/api/items/' + this.$route.params.id)
-    //     .then(response => {
-    //         this.form = response.data.data.attributes;
-    //         this.itemNum = response.data.data.item_num;
-    //         this.loading = false;
-    //     })
-    //     .catch(error => {
-    //         this.loading = false;
-    //         if (error.response.status === 404) {
-    //             this.$router.push('/home');
-    //         }
-    //     });
+    var _this = this;
+
+    this.getDay();
+    axios.post('/api/user-tsumiage', {
+      data: this.day
+    }).then(function (response) {
+      _this.itemNum = response.data.count;
+      _this.tsumiages = response.data.data;
+      _this.loading = false;
+    })["catch"](function (error) {
+      _this.loading = false; // if (error.response.status === 404) {
+      //     this.$router.push('/home');
+      // }
+    });
   },
   data: function data() {
-    return {
-      item: {
-        1: '',
-        2: '',
-        3: '',
-        4: '',
-        5: '',
-        6: '',
-        7: '',
-        8: '',
-        9: '',
-        10: ''
-      },
-      planTime: {
-        1: '',
-        2: '',
-        3: '',
-        4: '',
-        5: '',
-        6: '',
-        7: '',
-        8: '',
-        9: '',
-        10: ''
-      },
-      actualTime: {
-        1: '',
-        2: '',
-        3: '',
-        4: '',
-        5: '',
-        6: '',
-        7: '',
-        8: '',
-        9: '',
-        10: ''
-      },
+    var _ref;
+
+    return _ref = {
+      tsumiages: {},
       errors: null,
       itemNum: 3,
       loading: true,
-      today: null
-    };
+      day: null
+    }, _defineProperty(_ref, "loading", true), _defineProperty(_ref, "defaultDate", new Date()), _defineProperty(_ref, "DatePickerFormat", 'yyyy-MM-dd'), _defineProperty(_ref, "ja", {
+      language: 'Japanese',
+      months: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+      monthsAbbr: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+      days: ['日', '月', '火', '水', '木', '金', '土'],
+      rtl: false,
+      ymd: 'yyyy-MM-dd',
+      yearSuffix: '年'
+    }), _ref;
   },
-  methods: {
-    submitForm: function submitForm() {
-      var _this = this;
+  methods: (_methods = {
+    submitForm: function submitForm(key) {
+      var _this2 = this;
 
       var submitArray = {};
-      submitArray['tsumiage'] = {};
-
-      for (var i = 1; i < this.itemNum + 1; i++) {
-        var tsumiage = {};
-        tsumiage['item'] = this.item[i];
-        tsumiage['plan_time'] = this.planTime[i];
-        tsumiage['actual_time'] = this.actualTime[i];
-        tsumiage['today'] = this.today;
-        submitArray['tsumiage'][i] = tsumiage;
-      }
-
-      axios.post('/api/tsumiage', submitArray).then(function (response) {
+      var tsumiage_id = this.tsumiages[key]['data']['tsumiage_id'];
+      submitArray['key'] = key;
+      submitArray['item' + key] = this.tsumiages[key]['data']['attributes']['item'];
+      submitArray['plan_time' + key] = this.tsumiages[key]['data']['attributes']['plan_time'];
+      submitArray['actual_time' + key] = this.tsumiages[key]['data']['attributes']['actual_time'];
+      axios.patch('/api/tsumiage/' + tsumiage_id, submitArray).then(function (response) {
         alert("保存しました");
       })["catch"](function (errors) {
-        _this.errors = errors.response.data.errors;
+        _this2.errors = errors.response.data.errors;
       });
     },
-    itemUpdate: function itemUpdate($event, n) {
+    deleteItem: function deleteItem(tsumiage_id) {},
+    itemUpdate: function itemUpdate($event, key) {
       var self = this;
-      self.item[n] = $event;
+      self.tsumiages[key]['data']['attributes']['item'] = $event;
     },
-    planTimeUpdate: function planTimeUpdate($event, n) {
+    planTimeUpdate: function planTimeUpdate($event, key) {
       var self = this;
-      self.planTime[n] = $event;
+      self.tsumiages[key]['data']['attributes']['plan_time'] = $event;
     },
-    actualTimeUpdate: function actualTimeUpdate($event, n) {
+    actualTimeUpdate: function actualTimeUpdate($event, key) {
       var self = this;
-      self.actualTime[n] = $event;
-    },
-    displayToday: function displayToday() {
-      var now = new Date();
-      var Year = now.getFullYear();
-      var Month = ("00" + (now.getMonth() + 1)).slice(-2);
-      var Day = ("00" + now.getDate()).slice(-2);
-      document.getElementById("DateTimeDisp").innerHTML = Year + "/" + Month + "/" + Day;
-      this.today = Year + Month + Day;
+      self.tsumiages[key]['data']['attributes']['actual_time'] = $event;
+    }
+  }, _defineProperty(_methods, "deleteItem", function deleteItem() {
+    var self = this;
+    self.item[self.itemNum] = '';
+    self.planTime[self.itemNum] = '';
+    self.actualTime[self.itemNum] = '';
+    self.itemNum -= 1;
+  }), _defineProperty(_methods, "getDay", function getDay() {
+    var now = this.defaultDate;
+    var Year = now.getFullYear();
+    var Month = ("00" + (now.getMonth() + 1)).slice(-2);
+    var Day = ("00" + now.getDate()).slice(-2);
+    this.day = Year + "-" + Month + "-" + Day;
+  }), _methods),
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
+    authUser: 'authUser'
+  })),
+  watch: {
+    defaultDate: function defaultDate() {
+      this.getDay();
     }
   }
 });
@@ -7473,6 +7475,30 @@ ___CSS_LOADER_EXPORT___.push([module.id, "/* .error-field {\n    @apply .border-
 /*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/TsumiageCreate.vue?vue&type=style&index=0&lang=css& ***!
   \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".datapicker-style div input {\n  border: 1px ridge #dcdcdc;\n  border-radius: 3px;\n  text-align: center;\n}\n\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/TsumiageEdit.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/TsumiageEdit.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -38571,6 +38597,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/TsumiageEdit.vue?vue&type=style&index=0&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/TsumiageEdit.vue?vue&type=style&index=0&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TsumiageEdit_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TsumiageEdit.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/TsumiageEdit.vue?vue&type=style&index=0&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TsumiageEdit_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TsumiageEdit_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
 /*!****************************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
@@ -39294,23 +39350,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _TsumiageEdit_vue_vue_type_template_id_25aeb296_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TsumiageEdit.vue?vue&type=template&id=25aeb296&scoped=true& */ "./resources/js/views/TsumiageEdit.vue?vue&type=template&id=25aeb296&scoped=true&");
+/* harmony import */ var _TsumiageEdit_vue_vue_type_template_id_25aeb296___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TsumiageEdit.vue?vue&type=template&id=25aeb296& */ "./resources/js/views/TsumiageEdit.vue?vue&type=template&id=25aeb296&");
 /* harmony import */ var _TsumiageEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TsumiageEdit.vue?vue&type=script&lang=js& */ "./resources/js/views/TsumiageEdit.vue?vue&type=script&lang=js&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _TsumiageEdit_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TsumiageEdit.vue?vue&type=style&index=0&lang=css& */ "./resources/js/views/TsumiageEdit.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
+;
 
 
 /* normalize component */
-;
-var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
   _TsumiageEdit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
-  _TsumiageEdit_vue_vue_type_template_id_25aeb296_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render,
-  _TsumiageEdit_vue_vue_type_template_id_25aeb296_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  _TsumiageEdit_vue_vue_type_template_id_25aeb296___WEBPACK_IMPORTED_MODULE_0__.render,
+  _TsumiageEdit_vue_vue_type_template_id_25aeb296___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
   false,
   null,
-  "25aeb296",
+  null,
   null
   
 )
@@ -39540,6 +39598,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/views/TsumiageEdit.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/views/TsumiageEdit.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TsumiageEdit_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TsumiageEdit.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/TsumiageEdit.vue?vue&type=style&index=0&lang=css&");
+
+
+/***/ }),
+
 /***/ "./resources/js/Actions/Logout.vue?vue&type=template&id=4753871a&scoped=true&":
 /*!************************************************************************************!*\
   !*** ./resources/js/Actions/Logout.vue?vue&type=template&id=4753871a&scoped=true& ***!
@@ -39727,19 +39798,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/views/TsumiageEdit.vue?vue&type=template&id=25aeb296&scoped=true&":
-/*!****************************************************************************************!*\
-  !*** ./resources/js/views/TsumiageEdit.vue?vue&type=template&id=25aeb296&scoped=true& ***!
-  \****************************************************************************************/
+/***/ "./resources/js/views/TsumiageEdit.vue?vue&type=template&id=25aeb296&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/views/TsumiageEdit.vue?vue&type=template&id=25aeb296& ***!
+  \****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TsumiageEdit_vue_vue_type_template_id_25aeb296_scoped_true___WEBPACK_IMPORTED_MODULE_0__.render),
-/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TsumiageEdit_vue_vue_type_template_id_25aeb296_scoped_true___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TsumiageEdit_vue_vue_type_template_id_25aeb296___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TsumiageEdit_vue_vue_type_template_id_25aeb296___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TsumiageEdit_vue_vue_type_template_id_25aeb296_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TsumiageEdit.vue?vue&type=template&id=25aeb296&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/TsumiageEdit.vue?vue&type=template&id=25aeb296&scoped=true&");
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TsumiageEdit_vue_vue_type_template_id_25aeb296___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TsumiageEdit.vue?vue&type=template&id=25aeb296& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/TsumiageEdit.vue?vue&type=template&id=25aeb296&");
 
 
 /***/ }),
@@ -40782,10 +40853,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/TsumiageEdit.vue?vue&type=template&id=25aeb296&scoped=true&":
-/*!*******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/TsumiageEdit.vue?vue&type=template&id=25aeb296&scoped=true& ***!
-  \*******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/TsumiageEdit.vue?vue&type=template&id=25aeb296&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/TsumiageEdit.vue?vue&type=template&id=25aeb296& ***!
+  \*******************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -40798,145 +40869,162 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "mb-4", attrs: { id: "DateTimeDisp" } }),
-    _vm._v(" "),
-    _c(
-      "form",
-      {
-        staticClass: "pt-6",
-        on: {
-          submit: function($event) {
-            $event.preventDefault()
-            return _vm.submitForm.apply(null, arguments)
-          }
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "mb-4", attrs: { id: "DateTimeDisp" } }),
+      _vm._v(" "),
+      _c("Datepicker", {
+        staticClass: "datapicker-style",
+        attrs: {
+          format: _vm.DatePickerFormat,
+          language: _vm.ja,
+          name: "datepicker"
+        },
+        model: {
+          value: _vm.defaultDate,
+          callback: function($$v) {
+            _vm.defaultDate = $$v
+          },
+          expression: "defaultDate"
         }
-      },
-      [
-        _vm._l(_vm.itemNum, function(n) {
-          return _c("div", [
-            _c(
-              "div",
-              { staticClass: "flex justify-items-center mx-auto" },
-              [
-                _c("InputField", {
-                  key: "item" + n,
-                  staticClass: "pr-2",
-                  attrs: {
-                    name: "item" + n,
-                    label: "積み上げ" + n,
-                    errors: _vm.errors,
-                    placeholder: "積み上げ",
-                    data: _vm.item[n]
-                  },
-                  on: {
-                    "update:field": function($event) {
-                      return _vm.itemUpdate($event, n)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("InputField", {
-                  key: "plan_time" + n,
-                  staticClass: "pr-2",
-                  attrs: {
-                    name: "plan_time" + n,
-                    errors: _vm.errors,
-                    placeholder: "予定作業時間(分)",
-                    data: _vm.planTime[n]
-                  },
-                  on: {
-                    "update:field": function($event) {
-                      return _vm.planTimeUpdate($event, n)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("InputField", {
-                  key: "actual_time" + n,
-                  attrs: {
-                    name: "actual_time" + n,
-                    errors: _vm.errors,
-                    placeholder: "実績作業時間(分)",
-                    data: _vm.actualTime[n]
-                  },
-                  on: {
-                    "update:field": function($event) {
-                      return _vm.actualTimeUpdate($event, n)
-                    }
-                  }
-                })
-              ],
-              1
-            )
-          ])
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "flex justify-start" }, [
-          _vm.itemNum < 10
-            ? _c(
-                "button",
-                {
-                  staticClass:
-                    "p-1 rounded text-sm border mr-3 hover:text-blue-800",
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      _vm.itemNum += 1
-                    }
-                  }
-                },
-                [_vm._v("\n                積み上げ追加\n            ")]
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.itemNum > 0
-            ? _c(
-                "button",
-                {
-                  staticClass:
-                    "p-1 rounded text-sm border mr-5 hover:text-red-800",
-                  attrs: { type: "button" },
-                  on: {
-                    click: function($event) {
-                      _vm.itemNum -= 1
-                    }
-                  }
-                },
-                [_vm._v("\n                積み上げ削除\n            ")]
-              )
-            : _vm._e()
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "flex justify-end" },
-          [
-            _c(
-              "router-link",
-              {
-                staticClass:
-                  "py-2 px-4 rounded text-red-700 border mr-5 hover:border-red-700",
-                attrs: { to: "/home" }
-              },
-              [_vm._v("\n                キャンセル\n            ")]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "bg-blue-500 py-2 px-4 text-white rounded hover:bg-blue-400"
-              },
-              [_vm._v("保存")]
-            )
-          ],
-          1
-        )
-      ],
-      2
-    )
-  ])
+      }),
+      _vm._v(" "),
+      _vm.loading
+        ? _c("div", [_vm._v("Loading...")])
+        : _c(
+            "div",
+            [
+              _vm._l(_vm.tsumiages, function(tsumiage, tsumiageKey, index) {
+                return _c("div", [
+                  _c(
+                    "form",
+                    {
+                      staticClass: "pt-6",
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          return _vm.submitForm(tsumiageKey)
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "flex justify-items-start" }, [
+                        _c(
+                          "div",
+                          { staticClass: "flex justify-items-center mx-auto" },
+                          [
+                            _c("InputField", {
+                              key: "item" + tsumiageKey,
+                              staticClass: "pr-2",
+                              attrs: {
+                                name: "item" + tsumiageKey,
+                                label: "積み上げ" + String(parseInt(index) + 1),
+                                errors: _vm.errors,
+                                placeholder: "積み上げ",
+                                data: tsumiage.data.attributes.item
+                              },
+                              on: {
+                                "update:field": function($event) {
+                                  return _vm.itemUpdate($event, tsumiageKey)
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("InputField", {
+                              key: "plan_time" + tsumiageKey,
+                              staticClass: "pr-2",
+                              attrs: {
+                                name: "plan_time" + tsumiageKey,
+                                errors: _vm.errors,
+                                placeholder: "予定作業時間(分)",
+                                data: tsumiage.data.attributes.plan_time
+                              },
+                              on: {
+                                "update:field": function($event) {
+                                  return _vm.planTimeUpdate($event, tsumiageKey)
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("InputField", {
+                              key: "actual_time" + tsumiageKey,
+                              attrs: {
+                                name: "actual_time" + tsumiageKey,
+                                errors: _vm.errors,
+                                placeholder: "実績作業時間(分)",
+                                data: tsumiage.data.attributes.actual_time
+                              },
+                              on: {
+                                "update:field": function($event) {
+                                  return _vm.actualTimeUpdate(
+                                    $event,
+                                    tsumiageKey
+                                  )
+                                }
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "flex justify-end pt-3" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "p-1 rounded text-red-700 border mr-5 hover:border-red-700 h-9",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteItem(
+                                    tsumiage.data.tsumiage_id
+                                  )
+                                }
+                              }
+                            },
+                            [_vm._v("削除")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "bg-blue-500 p-1 h-9 text-white rounded hover:bg-blue-400"
+                            },
+                            [_vm._v("保存")]
+                          )
+                        ])
+                      ])
+                    ]
+                  )
+                ])
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex justify-start" }, [
+                _vm.itemNum < 10
+                  ? _c(
+                      "button",
+                      {
+                        staticClass:
+                          "p-1 rounded text-sm border mr-3 hover:text-blue-800",
+                        attrs: { type: "button" },
+                        on: {
+                          click: function($event) {
+                            _vm.itemNum += 1
+                          }
+                        }
+                      },
+                      [_vm._v("\n                積み上げ追加\n            ")]
+                    )
+                  : _vm._e()
+              ])
+            ],
+            2
+          )
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

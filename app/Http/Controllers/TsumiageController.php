@@ -7,6 +7,7 @@ use App\Models\Tsumiage;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Resources\TsumiageCollection;
 use App\Http\Requests\TsumiageRequest;
+use App\Http\Resources\Tsumiage as TsumiageResource;
 
 class TsumiageController extends Controller
 {
@@ -31,6 +32,26 @@ class TsumiageController extends Controller
         return (new TsumiageCollection($tsumiages))
         ->response()
         ->setStatusCode(Response::HTTP_CREATED);
+    }
+
+
+    public function update(Request $request, Tsumiage $tsumiage)
+    {
+        info($request);
+        // TODO バリデーションとポリシー追加
+        $itemKey = 'item' . $request->key;
+        $planTimeKey = 'plan_time' . $request->key;
+        $actualTimeKey = 'actual_time' . $request->key;
+
+        $tsumiage->update([
+            'item' => $request->$itemKey,
+            'plan_time' => $request->$planTimeKey,
+            'actual_time' => $request->$actualTimeKey,
+        ]);
+
+        return (new TsumiageResource($tsumiage))
+        ->response()
+        ->setStatusCode(Response::HTTP_OK);
     }
 
 }
