@@ -2639,7 +2639,7 @@ __webpack_require__.r(__webpack_exports__);
     Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_1__.default
   },
   mounted: function mounted() {
-    this.displayToday(); // axios.get('/api/items/' + this.$route.params.id)
+    this.getDay(); // axios.get('/api/items/' + this.$route.params.id)
     //     .then(response => {
     //         this.form = response.data.data.attributes;
     //         this.itemNum = response.data.data.item_num;
@@ -2745,13 +2745,18 @@ __webpack_require__.r(__webpack_exports__);
       self.actualTime[self.itemNum] = '';
       self.itemNum -= 1;
     },
-    displayToday: function displayToday() {
+    getDay: function getDay() {
       var now = this.defaultDate;
       var Year = now.getFullYear();
       var Month = ("00" + (now.getMonth() + 1)).slice(-2);
       var Day = ("00" + now.getDate()).slice(-2);
-      document.getElementById("DateTimeDisp").innerHTML = Year + "/" + Month + "/" + Day;
       this.day = Year + "-" + Month + "-" + Day;
+    }
+  },
+  watch: {
+    // defaultDateの変更を監視してdayを計算したい
+    defaultDate: function defaultDate() {
+      this.getDay();
     }
   }
 });

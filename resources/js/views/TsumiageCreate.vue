@@ -56,7 +56,7 @@
         },
 
         mounted() {
-            this.displayToday();
+            this.getDay();
             
             // axios.get('/api/items/' + this.$route.params.id)
             //     .then(response => {
@@ -145,13 +145,19 @@
                 self.itemNum -= 1;
             },
 
-            displayToday: function () {
+            getDay: function () {
                 var now = this.defaultDate;
                 var Year = now.getFullYear();
                 var Month = ("00" + (now.getMonth()+1)).slice(-2);
                 var Day = ("00" + now.getDate()).slice(-2);
-                document.getElementById("DateTimeDisp").innerHTML = Year + "/" + Month + "/" + Day;
                 this.day = Year + "-" + Month + "-" + Day;
+            },
+        },
+
+        watch: {
+            // defaultDateの変更を監視してdayを計算したい
+            defaultDate: function () {
+                this.getDay();
             },
         }
     }
