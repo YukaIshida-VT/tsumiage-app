@@ -28,9 +28,13 @@ class TsumiageRequest extends FormRequest
         $returnArray = [];
 
         for ($i = 1; $i <= 11; $i++) {
-            $key = 'item' . $i;
-            if (array_key_exists($key, $data)) {
-                $returnArray[$key] = 'required';
+            $itemKey = 'item' . $i;
+            $planTimeKey = 'plan_time' . $i;
+            $actualTimeKey = 'actual_time' . $i;
+            if (array_key_exists($itemKey, $data)) {
+                $returnArray[$itemKey] = 'required';
+                $returnArray[$planTimeKey] = 'nullable|numeric';
+                $returnArray[$actualTimeKey] = 'nullable|numeric';
             }
         }
 
