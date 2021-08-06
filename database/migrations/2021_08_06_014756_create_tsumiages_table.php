@@ -16,7 +16,7 @@ class CreateTsumiagesTable extends Migration
         Schema::create('tsumiages', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->integer('today');
+            $table->date('date');
             $table->string('item');
             $table->integer('plan_time')->nullable();
             $table->integer('actual_time')->nullable();

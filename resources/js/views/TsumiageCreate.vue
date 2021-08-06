@@ -88,7 +88,7 @@
                 errors: null,
                 itemNum: 3,
                 loading: true,
-                today: null,
+                day: null,
 
                 defaultDate: new Date(),
                 DatePickerFormat: 'yyyy-MM-dd',
@@ -107,7 +107,7 @@
         methods: {
             submitForm: function() {
                 var submitArray = {};
-                submitArray['today'] = this.today;
+                submitArray['date'] = this.day;
 
                 for (let i = 1; i < this.itemNum + 1; i++) {
                     submitArray['item' + i] = this.item[i];
@@ -146,12 +146,12 @@
             },
 
             displayToday: function () {
-                var now = new Date();
+                var now = this.defaultDate;
                 var Year = now.getFullYear();
                 var Month = ("00" + (now.getMonth()+1)).slice(-2);
                 var Day = ("00" + now.getDate()).slice(-2);
                 document.getElementById("DateTimeDisp").innerHTML = Year + "/" + Month + "/" + Day;
-                this.today = Year + Month +Day;
+                this.day = Year + "-" + Month + "-" + Day;
             },
         }
     }
@@ -159,7 +159,7 @@
 
 <style>
     .datapicker-style div input {
-        border: 1px ridge #333333;
+        border: 1px ridge #dcdcdc;
         border-radius: 3px;
         text-align: center;
     }

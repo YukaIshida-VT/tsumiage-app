@@ -2693,7 +2693,7 @@ __webpack_require__.r(__webpack_exports__);
       errors: null,
       itemNum: 3,
       loading: true,
-      today: null,
+      day: null,
       defaultDate: new Date(),
       DatePickerFormat: 'yyyy-MM-dd',
       ja: {
@@ -2712,7 +2712,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var submitArray = {};
-      submitArray['today'] = this.today;
+      submitArray['date'] = this.day;
 
       for (var i = 1; i < this.itemNum + 1; i++) {
         submitArray['item' + i] = this.item[i];
@@ -2746,12 +2746,12 @@ __webpack_require__.r(__webpack_exports__);
       self.itemNum -= 1;
     },
     displayToday: function displayToday() {
-      var now = new Date();
+      var now = this.defaultDate;
       var Year = now.getFullYear();
       var Month = ("00" + (now.getMonth() + 1)).slice(-2);
       var Day = ("00" + now.getDate()).slice(-2);
       document.getElementById("DateTimeDisp").innerHTML = Year + "/" + Month + "/" + Day;
-      this.today = Year + Month + Day;
+      this.day = Year + "-" + Month + "-" + Day;
     }
   }
 });
@@ -7631,7 +7631,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".datapicker-style div input {\n  border: 1px ridge #333333;\n  border-radius: 3px;\n  text-align: center;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".datapicker-style div input {\n  border: 1px ridge #dcdcdc;\n  border-radius: 3px;\n  text-align: center;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

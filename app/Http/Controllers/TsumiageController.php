@@ -23,7 +23,7 @@ class TsumiageController extends Controller
 
             if ($request->has($itemKey)) {
                 $dataArray[] = ['item' => $request->$itemKey, 'plan_time' => $request->$planTimeKey,
-                                 'actual_time' => $request->$actualTimeKey, 'today' => $request->today];
+                                 'actual_time' => $request->$actualTimeKey, 'date' => $request->date];
             }
         }
         $tsumiages = request()->user()->tsumiages()->createMany($dataArray);
