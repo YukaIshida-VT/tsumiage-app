@@ -1,6 +1,12 @@
 <template>
     <div>
         <div id="DateTimeDisp" class="mb-4"></div>
+        <Datepicker
+            v-model="defaultDate"
+            :format="DatePickerFormat"
+            :language="ja"
+            name="datepicker" class="datapicker-style">
+        </Datepicker>
 
         <form @submit.prevent="submitForm" class="pt-6">
     
@@ -39,12 +45,14 @@
 
 <script>
     import InputField from '../components/InputField';
+    import Datepicker from 'vuejs-datepicker';
 
     export default {
         name: "TsumiageCreate",
 
         components: {
-            InputField
+            InputField,
+            Datepicker
         },
 
         mounted() {
@@ -78,12 +86,21 @@
                 },
 
                 errors: null,
-
                 itemNum: 3,
-
                 loading: true,
-
                 today: null,
+
+                defaultDate: new Date(),
+                DatePickerFormat: 'yyyy-MM-dd',
+                ja: {
+                    language: 'Japanese',
+                    months: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                    monthsAbbr: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                    days: ['日', '月', '火', '水', '木', '金', '土'],
+                    rtl: false,
+                    ymd: 'yyyy-MM-dd',
+                    yearSuffix: '年'
+                }
             }
         },
 
@@ -140,6 +157,11 @@
     }
 </script>
 
-<style scoped>
-
+<style>
+    .datapicker-style div input {
+        border: 1px ridge #333333;
+        border-radius: 3px;
+        text-align: center;
+    }
+    
 </style>
