@@ -90,16 +90,12 @@
         methods: {
             submitForm: function() {
                 var submitArray = {};
-                submitArray['tsumiage'] = {};
+                submitArray['today'] = this.today;
 
                 for (let i = 1; i < this.itemNum + 1; i++) {
-                    let tsumiage = {};
-                    tsumiage['item'] = this.item[i];
-                    tsumiage['plan_time'] = this.planTime[i];
-                    tsumiage['actual_time'] = this.actualTime[i];
-                    tsumiage['today'] = this.today;
-
-                    submitArray['tsumiage'][i] = tsumiage;
+                    submitArray['item' + i] = this.item[i];
+                    submitArray['plan_time' + i] = this.planTime[i];
+                    submitArray['actual_time' + i] = this.actualTime[i];
                 }
 
                 axios.post('/api/tsumiage', submitArray)
