@@ -41,7 +41,7 @@
     import InputField from '../components/InputField';
 
     export default {
-        name: "TsumiageCreate",
+        name: "TsumiageEdit",
 
         components: {
             InputField
@@ -91,7 +91,7 @@
             submitForm: function() {
                 var submitArray = {};
                 submitArray['tsumiage'] = {};
-
+                
                 for (let i = 1; i < this.itemNum + 1; i++) {
                     let tsumiage = {};
                     tsumiage['item'] = this.item[i];

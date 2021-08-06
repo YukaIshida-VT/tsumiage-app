@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import Home from "./views/Home";
 import TsumiageCreate from "./views/TsumiageCreate";
 import ContactsShow from "./views/ContactsShow";
-import ContactsEdit from "./views/ContactsEdit";
+import TsumiageEdit from "./views/TsumiageEdit";
 import ContactsIndex from "./views/ContactsIndex";
 import BirthdaysIndex from "./views/BirthdaysIndex";
 import ItemsEdit from "./views/ItemsEdit";
