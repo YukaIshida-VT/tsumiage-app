@@ -1,6 +1,4 @@
 <template>
-
-<template>
     <nav class="pt-4">
         <router-link to="/home">
             <svg class="fill-current text-blue-600 w-12 h-12" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
