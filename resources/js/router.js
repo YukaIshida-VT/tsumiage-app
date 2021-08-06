@@ -21,7 +21,7 @@ export default new VueRouter({
             meta: { title: 'Contacts' }
         }, {
             path: '/tsumiage/create', component: TsumiageCreate,
-            meta: { title: '積み上げ入力' }
+            meta: { title: '積み上げ作成' }
         }, {
             path: '/contacts/:id', component: ContactsShow, name: 'ContactsShow',
             meta: { title: '積み上げ詳細' }

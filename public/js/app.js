@@ -3023,7 +3023,7 @@ vue__WEBPACK_IMPORTED_MODULE_8__.default.use(vue_router__WEBPACK_IMPORTED_MODULE
     path: '/tsumiage/create',
     component: _views_TsumiageCreate__WEBPACK_IMPORTED_MODULE_1__.default,
     meta: {
-      title: '積み上げ入力'
+      title: '積み上げ作成'
     }
   }, {
     path: '/contacts/:id',
@@ -41111,14 +41111,16 @@ var render = function() {
               [_vm._v("\n                キャンセル\n            ")]
             ),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "bg-blue-500 py-2 px-4 text-white rounded hover:bg-blue-400"
-              },
-              [_vm._v("保存")]
-            )
+            _vm.itemNum > 0
+              ? _c(
+                  "button",
+                  {
+                    staticClass:
+                      "bg-blue-500 py-2 px-4 text-white rounded hover:bg-blue-400"
+                  },
+                  [_vm._v("保存")]
+                )
+              : _vm._e()
           ],
           1
         )
