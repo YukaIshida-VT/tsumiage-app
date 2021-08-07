@@ -15,7 +15,7 @@ export default new VueRouter({
             path: '/home', component: Home,
             meta: { title: 'ホーム' }
         }, {
-            path: '/tsumiage/create', component: TsumiageCreate,
+            path: '/tsumiage/create/:day', component: TsumiageCreate,
             meta: { title: '積み上げ作成' }
         }, {
             path: '/tsumiage/edit/:day', component: TsumiageEdit,

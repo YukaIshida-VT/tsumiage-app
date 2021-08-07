@@ -56,6 +56,7 @@
         },
 
         mounted() {
+            this.getDate(this.$route.params.day);
             this.getDay();
             this.getTsumiage();
         },
@@ -142,11 +143,17 @@
                 this.yyyymmdd = Year + Month + Day;
             },
 
+            getDate: function (yyyymmdd) {
+                let y = yyyymmdd.substr(0, 4);
+                let m = yyyymmdd.substr(4, 2);
+                let d = yyyymmdd.substr(6, 2);
+                this.defaultDate = new Date(y, m - 1, d); 
+            },
+
             getTsumiage: function() {
                 axios.post('/api/user-tsumiage', {data: this.day})
                     .then(response => {
                         if (response.data.count != 0) {
-                            // TODO 選択した日付へのルーティングとする
                             this.$router.push('/tsumiage/edit/' + this.yyyymmdd);
                         } 
                     })

@@ -2501,6 +2501,7 @@ __webpack_require__.r(__webpack_exports__);
     Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_1__.default
   },
   mounted: function mounted() {
+    this.getDate(this.$route.params.day);
     this.getDay();
     this.getTsumiage();
   },
@@ -2606,6 +2607,12 @@ __webpack_require__.r(__webpack_exports__);
       this.day = Year + "-" + Month + "-" + Day;
       this.yyyymmdd = Year + Month + Day;
     },
+    getDate: function getDate(yyyymmdd) {
+      var y = yyyymmdd.substr(0, 4);
+      var m = yyyymmdd.substr(4, 2);
+      var d = yyyymmdd.substr(6, 2);
+      this.defaultDate = new Date(y, m - 1, d);
+    },
     getTsumiage: function getTsumiage() {
       var _this2 = this;
 
@@ -2613,7 +2620,6 @@ __webpack_require__.r(__webpack_exports__);
         data: this.day
       }).then(function (response) {
         if (response.data.count != 0) {
-          // TODO 選択した日付へのルーティングとする
           _this2.$router.push('/tsumiage/edit/' + _this2.yyyymmdd);
         }
       })["catch"](function (error) {});
@@ -2717,7 +2723,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       errors: null,
       itemNum: 0,
       loading: true,
-      day: null
+      day: null,
+      yyyymmdd: null
     }, _defineProperty(_ref, "loading", true), _defineProperty(_ref, "defaultDate", new Date()), _defineProperty(_ref, "DatePickerFormat", 'yyyy-MM-dd'), _defineProperty(_ref, "ja", {
       language: 'Japanese',
       months: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
@@ -2764,8 +2771,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.post('/api/user-tsumiage', {
         data: this.day
       }).then(function (response) {
-        if (response.data.count == 0) {// TODO 選択した日付へのルーティングとする
-          // this.$router.push('/tsumiage/create');
+        if (response.data.count == 0) {
+          _this3.$router.push('/tsumiage/create/' + _this3.yyyymmdd);
         } else {
           _this3.itemNum = response.data.count;
           _this3.tsumiages = response.data.data;
@@ -2796,6 +2803,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var Month = ("00" + (now.getMonth() + 1)).slice(-2);
       var Day = ("00" + now.getDate()).slice(-2);
       this.day = Year + "-" + Month + "-" + Day;
+      this.yyyymmdd = Year + Month + Day;
     },
     getDate: function getDate(yyyymmdd) {
       var y = yyyymmdd.substr(0, 4);
@@ -2927,7 +2935,7 @@ vue__WEBPACK_IMPORTED_MODULE_6__.default.use(vue_router__WEBPACK_IMPORTED_MODULE
       title: 'ホーム'
     }
   }, {
-    path: '/tsumiage/create',
+    path: '/tsumiage/create/:day',
     component: _views_TsumiageCreate__WEBPACK_IMPORTED_MODULE_1__.default,
     meta: {
       title: '積み上げ作成'

@@ -71,6 +71,7 @@
                 itemNum: 0,
                 loading: true,
                 day: null,
+                yyyymmdd: null,
                 loading: true,
 
                 defaultDate: new Date(),
@@ -122,8 +123,7 @@
                 axios.post('/api/user-tsumiage', {data: this.day})
                     .then(response => {
                         if (response.data.count == 0) {
-                            // TODO 選択した日付へのルーティングとする
-                            // this.$router.push('/tsumiage/create');
+                            this.$router.push('/tsumiage/create/' + this.yyyymmdd);
                         } else {
                             this.itemNum = response.data.count;
                             this.tsumiages = response.data.data;
@@ -160,6 +160,7 @@
                 var Month = ("00" + (now.getMonth()+1)).slice(-2);
                 var Day = ("00" + now.getDate()).slice(-2);
                 this.day = Year + "-" + Month + "-" + Day;
+                this.yyyymmdd = Year + Month + Day;
             },
 
             getDate: function (yyyymmdd) {
