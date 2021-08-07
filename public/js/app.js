@@ -2838,7 +2838,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         _this2.getTsumiage();
 
-        _this2.addItemNum = 0;
+        _this2.allDeleteAddItem();
       })["catch"](function (errors) {
         _this2.errors = errors.response.data.errors;
       });
@@ -2850,6 +2850,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         alert("削除しました");
 
         _this3.getTsumiage();
+
+        _this3.allDeleteAddItem();
       })["catch"](function (errors) {
         _this3.errors = errors.response.data.errors;
       });
@@ -2874,12 +2876,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         // }
       });
     },
-    deleteAddItem: function deleteAddItem() {
+    deleteAddItem: function deleteAddItem(addItemNum) {
       var self = this;
-      self.item[self.addItemNum] = '';
-      self.planTime[self.addItemNum] = '';
-      self.actualTime[self.addItemNum] = '';
-      self.addItemNum -= 1;
+      self.item[addItemNum] = '';
+      self.planTime[addItemNum] = '';
+      self.actualTime[addItemNum] = '';
+    },
+    allDeleteAddItem: function allDeleteAddItem() {
+      for (var i = 1; i < this.addItemNum + 1; i++) {
+        this.deleteAddItem(i);
+      }
+
+      this.addItemNum = 0;
     },
     itemUpdate: function itemUpdate($event, key) {
       var self = this;
@@ -41219,7 +41227,8 @@ var render = function() {
                             attrs: { type: "button" },
                             on: {
                               click: function($event) {
-                                return _vm.deleteAddItem()
+                                _vm.deleteAddItem(_vm.addItemNum)
+                                _vm.addItemNum -= 1
                               }
                             }
                           },

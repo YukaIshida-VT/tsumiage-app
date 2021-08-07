@@ -51,7 +51,7 @@
                         積み上げ追加
                     </button>
                     <button v-if="addItemNum > 0" type="button" class="p-1 rounded text-sm border mr-3 hover:text-blue-800" 
-                    @click="deleteAddItem()">
+                    @click="deleteAddItem(addItemNum); addItemNum -= 1;">
                         追加積み上げ削除
                     </button>
                     <button v-if="addItemNum > 0" class="bg-blue-500 p-1 text-sm text-white rounded hover:bg-blue-400">追加積み上げ保存</button>
@@ -148,7 +148,7 @@
                     .then(response => {
                         alert("保存しました");
                         this.getTsumiage();
-                        this.addItemNum = 0;
+                        this.allDeleteAddItem();
                     })
                     .catch(errors => {
                         this.errors = errors.response.data.errors;
@@ -160,6 +160,7 @@
                     .then(response => {
                         alert("削除しました");
                         this.getTsumiage();
+                        this.allDeleteAddItem();
                     })
                     .catch(errors => {
                         this.errors = errors.response.data.errors;
@@ -189,12 +190,18 @@
 
             },
 
-            deleteAddItem: function() {
+            deleteAddItem: function(addItemNum) {
                 var self = this;
-                self.item[self.addItemNum] = '';
-                self.planTime[self.addItemNum] = '';
-                self.actualTime[self.addItemNum] = '';
-                self.addItemNum -= 1;
+                self.item[addItemNum] = '';
+                self.planTime[addItemNum] = '';
+                self.actualTime[addItemNum] = '';
+            },
+
+            allDeleteAddItem: function() {
+                for (let i = 1; i < this.addItemNum + 1; i++) {
+                    this.deleteAddItem(i);
+                }
+                this.addItemNum = 0;
             },
 
             itemUpdate: function($event, key) {
