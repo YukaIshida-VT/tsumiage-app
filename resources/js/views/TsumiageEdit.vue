@@ -36,7 +36,7 @@
             <form @submit.prevent="submitAddItem()" class="pt-6">
                 <div v-for="n in addItemNum">
                     <div class="flex justify-items-center mx-auto">
-                        <InputField :key="'add_item' + n" :name="'add_item' + n" :label="'積み上げ' + String(parseInt(n) + parseInt(itemNum))" :errors="errors"
+                        <InputField :key="'add_item' + n" :name="'add_item' + n" :label="'追加' + n" :errors="errors"
                         placeholder="積み上げ" @update:field="addItemUpdate($event, n)" :data="item[n]" class="pr-2" />
                         <InputField :key="'add_plan_time' + n" :name="'add_plan_time' + n" :errors="errors"
                         placeholder="予定作業時間(分)" @update:field="addPlanTimeUpdate($event, n)" :data="planTime[n]" class="pr-2" />
@@ -160,7 +160,6 @@
                     .then(response => {
                         alert("削除しました");
                         this.getTsumiage();
-                        this.allDeleteAddItem();
                     })
                     .catch(errors => {
                         this.errors = errors.response.data.errors;

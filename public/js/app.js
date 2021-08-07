@@ -2850,8 +2850,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         alert("削除しました");
 
         _this3.getTsumiage();
-
-        _this3.allDeleteAddItem();
       })["catch"](function (errors) {
         _this3.errors = errors.response.data.errors;
       });
@@ -41146,9 +41144,7 @@ var render = function() {
                             staticClass: "pr-2",
                             attrs: {
                               name: "add_item" + n,
-                              label:
-                                "積み上げ" +
-                                String(parseInt(n) + parseInt(_vm.itemNum)),
+                              label: "追加" + n,
                               errors: _vm.errors,
                               placeholder: "積み上げ",
                               data: _vm.item[n]
