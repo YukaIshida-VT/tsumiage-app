@@ -2585,13 +2585,15 @@ __webpack_require__.r(__webpack_exports__);
       submitArray['date'] = this.day;
 
       for (var i = 1; i < this.itemNum + 1; i++) {
-        submitArray['item' + i] = this.item[i];
-        submitArray['plan_time' + i] = this.planTime[i];
-        submitArray['actual_time' + i] = this.actualTime[i];
+        submitArray['add_item' + i] = this.item[i];
+        submitArray['add_plan_time' + i] = this.planTime[i];
+        submitArray['add_actual_time' + i] = this.actualTime[i];
       }
 
       axios.post('/api/tsumiage', submitArray).then(function (response) {
         alert("保存しました");
+
+        _this.$router.push('/tsumiage/edit/' + _this.yyyymmdd);
       })["catch"](function (errors) {
         _this.errors = errors.response.data.errors;
       });
@@ -2827,9 +2829,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       submitArray['date'] = this.day;
 
       for (var i = 1; i < this.addItemNum + 1; i++) {
-        submitArray['item' + i] = this.item[i];
-        submitArray['plan_time' + i] = this.planTime[i];
-        submitArray['actual_time' + i] = this.actualTime[i];
+        submitArray['add_item' + i] = this.item[i];
+        submitArray['add_plan_time' + i] = this.planTime[i];
+        submitArray['add_actual_time' + i] = this.actualTime[i];
       }
 
       axios.post('/api/tsumiage', submitArray).then(function (response) {
@@ -40835,7 +40837,7 @@ var render = function() {
                     key: "item" + n,
                     staticClass: "pr-2",
                     attrs: {
-                      name: "item" + n,
+                      name: "add_item" + n,
                       label: "積み上げ" + n,
                       errors: _vm.errors,
                       placeholder: "積み上げ",
@@ -40852,7 +40854,7 @@ var render = function() {
                     key: "plan_time" + n,
                     staticClass: "pr-2",
                     attrs: {
-                      name: "plan_time" + n,
+                      name: "add_plan_time" + n,
                       errors: _vm.errors,
                       placeholder: "予定作業時間(分)",
                       data: _vm.planTime[n]
@@ -40867,7 +40869,7 @@ var render = function() {
                   _c("InputField", {
                     key: "actual_time" + n,
                     attrs: {
-                      name: "actual_time" + n,
+                      name: "add_actual_time" + n,
                       errors: _vm.errors,
                       placeholder: "実績作業時間(分)",
                       data: _vm.actualTime[n]

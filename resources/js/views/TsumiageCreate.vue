@@ -12,11 +12,11 @@
     
             <div v-for="n in itemNum">
                 <div class="flex justify-items-center mx-auto">
-                    <InputField :key="'item' + n" :name="'item' + n" :label="'積み上げ' + n" :errors="errors"
+                    <InputField :key="'item' + n" :name="'add_item' + n" :label="'積み上げ' + n" :errors="errors"
                     placeholder="積み上げ" @update:field="itemUpdate($event, n)" :data="item[n]" class="pr-2" />
-                    <InputField :key="'plan_time' + n" :name="'plan_time' + n" :errors="errors"
+                    <InputField :key="'plan_time' + n" :name="'add_plan_time' + n" :errors="errors"
                     placeholder="予定作業時間(分)" @update:field="planTimeUpdate($event, n)" :data="planTime[n]" class="pr-2" />
-                    <InputField :key="'actual_time' + n" :name="'actual_time' + n" :errors="errors"
+                    <InputField :key="'actual_time' + n" :name="'add_actual_time' + n" :errors="errors"
                     placeholder="実績作業時間(分)" @update:field="actualTimeUpdate($event, n)" :data="actualTime[n]" />
                 </div>
             </div>
@@ -98,14 +98,15 @@
                 submitArray['date'] = this.day;
 
                 for (let i = 1; i < this.itemNum + 1; i++) {
-                    submitArray['item' + i] = this.item[i];
-                    submitArray['plan_time' + i] = this.planTime[i];
-                    submitArray['actual_time' + i] = this.actualTime[i];
+                    submitArray['add_item' + i] = this.item[i];
+                    submitArray['add_plan_time' + i] = this.planTime[i];
+                    submitArray['add_actual_time' + i] = this.actualTime[i];
                 }
 
                 axios.post('/api/tsumiage', submitArray)
                     .then(response => {
                         alert("保存しました");
+                        this.$router.push('/tsumiage/edit/' + this.yyyymmdd);
                     })
                     .catch(errors => {
                         this.errors = errors.response.data.errors;

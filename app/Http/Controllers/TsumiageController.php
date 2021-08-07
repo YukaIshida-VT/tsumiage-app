@@ -13,14 +13,15 @@ class TsumiageController extends Controller
 {
     public function store(TsumiageRequest $request) 
     {
+        info($request);
         $this->authorize('create', Tsumiage::class);
 
         $dataArray = [];
 
         for ($i = 1; $i <= 11; $i++) {
-            $itemKey = 'item' . $i;
-            $planTimeKey = 'plan_time' . $i;
-            $actualTimeKey = 'actual_time' . $i;
+            $itemKey = 'add_item' . $i;
+            $planTimeKey = 'add_plan_time' . $i;
+            $actualTimeKey = 'add_actual_time' . $i;
 
             if ($request->has($itemKey)) {
                 $dataArray[] = ['item' => $request->$itemKey, 'plan_time' => $request->$planTimeKey,

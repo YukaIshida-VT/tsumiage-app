@@ -140,9 +140,9 @@
                 submitArray['date'] = this.day;
 
                 for (let i = 1; i < this.addItemNum + 1; i++) {
-                    submitArray['item' + i] = this.item[i];
-                    submitArray['plan_time' + i] = this.planTime[i];
-                    submitArray['actual_time' + i] = this.actualTime[i];
+                    submitArray['add_item' + i] = this.item[i];
+                    submitArray['add_plan_time' + i] = this.planTime[i];
+                    submitArray['add_actual_time' + i] = this.actualTime[i];
                 }
 
                 axios.post('/api/tsumiage', submitArray)
