@@ -2718,6 +2718,25 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2738,6 +2757,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       tsumiages: {},
       errors: null,
       itemNum: 0,
+      addItemNum: 0,
       loading: true,
       day: null,
       yyyymmdd: null
@@ -2749,6 +2769,39 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       rtl: false,
       ymd: 'yyyy-MM-dd',
       yearSuffix: '年'
+    }), _defineProperty(_ref, "item", {
+      1: '',
+      2: '',
+      3: '',
+      4: '',
+      5: '',
+      6: '',
+      7: '',
+      8: '',
+      9: '',
+      10: ''
+    }), _defineProperty(_ref, "planTime", {
+      1: '',
+      2: '',
+      3: '',
+      4: '',
+      5: '',
+      6: '',
+      7: '',
+      8: '',
+      9: '',
+      10: ''
+    }), _defineProperty(_ref, "actualTime", {
+      1: '',
+      2: '',
+      3: '',
+      4: '',
+      5: '',
+      6: '',
+      7: '',
+      8: '',
+      9: '',
+      10: ''
     }), _ref;
   },
   methods: {
@@ -2767,11 +2820,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.errors = errors.response.data.errors;
       });
     },
-    deleteItem: function deleteItem(tsumiage_id) {
+    submitAddItem: function submitAddItem() {
       var _this2 = this;
 
-      axios["delete"]('/api/tsumiage/' + tsumiage_id).then(function (response) {
-        alert("削除しました"); // TODO 編集した日付へのルーティングとする
+      var submitArray = {};
+      submitArray['date'] = this.day;
+
+      for (var i = 1; i < this.addItemNum + 1; i++) {
+        submitArray['item' + i] = this.item[i];
+        submitArray['plan_time' + i] = this.planTime[i];
+        submitArray['actual_time' + i] = this.actualTime[i];
+      }
+
+      axios.post('/api/tsumiage', submitArray).then(function (response) {
+        alert("保存しました");
 
         _this2.$router.go({
           path: _this2.$router.currentRoute.path,
@@ -2781,22 +2843,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.errors = errors.response.data.errors;
       });
     },
-    getTsumiage: function getTsumiage() {
+    deleteItem: function deleteItem(tsumiage_id) {
       var _this3 = this;
+
+      axios["delete"]('/api/tsumiage/' + tsumiage_id).then(function (response) {
+        alert("削除しました"); // TODO 編集した日付へのルーティングとする
+
+        _this3.$router.go({
+          path: _this3.$router.currentRoute.path,
+          force: true
+        });
+      })["catch"](function (errors) {
+        _this3.errors = errors.response.data.errors;
+      });
+    },
+    getTsumiage: function getTsumiage() {
+      var _this4 = this;
 
       axios.post('/api/user-tsumiage', {
         data: this.day
       }).then(function (response) {
         if (response.data.count == 0) {
-          _this3.$router.push('/tsumiage/create/' + _this3.yyyymmdd);
+          _this4.$router.push('/tsumiage/create/' + _this4.yyyymmdd);
         } else {
-          _this3.itemNum = response.data.count;
-          _this3.tsumiages = response.data.data;
+          _this4.itemNum = response.data.count;
+          _this4.tsumiages = response.data.data;
         }
 
-        _this3.loading = false;
+        _this4.loading = false;
       })["catch"](function (error) {
-        _this3.loading = false; // if (error.response.status === 404) {
+        _this4.loading = false; // if (error.response.status === 404) {
         //     this.$router.push('/home');
         // }
       });
@@ -2812,6 +2888,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     actualTimeUpdate: function actualTimeUpdate($event, key) {
       var self = this;
       self.tsumiages[key]['data']['attributes']['actual_time'] = $event;
+    },
+    addItemUpdate: function addItemUpdate($event, n) {
+      var self = this;
+      self.item[n] = $event;
+    },
+    addPlanTimeUpdate: function addPlanTimeUpdate($event, n) {
+      var self = this;
+      self.planTime[n] = $event;
+    },
+    addActualTimeUpdate: function addActualTimeUpdate($event, n) {
+      var self = this;
+      self.actualTime[n] = $event;
     },
     getDay: function getDay() {
       var now = this.defaultDate;
@@ -2834,6 +2922,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   })),
   watch: {
     defaultDate: function defaultDate() {
+      this.addItemNum = 0;
       this.getDay();
       this.getTsumiage();
     }
@@ -40933,6 +41022,11 @@ var render = function() {
                           "div",
                           { staticClass: "flex justify-items-center mx-auto" },
                           [
+                            _vm._v(
+                              "\n                        " +
+                                _vm._s(index) +
+                                "\n                        "
+                            ),
                             _c("InputField", {
                               key: "item" + tsumiageKey,
                               staticClass: "pr-2",
@@ -41022,24 +41116,136 @@ var render = function() {
               _vm._v(" "),
               _vm.itemNum == 0 ? _c("div", { staticClass: "pt-64" }) : _vm._e(),
               _vm._v(" "),
-              _c("div", { staticClass: "flex justify-start" }, [
-                _vm.itemNum < 10
-                  ? _c(
-                      "button",
-                      {
-                        staticClass:
-                          "p-1 rounded text-sm border mr-3 hover:text-blue-800",
-                        attrs: { type: "button" },
-                        on: {
-                          click: function($event) {
-                            _vm.itemNum += 1
-                          }
-                        }
-                      },
-                      [_vm._v("\n                積み上げ追加\n            ")]
-                    )
-                  : _vm._e()
-              ])
+              _c(
+                "form",
+                {
+                  staticClass: "pt-6",
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.submitAddItem()
+                    }
+                  }
+                },
+                [
+                  _vm._l(_vm.addItemNum, function(n) {
+                    return _c("div", [
+                      _c(
+                        "div",
+                        { staticClass: "flex justify-items-center mx-auto" },
+                        [
+                          _c("InputField", {
+                            key: "add_item" + n,
+                            staticClass: "pr-2",
+                            attrs: {
+                              name: "add_item" + n,
+                              label:
+                                "積み上げ" +
+                                String(parseInt(n) + parseInt(_vm.itemNum)),
+                              errors: _vm.errors,
+                              placeholder: "積み上げ",
+                              data: _vm.item[n]
+                            },
+                            on: {
+                              "update:field": function($event) {
+                                return _vm.addItemUpdate($event, n)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("InputField", {
+                            key: "add_plan_time" + n,
+                            staticClass: "pr-2",
+                            attrs: {
+                              name: "add_plan_time" + n,
+                              errors: _vm.errors,
+                              placeholder: "予定作業時間(分)",
+                              data: _vm.planTime[n]
+                            },
+                            on: {
+                              "update:field": function($event) {
+                                return _vm.addPlanTimeUpdate($event, n)
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("InputField", {
+                            key: "add_actual_time" + n,
+                            attrs: {
+                              name: "add_actual_time" + n,
+                              errors: _vm.errors,
+                              placeholder: "実績作業時間(分)",
+                              data: _vm.actualTime[n]
+                            },
+                            on: {
+                              "update:field": function($event) {
+                                return _vm.addActualTimeUpdate($event, n)
+                              }
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "flex justify-start" }, [
+                    parseInt(_vm.addItemNum) + parseInt(_vm.itemNum) < 10
+                      ? _c(
+                          "button",
+                          {
+                            staticClass:
+                              "p-1 rounded text-sm border mr-3 hover:text-blue-800",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                _vm.addItemNum += 1
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                    積み上げ追加\n                "
+                            )
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.addItemNum > 0
+                      ? _c(
+                          "button",
+                          {
+                            staticClass:
+                              "p-1 rounded text-sm border mr-3 hover:text-blue-800",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                _vm.addItemNum -= 1
+                              }
+                            }
+                          },
+                          [
+                            _vm._v(
+                              "\n                    追加積み上げ削除\n                "
+                            )
+                          ]
+                        )
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm.addItemNum > 0
+                      ? _c(
+                          "button",
+                          {
+                            staticClass:
+                              "bg-blue-500 p-1 text-sm text-white rounded hover:bg-blue-400"
+                          },
+                          [_vm._v("追加積み上げ保存")]
+                        )
+                      : _vm._e()
+                  ])
+                ],
+                2
+              )
             ],
             2
           )
