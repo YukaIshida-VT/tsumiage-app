@@ -58,6 +58,7 @@
         },
 
         mounted() {
+            this.getDate(this.$route.params.day);
             this.getDay();
             this.getTsumiage();
         },
@@ -122,7 +123,7 @@
                     .then(response => {
                         if (response.data.count == 0) {
                             // TODO 選択した日付へのルーティングとする
-                            this.$router.push('/tsumiage/create');
+                            // this.$router.push('/tsumiage/create');
                         } else {
                             this.itemNum = response.data.count;
                             this.tsumiages = response.data.data;
@@ -159,6 +160,13 @@
                 var Month = ("00" + (now.getMonth()+1)).slice(-2);
                 var Day = ("00" + now.getDate()).slice(-2);
                 this.day = Year + "-" + Month + "-" + Day;
+            },
+
+            getDate: function (yyyymmdd) {
+                let y = yyyymmdd.substr(0, 4);
+                let m = yyyymmdd.substr(4, 2);
+                let d = yyyymmdd.substr(6, 2);
+                this.defaultDate = new Date(y, m - 1, d); 
             },
         },
 

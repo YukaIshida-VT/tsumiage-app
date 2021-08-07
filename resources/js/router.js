@@ -18,7 +18,7 @@ export default new VueRouter({
             path: '/tsumiage/create', component: TsumiageCreate,
             meta: { title: '積み上げ作成' }
         }, {
-            path: '/tsumiage/edit', component: TsumiageEdit,
+            path: '/tsumiage/edit/:day', component: TsumiageEdit,
             meta: { title: '積み上げ編集・実績入力' }
         }, {
             path: '/items/:id/edit', component: ItemsEdit,

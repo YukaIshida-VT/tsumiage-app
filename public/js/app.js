@@ -2138,11 +2138,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Nav",
@@ -2551,6 +2546,7 @@ __webpack_require__.r(__webpack_exports__);
       itemNum: 3,
       loading: true,
       day: null,
+      yyyymmdd: null,
       defaultDate: new Date(),
       DatePickerFormat: 'yyyy-MM-dd',
       ja: {
@@ -2608,6 +2604,7 @@ __webpack_require__.r(__webpack_exports__);
       var Month = ("00" + (now.getMonth() + 1)).slice(-2);
       var Day = ("00" + now.getDate()).slice(-2);
       this.day = Year + "-" + Month + "-" + Day;
+      this.yyyymmdd = Year + Month + Day;
     },
     getTsumiage: function getTsumiage() {
       var _this2 = this;
@@ -2617,7 +2614,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         if (response.data.count != 0) {
           // TODO 選択した日付へのルーティングとする
-          _this2.$router.push('/tsumiage/edit');
+          _this2.$router.push('/tsumiage/edit/' + _this2.yyyymmdd);
         }
       })["catch"](function (error) {});
     }
@@ -2708,6 +2705,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_1__.default
   },
   mounted: function mounted() {
+    this.getDate(this.$route.params.day);
     this.getDay();
     this.getTsumiage();
   },
@@ -2766,9 +2764,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.post('/api/user-tsumiage', {
         data: this.day
       }).then(function (response) {
-        if (response.data.count == 0) {
-          // TODO 選択した日付へのルーティングとする
-          _this3.$router.push('/tsumiage/create');
+        if (response.data.count == 0) {// TODO 選択した日付へのルーティングとする
+          // this.$router.push('/tsumiage/create');
         } else {
           _this3.itemNum = response.data.count;
           _this3.tsumiages = response.data.data;
@@ -2799,6 +2796,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var Month = ("00" + (now.getMonth() + 1)).slice(-2);
       var Day = ("00" + now.getDate()).slice(-2);
       this.day = Year + "-" + Month + "-" + Day;
+    },
+    getDate: function getDate(yyyymmdd) {
+      var y = yyyymmdd.substr(0, 4);
+      var m = yyyymmdd.substr(4, 2);
+      var d = yyyymmdd.substr(6, 2);
+      this.defaultDate = new Date(y, m - 1, d);
     }
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
@@ -2930,7 +2933,7 @@ vue__WEBPACK_IMPORTED_MODULE_6__.default.use(vue_router__WEBPACK_IMPORTED_MODULE
       title: '積み上げ作成'
     }
   }, {
-    path: '/tsumiage/edit',
+    path: '/tsumiage/edit/:day',
     component: _views_TsumiageEdit__WEBPACK_IMPORTED_MODULE_2__.default,
     meta: {
       title: '積み上げ編集・実績入力'
@@ -40163,36 +40166,7 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("div", { staticClass: "tracking-wide pl-3" }, [
-            _vm._v("積み上げ作成")
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "router-link",
-        {
-          staticClass: "flex items-center py-2 hover:text-blue-600 text-sm",
-          attrs: { to: "/tsumiage/edit" }
-        },
-        [
-          _c(
-            "svg",
-            {
-              staticClass: "fill-current text-blue-600 w-5 h-5",
-              attrs: { viewBox: "0 0 24 24" }
-            },
-            [
-              _c("path", {
-                attrs: {
-                  d:
-                    "M23.3 11.9c0 .9-.6 1.4-1.4 1.4h-8.5v8.5c0 .9-.6 1.4-1.4 1.4s-1.4-.6-1.4-1.4v-8.5H2c-.9 0-1.4-.6-1.4-1.4 0-.9.6-1.4 1.4-1.4h8.5V1.9c0-.9.6-1.4 1.4-1.4s1.4.6 1.4 1.4v8.5h8.5c.9 0 1.5.6 1.5 1.5z"
-                }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "tracking-wide pl-3" }, [
-            _vm._v("積み上げ編集・実績入力")
+            _vm._v("積み上げ作成・編集")
           ])
         ]
       ),

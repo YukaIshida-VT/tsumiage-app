@@ -76,6 +76,7 @@
                 itemNum: 3,
                 loading: true,
                 day: null,
+                yyyymmdd: null,
 
                 defaultDate: new Date(),
                 DatePickerFormat: 'yyyy-MM-dd',
@@ -138,6 +139,7 @@
                 var Month = ("00" + (now.getMonth()+1)).slice(-2);
                 var Day = ("00" + now.getDate()).slice(-2);
                 this.day = Year + "-" + Month + "-" + Day;
+                this.yyyymmdd = Year + Month + Day;
             },
 
             getTsumiage: function() {
@@ -145,7 +147,7 @@
                     .then(response => {
                         if (response.data.count != 0) {
                             // TODO 選択した日付へのルーティングとする
-                            this.$router.push('/tsumiage/edit');
+                            this.$router.push('/tsumiage/edit/' + this.yyyymmdd);
                         } 
                     })
                     .catch(error => {
