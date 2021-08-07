@@ -10,6 +10,7 @@
 
         <div v-if="loading">Loading...</div>
         <div v-else>
+            <div v-if="itemNum < 2" class="pt-10"></div>
         
             <div v-for="(tsumiage, tsumiageKey, index) in tsumiages">
                 <form @submit.prevent="submitForm(tsumiageKey)" class="pt-6">
@@ -30,8 +31,6 @@
                     </div>
                 </form>
             </div>
-
-            <div v-if="itemNum == 0" class="pt-64"></div>
 
             <form @submit.prevent="submitAddItem()" class="pt-6">
                 <div class="pl-5">
@@ -59,6 +58,7 @@
                     </div>
                 </div>
             </form>
+            <div class="pt-44"></div>
         </div>
 
     </div>

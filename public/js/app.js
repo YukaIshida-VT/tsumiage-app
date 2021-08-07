@@ -2509,6 +2509,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -40961,7 +40962,9 @@ var render = function() {
           )
         ],
         2
-      )
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "pt-44" })
     ],
     1
   )
@@ -41015,6 +41018,8 @@ var render = function() {
         : _c(
             "div",
             [
+              _vm.itemNum < 2 ? _c("div", { staticClass: "pt-10" }) : _vm._e(),
+              _vm._v(" "),
               _vm._l(_vm.tsumiages, function(tsumiage, tsumiageKey, index) {
                 return _c("div", [
                   _c(
@@ -41120,8 +41125,6 @@ var render = function() {
                   )
                 ])
               }),
-              _vm._v(" "),
-              _vm.itemNum == 0 ? _c("div", { staticClass: "pt-64" }) : _vm._e(),
               _vm._v(" "),
               _c(
                 "form",
@@ -41259,7 +41262,9 @@ var render = function() {
                     2
                   )
                 ]
-              )
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "pt-44" })
             ],
             2
           )
