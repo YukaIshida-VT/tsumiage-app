@@ -18,6 +18,7 @@ Route::middleware('auth:api')->group(function(){
     Route::patch('/items/{item}', [TsumiageItemController::class, 'update']);
     Route::post('/tsumiage', [TsumiageController::class, 'store']);
     Route::patch('/tsumiage/{tsumiage}', [TsumiageController::class, 'update']);
+    Route::delete('/tsumiage/{tsumiage}', [TsumiageController::class, 'destroy']);
     Route::post('/user-tsumiage', [UserTsumiageController::class, 'show']);
 });
 

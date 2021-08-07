@@ -104,6 +104,7 @@
             submitForm: function(key) {
                 var submitArray = {};
                 let tsumiage_id = this.tsumiages[key]['data']['tsumiage_id'];
+                submitArray['key'] = key;
                 submitArray['item' + key] = this.tsumiages[key]['data']['attributes']['item'];
                 submitArray['plan_time' + key] = this.tsumiages[key]['data']['attributes']['plan_time'];
                 submitArray['actual_time' + key] = this.tsumiages[key]['data']['attributes']['actual_time'];
@@ -118,6 +119,13 @@
             },
 
             deleteItem: function(tsumiage_id) {
+                axios.delete('/api/tsumiage/' + tsumiage_id)
+                    .then(response => {
+                        alert("削除しました");
+                    })
+                    .catch(errors => {
+                        this.errors = errors.response.data.errors;
+                    });
 
             },
 

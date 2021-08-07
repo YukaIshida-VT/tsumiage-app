@@ -42,6 +42,7 @@ class TsumiageController extends Controller
         $itemKey = 'item' . $request->key;
         $planTimeKey = 'plan_time' . $request->key;
         $actualTimeKey = 'actual_time' . $request->key;
+        info($itemKey);
 
         $tsumiage->update([
             'item' => $request->$itemKey,
@@ -52,6 +53,13 @@ class TsumiageController extends Controller
         return (new TsumiageResource($tsumiage))
         ->response()
         ->setStatusCode(Response::HTTP_OK);
+    }
+
+    public function destroy(Tsumiage $tsumiage)
+    {
+        // TODO ポリシー追加
+        $tsumiage->delete();
+        return response()->setStatusCode(Response::HTTP_OK);
     }
 
 }

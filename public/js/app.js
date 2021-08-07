@@ -2748,6 +2748,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       var submitArray = {};
       var tsumiage_id = this.tsumiages[key]['data']['tsumiage_id'];
+      submitArray['key'] = key;
       submitArray['item' + key] = this.tsumiages[key]['data']['attributes']['item'];
       submitArray['plan_time' + key] = this.tsumiages[key]['data']['attributes']['plan_time'];
       submitArray['actual_time' + key] = this.tsumiages[key]['data']['attributes']['actual_time'];
@@ -2757,7 +2758,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.errors = errors.response.data.errors;
       });
     },
-    deleteItem: function deleteItem(tsumiage_id) {},
+    deleteItem: function deleteItem(tsumiage_id) {
+      var _this3 = this;
+
+      axios["delete"]('/api/tsumiage/' + tsumiage_id).then(function (response) {
+        alert("削除しました");
+      })["catch"](function (errors) {
+        _this3.errors = errors.response.data.errors;
+      });
+    },
     itemUpdate: function itemUpdate($event, key) {
       var self = this;
       self.tsumiages[key]['data']['attributes']['item'] = $event;
