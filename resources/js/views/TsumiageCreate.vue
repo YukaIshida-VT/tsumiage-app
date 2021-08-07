@@ -134,10 +134,10 @@
             },
 
             getDay: function () {
-                var now = this.defaultDate;
-                var Year = now.getFullYear();
-                var Month = ("00" + (now.getMonth()+1)).slice(-2);
-                var Day = ("00" + now.getDate()).slice(-2);
+                let now = this.defaultDate;
+                let Year = now.getFullYear();
+                let Month = ("00" + (now.getMonth()+1)).slice(-2);
+                let Day = ("00" + now.getDate()).slice(-2);
                 this.day = Year + "-" + Month + "-" + Day;
                 this.yyyymmdd = Year + Month + Day;
             },
