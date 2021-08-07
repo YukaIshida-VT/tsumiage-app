@@ -51,7 +51,7 @@
                         積み上げ追加
                     </button>
                     <button v-if="addItemNum > 0" type="button" class="p-1 rounded text-sm border mr-3 hover:text-blue-800" 
-                    @click="addItemNum -= 1">
+                    @click="deleteAddItem()">
                         追加積み上げ削除
                     </button>
                     <button v-if="addItemNum > 0" class="bg-blue-500 p-1 text-sm text-white rounded hover:bg-blue-400">追加積み上げ保存</button>
@@ -187,6 +187,14 @@
                         // }
                     });
 
+            },
+
+            deleteAddItem: function() {
+                var self = this;
+                self.item[self.addItemNum] = '';
+                self.planTime[self.addItemNum] = '';
+                self.actualTime[self.addItemNum] = '';
+                self.addItemNum -= 1;
             },
 
             itemUpdate: function($event, key) {

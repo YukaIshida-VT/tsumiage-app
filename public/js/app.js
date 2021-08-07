@@ -2874,6 +2874,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         // }
       });
     },
+    deleteAddItem: function deleteAddItem() {
+      var self = this;
+      self.item[self.addItemNum] = '';
+      self.planTime[self.addItemNum] = '';
+      self.actualTime[self.addItemNum] = '';
+      self.addItemNum -= 1;
+    },
     itemUpdate: function itemUpdate($event, key) {
       var self = this;
       self.tsumiages[key]['data']['attributes']['item'] = $event;
@@ -41212,7 +41219,7 @@ var render = function() {
                             attrs: { type: "button" },
                             on: {
                               click: function($event) {
-                                _vm.addItemNum -= 1
+                                return _vm.deleteAddItem()
                               }
                             }
                           },
