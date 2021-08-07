@@ -2141,9 +2141,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Nav",
+  data: function data() {
+    return {
+      yyyymmdd: null
+    };
+  },
+  mounted: function mounted() {
+    this.setYyyymmdd();
+  },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)({
     authUser: 'authUser'
-  }))
+  })),
+  methods: {
+    setYyyymmdd: function setYyyymmdd() {
+      var now = new Date();
+      var Year = now.getFullYear();
+      var Month = ("00" + (now.getMonth() + 1)).slice(-2);
+      var Day = ("00" + now.getDate()).slice(-2);
+      this.yyyymmdd = Year + Month + Day;
+    }
+  }
 });
 
 /***/ }),
@@ -40154,7 +40171,7 @@ var render = function() {
         "router-link",
         {
           staticClass: "flex items-center py-2 hover:text-blue-600 text-sm",
-          attrs: { to: "/tsumiage/create" }
+          attrs: { to: "/tsumiage/create/" + _vm.yyyymmdd }
         },
         [
           _c(
