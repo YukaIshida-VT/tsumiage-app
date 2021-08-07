@@ -2738,7 +2738,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 
 
@@ -3052,7 +3051,7 @@ vue__WEBPACK_IMPORTED_MODULE_6__.default.use(vue_router__WEBPACK_IMPORTED_MODULE
     path: '/tsumiage/edit/:day',
     component: _views_TsumiageEdit__WEBPACK_IMPORTED_MODULE_2__.default,
     meta: {
-      title: '積み上げ編集・実績入力'
+      title: '積み上げ編集'
     }
   }, {
     path: '/items/:id/edit',
@@ -41024,11 +41023,6 @@ var render = function() {
                           "div",
                           { staticClass: "flex justify-items-center mx-auto" },
                           [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(index) +
-                                "\n                        "
-                            ),
                             _c("InputField", {
                               key: "item" + tsumiageKey,
                               staticClass: "pr-2",

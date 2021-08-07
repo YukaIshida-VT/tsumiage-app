@@ -19,7 +19,7 @@ export default new VueRouter({
             meta: { title: '積み上げ作成' }
         }, {
             path: '/tsumiage/edit/:day', component: TsumiageEdit,
-            meta: { title: '積み上げ編集・実績入力' }
+            meta: { title: '積み上げ編集' }
         }, {
             path: '/items/:id/edit', component: ItemsEdit,
             meta: { title: '積み上げ項目編集' }

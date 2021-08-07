@@ -15,7 +15,6 @@
                 <form @submit.prevent="submitForm(tsumiageKey)" class="pt-6">
                     <div class="flex justify-items-start">
                         <div class="flex justify-items-center mx-auto">
-                            {{ index }}
                             <InputField :key="'item' + tsumiageKey" :name="'item' + tsumiageKey" :label="'積み上げ' + String(parseInt(index) + 1)" :errors="errors"
                             placeholder="積み上げ" @update:field="itemUpdate($event, tsumiageKey)" :data="tsumiage.data.attributes.item" class="pr-2" />
                             <InputField :key="'plan_time' + tsumiageKey" :name="'plan_time' + tsumiageKey" :errors="errors"
