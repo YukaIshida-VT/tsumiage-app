@@ -2706,20 +2706,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_1__.default
   },
   mounted: function mounted() {
-    var _this = this;
-
     this.getDay();
-    axios.post('/api/user-tsumiage', {
-      data: this.day
-    }).then(function (response) {
-      _this.itemNum = response.data.count;
-      _this.tsumiages = response.data.data;
-      _this.loading = false;
-    })["catch"](function (error) {
-      _this.loading = false; // if (error.response.status === 404) {
-      //     this.$router.push('/home');
-      // }
-    });
+    this.getTsumiage();
   },
   data: function data() {
     var _ref;
@@ -2742,7 +2730,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: {
     submitForm: function submitForm(key) {
-      var _this2 = this;
+      var _this = this;
 
       var submitArray = {};
       var tsumiage_id = this.tsumiages[key]['data']['tsumiage_id'];
@@ -2753,21 +2741,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.patch('/api/tsumiage/' + tsumiage_id, submitArray).then(function (response) {
         alert("保存しました");
       })["catch"](function (errors) {
-        _this2.errors = errors.response.data.errors;
+        _this.errors = errors.response.data.errors;
       });
     },
     deleteItem: function deleteItem(tsumiage_id) {
-      var _this3 = this;
+      var _this2 = this;
 
       axios["delete"]('/api/tsumiage/' + tsumiage_id).then(function (response) {
         alert("削除しました"); // TODO 編集した日付へのルーティングとする
 
-        _this3.$router.go({
-          path: _this3.$router.currentRoute.path,
+        _this2.$router.go({
+          path: _this2.$router.currentRoute.path,
           force: true
         });
       })["catch"](function (errors) {
-        _this3.errors = errors.response.data.errors;
+        _this2.errors = errors.response.data.errors;
+      });
+    },
+    getTsumiage: function getTsumiage() {
+      var _this3 = this;
+
+      axios.post('/api/user-tsumiage', {
+        data: this.day
+      }).then(function (response) {
+        _this3.itemNum = response.data.count;
+        _this3.tsumiages = response.data.data;
+        _this3.loading = false;
+      })["catch"](function (error) {
+        _this3.loading = false; // if (error.response.status === 404) {
+        //     this.$router.push('/home');
+        // }
       });
     },
     itemUpdate: function itemUpdate($event, key) {
@@ -2796,6 +2799,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   watch: {
     defaultDate: function defaultDate() {
       this.getDay();
+      this.getTsumiage();
     }
   }
 });

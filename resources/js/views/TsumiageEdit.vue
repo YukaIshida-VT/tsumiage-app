@@ -59,21 +59,7 @@
 
         mounted() {
             this.getDay();
-            
-            axios.post('/api/user-tsumiage', {data: this.day})
-                .then(response => {
-                    this.itemNum = response.data.count;
-                    this.tsumiages = response.data.data;
-
-                    this.loading = false;
-                })
-                .catch(error => {
-                    this.loading = false;
-
-                    // if (error.response.status === 404) {
-                    //     this.$router.push('/home');
-                    // }
-                });
+            this.getTsumiage();
         },
 
         data: function() {
@@ -131,6 +117,24 @@
 
             },
 
+            getTsumiage: function() {
+                axios.post('/api/user-tsumiage', {data: this.day})
+                    .then(response => {
+                        this.itemNum = response.data.count;
+                        this.tsumiages = response.data.data;
+
+                        this.loading = false;
+                    })
+                    .catch(error => {
+                        this.loading = false;
+
+                        // if (error.response.status === 404) {
+                        //     this.$router.push('/home');
+                        // }
+                    });
+
+            },
+
             itemUpdate: function($event, key) {
                 var self = this;
                 self.tsumiages[key]['data']['attributes']['item'] = $event;
@@ -162,6 +166,7 @@
         watch: {
             defaultDate: function () {
                 this.getDay();
+                this.getTsumiage();
             },
         }
     }
