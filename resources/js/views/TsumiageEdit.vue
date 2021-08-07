@@ -31,6 +31,8 @@
                 </form>
             </div>
 
+            <div v-if="itemNum == 0" class="pt-64"></div>
+
             <div class="flex justify-start">
                 <button v-if="itemNum < 10" type="button" class="p-1 rounded text-sm border mr-3 hover:text-blue-800" 
                 @click="itemNum += 1">
@@ -79,7 +81,7 @@
                 tsumiages: {},
 
                 errors: null,
-                itemNum: 3,
+                itemNum: 0,
                 loading: true,
                 day: null,
                 loading: true,
@@ -102,7 +104,6 @@
             submitForm: function(key) {
                 var submitArray = {};
                 let tsumiage_id = this.tsumiages[key]['data']['tsumiage_id'];
-                submitArray['key'] = key;
                 submitArray['item' + key] = this.tsumiages[key]['data']['attributes']['item'];
                 submitArray['plan_time' + key] = this.tsumiages[key]['data']['attributes']['plan_time'];
                 submitArray['actual_time' + key] = this.tsumiages[key]['data']['attributes']['actual_time'];

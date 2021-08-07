@@ -2696,6 +2696,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -2727,7 +2729,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return _ref = {
       tsumiages: {},
       errors: null,
-      itemNum: 3,
+      itemNum: 0,
       loading: true,
       day: null
     }, _defineProperty(_ref, "loading", true), _defineProperty(_ref, "defaultDate", new Date()), _defineProperty(_ref, "DatePickerFormat", 'yyyy-MM-dd'), _defineProperty(_ref, "ja", {
@@ -2746,7 +2748,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       var submitArray = {};
       var tsumiage_id = this.tsumiages[key]['data']['tsumiage_id'];
-      submitArray['key'] = key;
       submitArray['item' + key] = this.tsumiages[key]['data']['attributes']['item'];
       submitArray['plan_time' + key] = this.tsumiages[key]['data']['attributes']['plan_time'];
       submitArray['actual_time' + key] = this.tsumiages[key]['data']['attributes']['actual_time'];
@@ -41000,6 +41001,8 @@ var render = function() {
                   )
                 ])
               }),
+              _vm._v(" "),
+              _vm.itemNum == 0 ? _c("div", { staticClass: "pt-64" }) : _vm._e(),
               _vm._v(" "),
               _c("div", { staticClass: "flex justify-start" }, [
                 _vm.itemNum < 10
