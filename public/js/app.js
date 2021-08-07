@@ -2502,7 +2502,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.getDate(this.$route.params.day);
-    this.getDay();
     this.getTsumiage();
   },
   data: function data() {
@@ -2608,10 +2607,11 @@ __webpack_require__.r(__webpack_exports__);
       this.yyyymmdd = Year + Month + Day;
     },
     getDate: function getDate(yyyymmdd) {
-      var y = yyyymmdd.substr(0, 4);
-      var m = yyyymmdd.substr(4, 2);
-      var d = yyyymmdd.substr(6, 2);
-      this.defaultDate = new Date(y, m - 1, d);
+      var Year = yyyymmdd.substr(0, 4);
+      var Month = yyyymmdd.substr(4, 2);
+      var Day = yyyymmdd.substr(6, 2);
+      this.defaultDate = new Date(Year, Month - 1, Day);
+      this.day = Year + "-" + Month + "-" + Day;
     },
     getTsumiage: function getTsumiage() {
       var _this2 = this;
@@ -2712,7 +2712,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   mounted: function mounted() {
     this.getDate(this.$route.params.day);
-    this.getDay();
     this.getTsumiage();
   },
   data: function data() {
@@ -2806,10 +2805,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.yyyymmdd = Year + Month + Day;
     },
     getDate: function getDate(yyyymmdd) {
-      var y = yyyymmdd.substr(0, 4);
-      var m = yyyymmdd.substr(4, 2);
-      var d = yyyymmdd.substr(6, 2);
-      this.defaultDate = new Date(y, m - 1, d);
+      var Year = yyyymmdd.substr(0, 4);
+      var Month = yyyymmdd.substr(4, 2);
+      var Day = yyyymmdd.substr(6, 2);
+      this.defaultDate = new Date(Year, Month - 1, Day);
+      this.day = Year + "-" + Month + "-" + Day;
     }
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({

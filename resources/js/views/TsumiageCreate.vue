@@ -57,7 +57,6 @@
 
         mounted() {
             this.getDate(this.$route.params.day);
-            this.getDay();
             this.getTsumiage();
         },
 
@@ -144,10 +143,11 @@
             },
 
             getDate: function (yyyymmdd) {
-                let y = yyyymmdd.substr(0, 4);
-                let m = yyyymmdd.substr(4, 2);
-                let d = yyyymmdd.substr(6, 2);
-                this.defaultDate = new Date(y, m - 1, d); 
+                let Year = yyyymmdd.substr(0, 4);
+                let Month = yyyymmdd.substr(4, 2);
+                let Day = yyyymmdd.substr(6, 2);
+                this.defaultDate = new Date(Year, Month - 1, Day); 
+                this.day = Year + "-" + Month + "-" + Day;
             },
 
             getTsumiage: function() {
