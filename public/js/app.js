@@ -2848,12 +2848,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this3 = this;
 
       axios["delete"]('/api/tsumiage/' + tsumiage_id).then(function (response) {
-        alert("削除しました"); // TODO 編集した日付へのルーティングとする
+        alert("削除しました");
 
-        _this3.$router.go({
-          path: _this3.$router.currentRoute.path,
-          force: true
-        });
+        _this3.getTsumiage();
       })["catch"](function (errors) {
         _this3.errors = errors.response.data.errors;
       });

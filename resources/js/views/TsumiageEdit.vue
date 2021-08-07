@@ -158,8 +158,7 @@
                 axios.delete('/api/tsumiage/' + tsumiage_id)
                     .then(response => {
                         alert("削除しました");
-                        // TODO 編集した日付へのルーティングとする
-                        this.$router.go({path: this.$router.currentRoute.path, force: true});
+                        this.getTsumiage();
                     })
                     .catch(errors => {
                         this.errors = errors.response.data.errors;
