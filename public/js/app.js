@@ -2764,8 +2764,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.post('/api/user-tsumiage', {
         data: this.day
       }).then(function (response) {
-        _this3.itemNum = response.data.count;
-        _this3.tsumiages = response.data.data;
+        if (response.data.count == 0) {
+          // TODO 選択した日付へのルーティングとする
+          _this3.$router.push('/tsumiage/create');
+        } else {
+          _this3.itemNum = response.data.count;
+          _this3.tsumiages = response.data.data;
+        }
+
         _this3.loading = false;
       })["catch"](function (error) {
         _this3.loading = false; // if (error.response.status === 404) {

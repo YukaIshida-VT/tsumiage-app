@@ -120,8 +120,13 @@
             getTsumiage: function() {
                 axios.post('/api/user-tsumiage', {data: this.day})
                     .then(response => {
-                        this.itemNum = response.data.count;
-                        this.tsumiages = response.data.data;
+                        if (response.data.count == 0) {
+                            // TODO 選択した日付へのルーティングとする
+                            this.$router.push('/tsumiage/create');
+                        } else {
+                            this.itemNum = response.data.count;
+                            this.tsumiages = response.data.data;
+                        }
 
                         this.loading = false;
                     })
