@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tsumiage;
-use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Response;
 use App\Http\Resources\TsumiageCollection;
 use App\Http\Requests\TsumiageRequest;
 use App\Http\Resources\Tsumiage as TsumiageResource;
@@ -37,12 +37,10 @@ class TsumiageController extends Controller
 
     public function update(Request $request, Tsumiage $tsumiage)
     {
-        info($request);
         // TODO バリデーションとポリシー追加
         $itemKey = 'item' . $request->key;
         $planTimeKey = 'plan_time' . $request->key;
         $actualTimeKey = 'actual_time' . $request->key;
-        info($itemKey);
 
         $tsumiage->update([
             'item' => $request->$itemKey,
@@ -59,7 +57,7 @@ class TsumiageController extends Controller
     {
         // TODO ポリシー追加
         $tsumiage->delete();
-        return response()->setStatusCode(Response::HTTP_OK);
+        return response([], Response::HTTP_OK); 
     }
 
 }

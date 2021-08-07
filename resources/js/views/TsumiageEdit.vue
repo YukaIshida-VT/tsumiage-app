@@ -122,6 +122,8 @@
                 axios.delete('/api/tsumiage/' + tsumiage_id)
                     .then(response => {
                         alert("削除しました");
+                        // TODO 編集した日付へのルーティングとする
+                        this.$router.go({path: this.$router.currentRoute.path, force: true});
                     })
                     .catch(errors => {
                         this.errors = errors.response.data.errors;
@@ -140,14 +142,6 @@
             actualTimeUpdate: function($event, key) {
                 var self = this;
                 self.tsumiages[key]['data']['attributes']['actual_time'] = $event;
-            },
-
-            deleteItem: function() {
-                var self = this;
-                self.item[self.itemNum] = '';
-                self.planTime[self.itemNum] = '';
-                self.actualTime[self.itemNum] = '';
-                self.itemNum -= 1;
             },
 
             getDay: function () {

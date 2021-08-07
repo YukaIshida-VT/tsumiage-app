@@ -2644,8 +2644,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_InputField__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/InputField */ "./resources/js/components/InputField.vue");
 /* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-var _methods;
-
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2742,7 +2740,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       yearSuffix: '年'
     }), _ref;
   },
-  methods: (_methods = {
+  methods: {
     submitForm: function submitForm(key) {
       var _this2 = this;
 
@@ -2762,7 +2760,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this3 = this;
 
       axios["delete"]('/api/tsumiage/' + tsumiage_id).then(function (response) {
-        alert("削除しました");
+        alert("削除しました"); // TODO 編集した日付へのルーティングとする
+
+        _this3.$router.go({
+          path: _this3.$router.currentRoute.path,
+          force: true
+        });
       })["catch"](function (errors) {
         _this3.errors = errors.response.data.errors;
       });
@@ -2778,20 +2781,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     actualTimeUpdate: function actualTimeUpdate($event, key) {
       var self = this;
       self.tsumiages[key]['data']['attributes']['actual_time'] = $event;
+    },
+    getDay: function getDay() {
+      var now = this.defaultDate;
+      var Year = now.getFullYear();
+      var Month = ("00" + (now.getMonth() + 1)).slice(-2);
+      var Day = ("00" + now.getDate()).slice(-2);
+      this.day = Year + "-" + Month + "-" + Day;
     }
-  }, _defineProperty(_methods, "deleteItem", function deleteItem() {
-    var self = this;
-    self.item[self.itemNum] = '';
-    self.planTime[self.itemNum] = '';
-    self.actualTime[self.itemNum] = '';
-    self.itemNum -= 1;
-  }), _defineProperty(_methods, "getDay", function getDay() {
-    var now = this.defaultDate;
-    var Year = now.getFullYear();
-    var Month = ("00" + (now.getMonth() + 1)).slice(-2);
-    var Day = ("00" + now.getDate()).slice(-2);
-    this.day = Year + "-" + Month + "-" + Day;
-  }), _methods),
+  },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
     authUser: 'authUser'
   })),
