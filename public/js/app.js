@@ -2738,6 +2738,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -41133,122 +41135,130 @@ var render = function() {
                   }
                 },
                 [
-                  _vm._l(_vm.addItemNum, function(n) {
-                    return _c("div", [
-                      _c(
-                        "div",
-                        { staticClass: "flex justify-items-center mx-auto" },
-                        [
-                          _c("InputField", {
-                            key: "add_item" + n,
-                            staticClass: "pr-2",
-                            attrs: {
-                              name: "add_item" + n,
-                              label: "追加" + n,
-                              errors: _vm.errors,
-                              placeholder: "積み上げ",
-                              data: _vm.item[n]
+                  _c(
+                    "div",
+                    { staticClass: "pl-5" },
+                    [
+                      _vm._l(_vm.addItemNum, function(n) {
+                        return _c("div", [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "flex justify-items-center mx-auto"
                             },
-                            on: {
-                              "update:field": function($event) {
-                                return _vm.addItemUpdate($event, n)
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("InputField", {
-                            key: "add_plan_time" + n,
-                            staticClass: "pr-2",
-                            attrs: {
-                              name: "add_plan_time" + n,
-                              errors: _vm.errors,
-                              placeholder: "予定作業時間(分)",
-                              data: _vm.planTime[n]
-                            },
-                            on: {
-                              "update:field": function($event) {
-                                return _vm.addPlanTimeUpdate($event, n)
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("InputField", {
-                            key: "add_actual_time" + n,
-                            attrs: {
-                              name: "add_actual_time" + n,
-                              errors: _vm.errors,
-                              placeholder: "実績作業時間(分)",
-                              data: _vm.actualTime[n]
-                            },
-                            on: {
-                              "update:field": function($event) {
-                                return _vm.addActualTimeUpdate($event, n)
-                              }
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    ])
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "flex justify-start" }, [
-                    parseInt(_vm.addItemNum) + parseInt(_vm.itemNum) < 10
-                      ? _c(
-                          "button",
-                          {
-                            staticClass:
-                              "p-1 rounded text-sm border mr-3 hover:text-blue-800",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function($event) {
-                                _vm.addItemNum += 1
-                              }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                    積み上げ追加\n                "
+                            [
+                              _c("InputField", {
+                                key: "add_item" + n,
+                                staticClass: "pr-2",
+                                attrs: {
+                                  name: "add_item" + n,
+                                  label: "追加" + n,
+                                  errors: _vm.errors,
+                                  placeholder: "積み上げ",
+                                  data: _vm.item[n]
+                                },
+                                on: {
+                                  "update:field": function($event) {
+                                    return _vm.addItemUpdate($event, n)
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("InputField", {
+                                key: "add_plan_time" + n,
+                                staticClass: "pr-2",
+                                attrs: {
+                                  name: "add_plan_time" + n,
+                                  errors: _vm.errors,
+                                  placeholder: "予定作業時間(分)",
+                                  data: _vm.planTime[n]
+                                },
+                                on: {
+                                  "update:field": function($event) {
+                                    return _vm.addPlanTimeUpdate($event, n)
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("InputField", {
+                                key: "add_actual_time" + n,
+                                attrs: {
+                                  name: "add_actual_time" + n,
+                                  errors: _vm.errors,
+                                  placeholder: "実績作業時間(分)",
+                                  data: _vm.actualTime[n]
+                                },
+                                on: {
+                                  "update:field": function($event) {
+                                    return _vm.addActualTimeUpdate($event, n)
+                                  }
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ])
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "flex justify-start" }, [
+                        parseInt(_vm.addItemNum) + parseInt(_vm.itemNum) < 10
+                          ? _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "p-1 rounded text-sm border mr-3 hover:text-blue-800",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.addItemNum += 1
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                        積み上げ追加\n                    "
+                                )
+                              ]
                             )
-                          ]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.addItemNum > 0
-                      ? _c(
-                          "button",
-                          {
-                            staticClass:
-                              "p-1 rounded text-sm border mr-3 hover:text-blue-800",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function($event) {
-                                _vm.deleteAddItem(_vm.addItemNum)
-                                _vm.addItemNum -= 1
-                              }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                    追加積み上げ削除\n                "
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.addItemNum > 0
+                          ? _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "p-1 rounded text-sm border mr-3 hover:text-blue-800",
+                                attrs: { type: "button" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.deleteAddItem(_vm.addItemNum)
+                                    _vm.addItemNum -= 1
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                        追加積み上げ削除\n                    "
+                                )
+                              ]
                             )
-                          ]
-                        )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _vm.addItemNum > 0
-                      ? _c(
-                          "button",
-                          {
-                            staticClass:
-                              "bg-blue-500 p-1 text-sm text-white rounded hover:bg-blue-400"
-                          },
-                          [_vm._v("追加積み上げ保存")]
-                        )
-                      : _vm._e()
-                  ])
-                ],
-                2
+                          : _vm._e(),
+                        _vm._v(" "),
+                        _vm.addItemNum > 0
+                          ? _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "bg-blue-500 p-1 text-sm text-white rounded hover:bg-blue-400"
+                              },
+                              [_vm._v("追加積み上げ保存")]
+                            )
+                          : _vm._e()
+                      ])
+                    ],
+                    2
+                  )
+                ]
               )
             ],
             2

@@ -34,27 +34,29 @@
             <div v-if="itemNum == 0" class="pt-64"></div>
 
             <form @submit.prevent="submitAddItem()" class="pt-6">
-                <div v-for="n in addItemNum">
-                    <div class="flex justify-items-center mx-auto">
-                        <InputField :key="'add_item' + n" :name="'add_item' + n" :label="'追加' + n" :errors="errors"
-                        placeholder="積み上げ" @update:field="addItemUpdate($event, n)" :data="item[n]" class="pr-2" />
-                        <InputField :key="'add_plan_time' + n" :name="'add_plan_time' + n" :errors="errors"
-                        placeholder="予定作業時間(分)" @update:field="addPlanTimeUpdate($event, n)" :data="planTime[n]" class="pr-2" />
-                        <InputField :key="'add_actual_time' + n" :name="'add_actual_time' + n" :errors="errors"
-                        placeholder="実績作業時間(分)" @update:field="addActualTimeUpdate($event, n)" :data="actualTime[n]" />
+                <div class="pl-5">
+                    <div v-for="n in addItemNum">
+                        <div class="flex justify-items-center mx-auto">
+                            <InputField :key="'add_item' + n" :name="'add_item' + n" :label="'追加' + n" :errors="errors"
+                            placeholder="積み上げ" @update:field="addItemUpdate($event, n)" :data="item[n]" class="pr-2" />
+                            <InputField :key="'add_plan_time' + n" :name="'add_plan_time' + n" :errors="errors"
+                            placeholder="予定作業時間(分)" @update:field="addPlanTimeUpdate($event, n)" :data="planTime[n]" class="pr-2" />
+                            <InputField :key="'add_actual_time' + n" :name="'add_actual_time' + n" :errors="errors"
+                            placeholder="実績作業時間(分)" @update:field="addActualTimeUpdate($event, n)" :data="actualTime[n]" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="flex justify-start">
-                    <button v-if="(parseInt(addItemNum) + parseInt(itemNum)) < 10" type="button" class="p-1 rounded text-sm border mr-3 hover:text-blue-800" 
-                    @click="addItemNum += 1">
-                        積み上げ追加
-                    </button>
-                    <button v-if="addItemNum > 0" type="button" class="p-1 rounded text-sm border mr-3 hover:text-blue-800" 
-                    @click="deleteAddItem(addItemNum); addItemNum -= 1;">
-                        追加積み上げ削除
-                    </button>
-                    <button v-if="addItemNum > 0" class="bg-blue-500 p-1 text-sm text-white rounded hover:bg-blue-400">追加積み上げ保存</button>
+                    <div class="flex justify-start">
+                        <button v-if="(parseInt(addItemNum) + parseInt(itemNum)) < 10" type="button" class="p-1 rounded text-sm border mr-3 hover:text-blue-800" 
+                        @click="addItemNum += 1">
+                            積み上げ追加
+                        </button>
+                        <button v-if="addItemNum > 0" type="button" class="p-1 rounded text-sm border mr-3 hover:text-blue-800" 
+                        @click="deleteAddItem(addItemNum); addItemNum -= 1;">
+                            追加積み上げ削除
+                        </button>
+                        <button v-if="addItemNum > 0" class="bg-blue-500 p-1 text-sm text-white rounded hover:bg-blue-400">追加積み上げ保存</button>
+                    </div>
                 </div>
             </form>
         </div>
