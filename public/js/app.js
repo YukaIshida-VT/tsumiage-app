@@ -2836,10 +2836,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       axios.post('/api/tsumiage', submitArray).then(function (response) {
         alert("保存しました");
 
-        _this2.$router.go({
-          path: _this2.$router.currentRoute.path,
-          force: true
-        });
+        _this2.getTsumiage();
+
+        _this2.addItemNum = 0;
       })["catch"](function (errors) {
         _this2.errors = errors.response.data.errors;
       });

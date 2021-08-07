@@ -147,7 +147,8 @@
                 axios.post('/api/tsumiage', submitArray)
                     .then(response => {
                         alert("保存しました");
-                        this.$router.go({path: this.$router.currentRoute.path, force: true});
+                        this.getTsumiage();
+                        this.addItemNum = 0;
                     })
                     .catch(errors => {
                         this.errors = errors.response.data.errors;
