@@ -57,20 +57,7 @@
 
         mounted() {
             this.getDay();
-            
-            // axios.get('/api/items/' + this.$route.params.id)
-            //     .then(response => {
-            //         this.form = response.data.data.attributes;
-            //         this.itemNum = response.data.data.item_num;
-            //         this.loading = false;
-            //     })
-            //     .catch(error => {
-            //         this.loading = false;
-
-            //         if (error.response.status === 404) {
-            //             this.$router.push('/home');
-            //         }
-            //     });
+            this.getTsumiage();
         },
 
         data: function() {
@@ -152,12 +139,26 @@
                 var Day = ("00" + now.getDate()).slice(-2);
                 this.day = Year + "-" + Month + "-" + Day;
             },
+
+            getTsumiage: function() {
+                axios.post('/api/user-tsumiage', {data: this.day})
+                    .then(response => {
+                        if (response.data.count != 0) {
+                            // TODO 選択した日付へのルーティングとする
+                            this.$router.push('/tsumiage/edit');
+                        } 
+                    })
+                    .catch(error => {
+
+                    });
+
+            },
         },
 
         watch: {
-            // defaultDateの変更を監視してdayを計算したい
             defaultDate: function () {
                 this.getDay();
+                this.getTsumiage();
             },
         }
     }

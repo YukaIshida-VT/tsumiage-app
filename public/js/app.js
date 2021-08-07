@@ -2506,18 +2506,8 @@ __webpack_require__.r(__webpack_exports__);
     Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_1__.default
   },
   mounted: function mounted() {
-    this.getDay(); // axios.get('/api/items/' + this.$route.params.id)
-    //     .then(response => {
-    //         this.form = response.data.data.attributes;
-    //         this.itemNum = response.data.data.item_num;
-    //         this.loading = false;
-    //     })
-    //     .catch(error => {
-    //         this.loading = false;
-    //         if (error.response.status === 404) {
-    //             this.$router.push('/home');
-    //         }
-    //     });
+    this.getDay();
+    this.getTsumiage();
   },
   data: function data() {
     return {
@@ -2618,12 +2608,24 @@ __webpack_require__.r(__webpack_exports__);
       var Month = ("00" + (now.getMonth() + 1)).slice(-2);
       var Day = ("00" + now.getDate()).slice(-2);
       this.day = Year + "-" + Month + "-" + Day;
+    },
+    getTsumiage: function getTsumiage() {
+      var _this2 = this;
+
+      axios.post('/api/user-tsumiage', {
+        data: this.day
+      }).then(function (response) {
+        if (response.data.count != 0) {
+          // TODO 選択した日付へのルーティングとする
+          _this2.$router.push('/tsumiage/edit');
+        }
+      })["catch"](function (error) {});
     }
   },
   watch: {
-    // defaultDateの変更を監視してdayを計算したい
     defaultDate: function defaultDate() {
       this.getDay();
+      this.getTsumiage();
     }
   }
 });
