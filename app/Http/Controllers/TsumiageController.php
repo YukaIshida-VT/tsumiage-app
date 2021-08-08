@@ -7,6 +7,7 @@ use App\Models\Tsumiage;
 use Illuminate\Http\Response;
 use App\Http\Resources\TsumiageCollection;
 use App\Http\Requests\StoreTsumiage;
+use App\Http\Requests\UpdateTsumiage;
 use App\Http\Resources\Tsumiage as TsumiageResource;
 
 class TsumiageController extends Controller
@@ -36,9 +37,9 @@ class TsumiageController extends Controller
     }
 
 
-    public function update(Request $request, Tsumiage $tsumiage)
+    public function update(UpdateTsumiage $request, Tsumiage $tsumiage)
     {
-        // TODO バリデーションとポリシー追加
+        // TODO ポリシー追加
         $itemKey = 'item' . $request->key;
         $planTimeKey = 'plan_time' . $request->key;
         $actualTimeKey = 'actual_time' . $request->key;
