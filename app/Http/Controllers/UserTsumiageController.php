@@ -10,7 +10,8 @@ class UserTsumiageController extends Controller
 {
     public function show(Request $request)
     {
-        $tsumiages = Auth::user()->tsumiages->where('date', $request->data);
+        
+        $tsumiages = Auth::user()->tsumiages->where('date', $request->date);
         return new TsumiageCollection($tsumiages);
     }
 

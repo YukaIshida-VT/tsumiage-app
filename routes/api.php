@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\TsumiageItemController;
 use App\Http\Controllers\TsumiageController;
 use App\Http\Controllers\UserTsumiageController;
+use App\Http\Controllers\TsumiageCountController;
 
 Route::middleware('auth:api')->group(function(){
     Route::get('auth-user', [AuthUserController::class, 'show']);

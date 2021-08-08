@@ -1944,7 +1944,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      title: ''
+      title: '',
+      defaultDate: new Date()
     };
   },
   watch: {
@@ -2141,16 +2142,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Nav",
-  data: function data() {
-    return {
-      yyyymmdd: null
-    };
-  },
   mounted: function mounted() {
     this.setYyyymmdd();
+    this.$store.dispatch('fetchTsumiageCount');
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)({
-    authUser: 'authUser'
+    authUser: 'authUser',
+    yyyymmdd: 'yyyymmdd',
+    yyyy_mm_dd: 'yyyy_mm_dd',
+    tsumiageCount: 'tsumiageCount'
   })),
   methods: {
     setYyyymmdd: function setYyyymmdd() {
@@ -2158,7 +2158,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var Year = now.getFullYear();
       var Month = ("00" + (now.getMonth() + 1)).slice(-2);
       var Day = ("00" + now.getDate()).slice(-2);
-      this.yyyymmdd = Year + Month + Day;
+      var yyyymmdd = Year + Month + Day;
+      var yyyy_mm_dd = Year + "-" + Month + "-" + Day;
+      this.$store.dispatch('setDay', {
+        0: yyyymmdd,
+        1: yyyy_mm_dd
+      });
     }
   }
 });
@@ -2637,7 +2642,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       axios.post('/api/user-tsumiage', {
-        data: this.day
+        date: this.day
       }).then(function (response) {
         if (response.data.count != 0) {
           _this2.$router.push('/tsumiage/edit/' + _this2.yyyymmdd);
@@ -2861,7 +2866,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this4 = this;
 
       axios.post('/api/user-tsumiage', {
-        data: this.day
+        date: this.day
       }).then(function (response) {
         if (response.data.count == 0) {
           _this4.$router.push('/tsumiage/create/' + _this4.yyyymmdd);
@@ -3097,18 +3102,92 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_user__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/user */ "./resources/js/store/modules/user.js");
+/* harmony import */ var _modules_todayTsumiage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/todayTsumiage */ "./resources/js/store/modules/todayTsumiage.js");
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_1__.default.use(vuex__WEBPACK_IMPORTED_MODULE_2__.default);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_2__.default.Store({
+
+vue__WEBPACK_IMPORTED_MODULE_2__.default.use(vuex__WEBPACK_IMPORTED_MODULE_3__.default);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_3__.default.Store({
   modules: {
-    User: _modules_user__WEBPACK_IMPORTED_MODULE_0__.default
+    User: _modules_user__WEBPACK_IMPORTED_MODULE_0__.default,
+    TodayTsumiage: _modules_todayTsumiage__WEBPACK_IMPORTED_MODULE_1__.default
   }
 }));
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/todayTsumiage.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/store/modules/todayTsumiage.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var state = {
+  yyyymmdd: null,
+  yyyy_mm_dd: null,
+  tsumiageCount: null
+};
+var getters = {
+  yyyymmdd: function yyyymmdd(state) {
+    return state.yyyymmdd;
+  },
+  yyyy_mm_dd: function yyyy_mm_dd(state) {
+    return state.yyyy_mm_dd;
+  },
+  tsumiageCount: function tsumiageCount(state) {
+    return state.tsumiageCount;
+  }
+};
+var actions = {
+  setDay: function setDay(_ref, payload) {
+    var commit = _ref.commit;
+    commit('setYyyymmdd', payload[0]);
+    commit('setYyyy_mm_dd', payload[1]);
+  },
+  fetchTsumiageCount: function fetchTsumiageCount(_ref2) {
+    var commit = _ref2.commit,
+        state = _ref2.state;
+    axios.post('/api/user-tsumiage', {
+      date: state.yyyy_mm_dd
+    }).then(function (res) {
+      commit('setTsumiageCount', res.data.count);
+    })["catch"](function (error) {
+      console.log('Unable to fetch tsumiage count');
+    });
+  }
+};
+var mutations = {
+  setYyyymmdd: function setYyyymmdd(state, yyyymmdd) {
+    state.yyyymmdd = yyyymmdd;
+  },
+  setYyyy_mm_dd: function setYyyy_mm_dd(state, yyyy_mm_dd) {
+    state.yyyy_mm_dd = yyyy_mm_dd;
+  },
+  setTsumiageCount: function setTsumiageCount(state, tsumiageCount) {
+    state.tsumiageCount = tsumiageCount;
+  },
+  // updateYyyymmdd(state, yyyymmdd) {
+  //     state.yyyymmdd = yyyymmdd;
+  // },
+  updateTsumiageCount: function updateTsumiageCount(state, tsumiageCount) {
+    state.yyyymmdd = tsumiageCount;
+  }
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  state: state,
+  getters: getters,
+  actions: actions,
+  mutations: mutations
+});
 
 /***/ }),
 

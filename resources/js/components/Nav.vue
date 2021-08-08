@@ -40,19 +40,17 @@
     export default {
         name: "Nav",
 
-        data: function() {
-            return {
-                yyyymmdd: null,
-            }
-        },
-
         mounted() {
             this.setYyyymmdd();
+            this.$store.dispatch('fetchTsumiageCount');
         },
 
         computed: {
             ...mapGetters({
-                authUser: 'authUser'
+                authUser: 'authUser',
+                yyyymmdd: 'yyyymmdd',
+                yyyy_mm_dd: 'yyyy_mm_dd',
+                tsumiageCount: 'tsumiageCount',
             })
         },
 
@@ -62,7 +60,9 @@
                 let Year = now.getFullYear();
                 let Month = ("00" + (now.getMonth()+1)).slice(-2);
                 let Day = ("00" + now.getDate()).slice(-2);
-                this.yyyymmdd = Year + Month + Day;
+                let yyyymmdd = Year + Month + Day;
+                let yyyy_mm_dd = Year + "-" + Month + "-" + Day;
+                this.$store.dispatch('setDay', {0: yyyymmdd, 1: yyyy_mm_dd});
             },
         }
     }

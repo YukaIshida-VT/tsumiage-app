@@ -153,7 +153,7 @@
             },
 
             getTsumiage: function() {
-                axios.post('/api/user-tsumiage', {data: this.day})
+                axios.post('/api/user-tsumiage', {date: this.day})
                     .then(response => {
                         if (response.data.count != 0) {
                             this.$router.push('/tsumiage/edit/' + this.yyyymmdd);

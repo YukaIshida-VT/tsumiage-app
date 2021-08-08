@@ -75,6 +75,8 @@
         data: function () {
             return {
                 title: '',
+                defaultDate: new Date(),
+                
             }
         },
 

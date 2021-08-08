@@ -51,10 +51,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Tsumiage::class);
     }
-
-    public function countTsumiages($date)
-    {
-        return $this->tsumiages()
-        ->where('date', $date)->count();
-    }
 }
