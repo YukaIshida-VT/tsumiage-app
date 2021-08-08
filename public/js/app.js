@@ -2145,11 +2145,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     this.setYyyymmdd();
     this.$store.dispatch('fetchTsumiageCount');
+    this.getTodayPath();
+  },
+  data: function data() {
+    return {
+      todayPath: ''
+    };
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)({
     authUser: 'authUser',
     yyyymmdd: 'yyyymmdd',
-    yyyy_mm_dd: 'yyyy_mm_dd',
     tsumiageCount: 'tsumiageCount'
   })),
   methods: {
@@ -2164,6 +2169,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         0: yyyymmdd,
         1: yyyy_mm_dd
       });
+    },
+    getTodayPath: function getTodayPath() {
+      if (this.tsumiageCount > 0) {
+        this.todayPath = '/tsumiage/edit/' + this.yyyymmdd;
+      } else {
+        this.todayPath = '/tsumiage/create/' + this.yyyymmdd;
+      }
     }
   }
 });
@@ -40352,7 +40364,7 @@ var render = function() {
         "router-link",
         {
           staticClass: "flex items-center py-2 hover:text-blue-600 text-sm",
-          attrs: { to: "/tsumiage/create/" + _vm.yyyymmdd }
+          attrs: { to: _vm.todayPath }
         },
         [
           _c(
