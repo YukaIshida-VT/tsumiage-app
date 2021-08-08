@@ -14,7 +14,6 @@ class TsumiageController extends Controller
 {
     public function store(StoreTsumiage $request) 
     {
-        info($request);
         $this->authorize('create', Tsumiage::class);
 
         $dataArray = [];
@@ -39,7 +38,7 @@ class TsumiageController extends Controller
 
     public function update(UpdateTsumiage $request, Tsumiage $tsumiage)
     {
-        // TODO ポリシー追加
+        $this->authorize('update', $tsumiage);
         $itemKey = 'item' . $request->key;
         $planTimeKey = 'plan_time' . $request->key;
         $actualTimeKey = 'actual_time' . $request->key;
@@ -57,7 +56,7 @@ class TsumiageController extends Controller
 
     public function destroy(Tsumiage $tsumiage)
     {
-        // TODO ポリシー追加
+        $this->authorize('delete', $tsumiage);
         $tsumiage->delete();
         return response([], Response::HTTP_OK); 
     }

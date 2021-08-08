@@ -53,7 +53,7 @@ class TsumiagePolicy
      */
     public function update(User $user, Tsumiage $tsumiage)
     {
-        //
+        return $user->id == $tsumiage->user_id;
     }
 
     /**
@@ -65,7 +65,7 @@ class TsumiagePolicy
      */
     public function delete(User $user, Tsumiage $tsumiage)
     {
-        //
+        return $user->id == $tsumiage->user_id;
     }
 
     /**
@@ -77,7 +77,7 @@ class TsumiagePolicy
      */
     public function restore(User $user, Tsumiage $tsumiage)
     {
-        //
+        return false;
     }
 
     /**
@@ -89,6 +89,6 @@ class TsumiagePolicy
      */
     public function forceDelete(User $user, Tsumiage $tsumiage)
     {
-        //
+        return false;
     }
 }
