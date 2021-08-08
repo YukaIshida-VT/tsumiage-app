@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Tsumiage;
 use Illuminate\Http\Response;
 use App\Http\Resources\TsumiageCollection;
-use App\Http\Requests\TsumiageRequest;
+use App\Http\Requests\StoreTsumiage;
 use App\Http\Resources\Tsumiage as TsumiageResource;
 
 class TsumiageController extends Controller
 {
-    public function store(TsumiageRequest $request) 
+    public function store(StoreTsumiage $request) 
     {
         info($request);
         $this->authorize('create', Tsumiage::class);
