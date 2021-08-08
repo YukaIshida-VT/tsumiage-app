@@ -10,7 +10,6 @@
 
         <div v-if="loading">Loading...</div>
         <div v-else>
-            <div v-if="itemNum < 2" class="pt-10"></div>
         
             <div v-for="(tsumiage, tsumiageKey, index) in tsumiages">
                 <form @submit.prevent="submitForm(tsumiageKey)" class="pt-6">
@@ -30,6 +29,12 @@
                         </div>
                     </div>
                 </form>
+            </div>
+
+            <div v-if="addItemNum == 0" class="pl-5">
+                <a :href="tweet" target="_blank" class="pt-2">
+                    <div class="w-24 bg-green-400 text-sm text-white p-1 rounded hover:bg-green-300 text-center">ツイート投稿</div>
+                </a>
             </div>
 
             <form @submit.prevent="submitAddItem()" class="pt-6">
@@ -93,6 +98,7 @@
                 day: null,
                 yyyymmdd: null,
                 loading: true,
+                tweet: '',
 
                 defaultDate: new Date(),
                 DatePickerFormat: 'yyyy-MM-dd',
@@ -177,6 +183,15 @@
                         } else {
                             this.itemNum = response.data.count;
                             this.tsumiages = response.data.data;
+
+                            let tsumiageArray = Object.values(this.tsumiages);
+                            var tweet = 'https://twitter.com/intent/tweet?hashtags=今日の積み上げ&text=';
+
+                            tsumiageArray.forEach(function(element){
+                                tweet += '・' + element.data.attributes.item + '%0a';
+                            });
+                            tweet += '%0a';
+                            this.tweet = tweet;
                         }
 
                         this.loading = false;
@@ -271,5 +286,4 @@
         border-radius: 3px;
         text-align: center;
     }
-    
 </style>

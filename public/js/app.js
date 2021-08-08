@@ -2758,6 +2758,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -2782,7 +2787,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       loading: true,
       day: null,
       yyyymmdd: null
-    }, _defineProperty(_ref, "loading", true), _defineProperty(_ref, "defaultDate", new Date()), _defineProperty(_ref, "DatePickerFormat", 'yyyy-MM-dd'), _defineProperty(_ref, "ja", {
+    }, _defineProperty(_ref, "loading", true), _defineProperty(_ref, "tweet", ''), _defineProperty(_ref, "defaultDate", new Date()), _defineProperty(_ref, "DatePickerFormat", 'yyyy-MM-dd'), _defineProperty(_ref, "ja", {
       language: 'Japanese',
       months: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
       monthsAbbr: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
@@ -2885,6 +2890,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         } else {
           _this4.itemNum = response.data.count;
           _this4.tsumiages = response.data.data;
+          var tsumiageArray = Object.values(_this4.tsumiages);
+          var tweet = 'https://twitter.com/intent/tweet?hashtags=今日の積み上げ&text=';
+          tsumiageArray.forEach(function (element) {
+            tweet += '・' + element.data.attributes.item + '%0a';
+          });
+          tweet += '%0a';
+          _this4.tweet = tweet;
         }
 
         _this4.loading = false;
@@ -7753,7 +7765,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".datapicker-style div input {\n  border: 1px ridge #dcdcdc;\n  border-radius: 3px;\n  text-align: center;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".datapicker-style div input {\n  border: 1px ridge #dcdcdc;\n  border-radius: 3px;\n  text-align: center;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -41109,8 +41121,6 @@ var render = function() {
         : _c(
             "div",
             [
-              _vm.itemNum < 2 ? _c("div", { staticClass: "pt-10" }) : _vm._e(),
-              _vm._v(" "),
               _vm._l(_vm.tsumiages, function(tsumiage, tsumiageKey, index) {
                 return _c("div", [
                   _c(
@@ -41216,6 +41226,28 @@ var render = function() {
                   )
                 ])
               }),
+              _vm._v(" "),
+              _vm.addItemNum == 0
+                ? _c("div", { staticClass: "pl-5" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "pt-2",
+                        attrs: { href: _vm.tweet, target: "_blank" }
+                      },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "w-24 bg-green-400 text-sm text-white p-1 rounded hover:bg-green-300 text-center"
+                          },
+                          [_vm._v("ツイート投稿")]
+                        )
+                      ]
+                    )
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               _c(
                 "form",
