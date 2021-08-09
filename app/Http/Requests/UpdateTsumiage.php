@@ -23,11 +23,9 @@ class UpdateTsumiage extends FormRequest
      */
     public function rules()
     {
-        $data = $this->all();
-
         $returnArray = [];
 
-        $key = $data['key'];
+        $key = $this->key;
         $itemKey = 'item' . $key;
         $planTimeKey = 'plan_time' . $key;
         $actualTimeKey = 'actual_time' . $key;
@@ -35,6 +33,22 @@ class UpdateTsumiage extends FormRequest
         $returnArray[$itemKey] = 'required';
         $returnArray[$planTimeKey] = 'nullable|numeric';
         $returnArray[$actualTimeKey] = 'nullable|numeric';
+
+        return $returnArray;
+    }
+
+    public function attributes()
+    {
+        $returnArray = [];
+
+        $key = $this->key;
+        $itemKey = 'item' . $key;
+        $planTimeKey = 'plan_time' . $key;
+        $actualTimeKey = 'actual_time' . $key;
+
+        $returnArray[$itemKey] = '積み上げ';
+        $returnArray[$planTimeKey] = '予定時間';
+        $returnArray[$actualTimeKey] = '実績時間';
 
         return $returnArray;
     }
