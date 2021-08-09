@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Tsumiage::class);
     }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }
