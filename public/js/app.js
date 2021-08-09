@@ -41231,7 +41231,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _vm.addItemNum == 0
-                ? _c("div", { staticClass: "pl-5" }, [
+                ? _c("div", { staticClass: "pl-1" }, [
                     _c(
                       "a",
                       {

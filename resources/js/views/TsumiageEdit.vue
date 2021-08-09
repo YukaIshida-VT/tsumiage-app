@@ -27,7 +27,7 @@
                 </form>
             </div>
 
-            <div v-if="addItemNum == 0" class="pl-5">
+            <div v-if="addItemNum == 0" class="pl-1">
                 <a :href="tweet" target="_blank" class="pt-2">
                     <div class="w-24 bg-green-400 text-sm text-white p-1 rounded hover:bg-green-300 text-center">ツイート投稿</div>
                 </a>
