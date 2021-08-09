@@ -1,6 +1,5 @@
 <template>
     <div>
-        <div id="DateTimeDisp" class="mb-4"></div>
         <Datepicker
             v-model="defaultDate"
             :format="DatePickerFormat"

@@ -2454,7 +2454,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2620,7 +2619,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
 //
 //
 //
@@ -40658,8 +40656,6 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("div", { staticClass: "mb-4", attrs: { id: "DateTimeDisp" } }),
-      _vm._v(" "),
       _c("Datepicker", {
         staticClass: "datapicker-style",
         attrs: {
@@ -40856,8 +40852,6 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("div", { staticClass: "mb-4", attrs: { id: "DateTimeDisp" } }),
-      _vm._v(" "),
       _c("Datepicker", {
         staticClass: "datapicker-style",
         attrs: {
