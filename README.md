@@ -1,4 +1,4 @@
-## セットアップ
+### セットアップ
 
 - git clone
 ```
@@ -25,4 +25,18 @@ docker-compose up -d
 - コンテナ停止
 ```
 docker-compose down
+```
+
+### 一般画面
+
+```
+http://127.0.0.1:40040/
+```
+
+### 管理画面
+
+```
+http://127.0.0.1:40040/admin
+
+admin / admin
 ```
