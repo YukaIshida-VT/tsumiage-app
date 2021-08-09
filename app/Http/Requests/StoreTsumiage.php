@@ -40,4 +40,21 @@ class StoreTsumiage extends FormRequest
 
         return $returnArray;
     }
+
+    public function attributes()
+    {
+        $returnArray = [];
+
+        for ($i = 1; $i <= 11; $i++) {
+            $itemKey = 'add_item' . $i;
+            $planTimeKey = 'add_plan_time' . $i;
+            $actualTimeKey = 'add_actual_time' . $i;
+
+            $returnArray[$itemKey] = '積み上げ';
+            $returnArray[$planTimeKey] = '予定時間';
+            $returnArray[$actualTimeKey] = '実績時間';
+        }
+
+        return $returnArray;
+    }
 }
