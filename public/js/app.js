@@ -2527,6 +2527,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2692,10 +2694,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
 //
 //
 //
@@ -40292,7 +40290,7 @@ var render = function() {
         }
       ],
       staticClass:
-        "pt-8 w-full text-gray-900 border-b pb-2 focus:outline-none focus:border-blue-400",
+        "pt-8 w-full text-gray-900 border-b pb-2 focus:outline-none focus:border-blue-400 text-sm",
       class: _vm.errorClassObject(),
       attrs: { id: _vm.name, type: "text", placeholder: _vm.placeholder },
       domProps: { value: _vm.value },
@@ -40949,7 +40947,7 @@ var render = function() {
                 [
                   _c("InputField", {
                     key: "item" + n,
-                    staticClass: "pr-2",
+                    staticClass: "pr-2 w-1/2",
                     attrs: {
                       name: "add_item" + n,
                       label: "積み上げ" + n,
@@ -40966,11 +40964,11 @@ var render = function() {
                   _vm._v(" "),
                   _c("InputField", {
                     key: "plan_time" + n,
-                    staticClass: "pr-2",
+                    staticClass: "pr-2 w-1/4",
                     attrs: {
                       name: "add_plan_time" + n,
                       errors: _vm.errors,
-                      placeholder: "予定作業時間(分)",
+                      placeholder: "予定時間(分)",
                       data: _vm.planTime[n]
                     },
                     on: {
@@ -40982,10 +40980,11 @@ var render = function() {
                   _vm._v(" "),
                   _c("InputField", {
                     key: "actual_time" + n,
+                    staticClass: " w-1/4",
                     attrs: {
                       name: "add_actual_time" + n,
                       errors: _vm.errors,
-                      placeholder: "実績作業時間(分)",
+                      placeholder: "実績時間(分)",
                       data: _vm.actualTime[n]
                     },
                     on: {
@@ -41000,69 +40999,79 @@ var render = function() {
             ])
           }),
           _vm._v(" "),
-          _c("div", { staticClass: "flex justify-start" }, [
-            _vm.itemNum < 10
-              ? _c(
-                  "button",
-                  {
-                    staticClass:
-                      "p-1 rounded text-sm border mr-3 hover:text-blue-800",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        _vm.itemNum += 1
+          _c("div", { staticClass: "flex justify-between" }, [
+            _c("div", { staticClass: "flex" }, [
+              _vm.itemNum < 10
+                ? _c(
+                    "button",
+                    {
+                      staticClass:
+                        "p-1 rounded text-sm border mr-3 hover:text-blue-800",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.itemNum += 1
+                        }
                       }
-                    }
-                  },
-                  [_vm._v("\n                積み上げ追加\n            ")]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.itemNum > 0
-              ? _c(
-                  "button",
-                  {
-                    staticClass:
-                      "p-1 rounded text-sm border mr-5 hover:text-red-800",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        return _vm.deleteItem()
-                      }
-                    }
-                  },
-                  [_vm._v("\n                積み上げ削除\n            ")]
-                )
-              : _vm._e()
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "flex justify-end" },
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass:
-                    "py-2 px-4 rounded text-red-700 border mr-5 hover:border-red-700",
-                  attrs: { to: "/home" }
-                },
-                [_vm._v("\n                キャンセル\n            ")]
-              ),
+                    },
+                    [
+                      _vm._v(
+                        "\n                    積み上げ追加\n                "
+                      )
+                    ]
+                  )
+                : _vm._e(),
               _vm._v(" "),
               _vm.itemNum > 0
                 ? _c(
                     "button",
                     {
                       staticClass:
-                        "bg-blue-500 py-2 px-4 text-white rounded hover:bg-blue-400"
+                        "p-1 rounded text-sm border mr-5 hover:text-red-800",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.deleteItem()
+                        }
+                      }
                     },
-                    [_vm._v("保存")]
+                    [
+                      _vm._v(
+                        "\n                    積み上げ削除\n                "
+                      )
+                    ]
                   )
                 : _vm._e()
-            ],
-            1
-          )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "flex justify-end" },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass:
+                      "p-1 rounded text-red-700 border mr-5 hover:border-red-700 text-sm py-auto",
+                    attrs: { to: "/home" }
+                  },
+                  [_vm._v("\n                    キャンセル\n                ")]
+                ),
+                _vm._v(" "),
+                _vm.itemNum > 0
+                  ? _c(
+                      "button",
+                      {
+                        staticClass:
+                          "bg-blue-500 p-1 text-white rounded hover:bg-blue-400 text-sm"
+                      },
+                      [_vm._v("保存")]
+                    )
+                  : _vm._e()
+              ],
+              1
+            )
+          ])
         ],
         2
       ),
@@ -41135,71 +41144,64 @@ var render = function() {
                       }
                     },
                     [
-                      _c("div", { staticClass: "flex justify-items-start" }, [
-                        _c(
-                          "div",
-                          { staticClass: "flex justify-items-center mx-auto" },
-                          [
-                            _c("InputField", {
-                              key: "item" + tsumiageKey,
-                              staticClass: "pr-2",
-                              attrs: {
-                                name: "item" + tsumiageKey,
-                                label: "積み上げ" + String(parseInt(index) + 1),
-                                errors: _vm.errors,
-                                placeholder: "積み上げ",
-                                data: tsumiage.data.attributes.item
-                              },
-                              on: {
-                                "update:field": function($event) {
-                                  return _vm.itemUpdate($event, tsumiageKey)
-                                }
+                      _c(
+                        "div",
+                        { staticClass: "flex justify-items-center mx-auto" },
+                        [
+                          _c("InputField", {
+                            key: "item" + tsumiageKey,
+                            staticClass: "pr-2 w-1/2",
+                            attrs: {
+                              name: "item" + tsumiageKey,
+                              label: "積み上げ" + String(parseInt(index) + 1),
+                              errors: _vm.errors,
+                              placeholder: "積み上げ",
+                              data: tsumiage.data.attributes.item
+                            },
+                            on: {
+                              "update:field": function($event) {
+                                return _vm.itemUpdate($event, tsumiageKey)
                               }
-                            }),
-                            _vm._v(" "),
-                            _c("InputField", {
-                              key: "plan_time" + tsumiageKey,
-                              staticClass: "pr-2",
-                              attrs: {
-                                name: "plan_time" + tsumiageKey,
-                                errors: _vm.errors,
-                                placeholder: "予定作業時間(分)",
-                                data: tsumiage.data.attributes.plan_time
-                              },
-                              on: {
-                                "update:field": function($event) {
-                                  return _vm.planTimeUpdate($event, tsumiageKey)
-                                }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("InputField", {
+                            key: "plan_time" + tsumiageKey,
+                            staticClass: "pr-2 w-1/4",
+                            attrs: {
+                              name: "plan_time" + tsumiageKey,
+                              errors: _vm.errors,
+                              placeholder: "予定時間(分)",
+                              data: tsumiage.data.attributes.plan_time
+                            },
+                            on: {
+                              "update:field": function($event) {
+                                return _vm.planTimeUpdate($event, tsumiageKey)
                               }
-                            }),
-                            _vm._v(" "),
-                            _c("InputField", {
-                              key: "actual_time" + tsumiageKey,
-                              attrs: {
-                                name: "actual_time" + tsumiageKey,
-                                errors: _vm.errors,
-                                placeholder: "実績作業時間(分)",
-                                data: tsumiage.data.attributes.actual_time
-                              },
-                              on: {
-                                "update:field": function($event) {
-                                  return _vm.actualTimeUpdate(
-                                    $event,
-                                    tsumiageKey
-                                  )
-                                }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("InputField", {
+                            key: "actual_time" + tsumiageKey,
+                            staticClass: "pr-2 w-1/4",
+                            attrs: {
+                              name: "actual_time" + tsumiageKey,
+                              errors: _vm.errors,
+                              placeholder: "実績時間(分)",
+                              data: tsumiage.data.attributes.actual_time
+                            },
+                            on: {
+                              "update:field": function($event) {
+                                return _vm.actualTimeUpdate($event, tsumiageKey)
                               }
-                            })
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "flex justify-end pt-3" }, [
+                            }
+                          }),
+                          _vm._v(" "),
                           _c(
                             "button",
                             {
                               staticClass:
-                                "p-1 rounded text-red-700 border mr-5 hover:border-red-700 h-9",
+                                "p-1 mt-5 rounded text-red-700 border mr-3 hover:border-red-700 h-9 text-sm w-12",
                               attrs: { type: "button" },
                               on: {
                                 click: function($event) {
@@ -41216,12 +41218,13 @@ var render = function() {
                             "button",
                             {
                               staticClass:
-                                "bg-blue-500 p-1 h-9 text-white rounded hover:bg-blue-400"
+                                "bg-blue-500 p-1  mt-5 h-9 text-white rounded hover:bg-blue-400 text-sm w-12"
                             },
                             [_vm._v("保存")]
                           )
-                        ])
-                      ])
+                        ],
+                        1
+                      )
                     ]
                   )
                 ])
@@ -41263,7 +41266,6 @@ var render = function() {
                 [
                   _c(
                     "div",
-                    { staticClass: "pl-5" },
                     [
                       _vm._l(_vm.addItemNum, function(n) {
                         return _c("div", [
@@ -41275,7 +41277,7 @@ var render = function() {
                             [
                               _c("InputField", {
                                 key: "add_item" + n,
-                                staticClass: "pr-2",
+                                staticClass: "pr-2 w-1/2",
                                 attrs: {
                                   name: "add_item" + n,
                                   label: "追加" + n,
@@ -41292,11 +41294,11 @@ var render = function() {
                               _vm._v(" "),
                               _c("InputField", {
                                 key: "add_plan_time" + n,
-                                staticClass: "pr-2",
+                                staticClass: "pr-2 w-1/4",
                                 attrs: {
                                   name: "add_plan_time" + n,
                                   errors: _vm.errors,
-                                  placeholder: "予定作業時間(分)",
+                                  placeholder: "予定時間(分)",
                                   data: _vm.planTime[n]
                                 },
                                 on: {
@@ -41308,10 +41310,11 @@ var render = function() {
                               _vm._v(" "),
                               _c("InputField", {
                                 key: "add_actual_time" + n,
+                                staticClass: " w-1/4",
                                 attrs: {
                                   name: "add_actual_time" + n,
                                   errors: _vm.errors,
-                                  placeholder: "実績作業時間(分)",
+                                  placeholder: "実績時間(分)",
                                   data: _vm.actualTime[n]
                                 },
                                 on: {
@@ -41326,7 +41329,7 @@ var render = function() {
                         ])
                       }),
                       _vm._v(" "),
-                      _c("div", { staticClass: "flex justify-start" }, [
+                      _c("div", { staticClass: "flex justify-start pl-1" }, [
                         parseInt(_vm.addItemNum) + parseInt(_vm.itemNum) < 10
                           ? _c(
                               "button",

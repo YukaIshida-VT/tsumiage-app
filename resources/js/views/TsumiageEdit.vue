@@ -13,20 +13,16 @@
         
             <div v-for="(tsumiage, tsumiageKey, index) in tsumiages">
                 <form @submit.prevent="submitForm(tsumiageKey)" class="pt-6">
-                    <div class="flex justify-items-start">
-                        <div class="flex justify-items-center mx-auto">
-                            <InputField :key="'item' + tsumiageKey" :name="'item' + tsumiageKey" :label="'積み上げ' + String(parseInt(index) + 1)" :errors="errors"
-                            placeholder="積み上げ" @update:field="itemUpdate($event, tsumiageKey)" :data="tsumiage.data.attributes.item" class="pr-2" />
-                            <InputField :key="'plan_time' + tsumiageKey" :name="'plan_time' + tsumiageKey" :errors="errors"
-                            placeholder="予定作業時間(分)" @update:field="planTimeUpdate($event, tsumiageKey)" :data="tsumiage.data.attributes.plan_time" class="pr-2" />
-                            <InputField :key="'actual_time' + tsumiageKey" :name="'actual_time' + tsumiageKey" :errors="errors"
-                            placeholder="実績作業時間(分)" @update:field="actualTimeUpdate($event, tsumiageKey)" :data="tsumiage.data.attributes.actual_time" />
-                        </div>
+                    <div class="flex justify-items-center mx-auto">
+                        <InputField :key="'item' + tsumiageKey" :name="'item' + tsumiageKey" :label="'積み上げ' + String(parseInt(index) + 1)" :errors="errors"
+                        placeholder="積み上げ" @update:field="itemUpdate($event, tsumiageKey)" :data="tsumiage.data.attributes.item" class="pr-2 w-1/2" />
+                        <InputField :key="'plan_time' + tsumiageKey" :name="'plan_time' + tsumiageKey" :errors="errors"
+                        placeholder="予定時間(分)" @update:field="planTimeUpdate($event, tsumiageKey)" :data="tsumiage.data.attributes.plan_time" class="pr-2 w-1/4" />
+                        <InputField :key="'actual_time' + tsumiageKey" :name="'actual_time' + tsumiageKey" :errors="errors"
+                        placeholder="実績時間(分)" @update:field="actualTimeUpdate($event, tsumiageKey)" :data="tsumiage.data.attributes.actual_time" class="pr-2 w-1/4" />
 
-                        <div class="flex justify-end pt-3">
-                            <button type="button" @click="deleteItem(tsumiage.data.tsumiage_id)" class="p-1 rounded text-red-700 border mr-5 hover:border-red-700 h-9">削除</button>
-                            <button class="bg-blue-500 p-1 h-9 text-white rounded hover:bg-blue-400">保存</button>
-                        </div>
+                        <button type="button" @click="deleteItem(tsumiage.data.tsumiage_id)" class="p-1 mt-5 rounded text-red-700 border mr-3 hover:border-red-700 h-9 text-sm w-12">削除</button>
+                        <button class="bg-blue-500 p-1  mt-5 h-9 text-white rounded hover:bg-blue-400 text-sm w-12">保存</button>
                     </div>
                 </form>
             </div>
@@ -38,19 +34,19 @@
             </div>
 
             <form @submit.prevent="submitAddItem()" class="pt-6">
-                <div class="pl-5">
+                <div>
                     <div v-for="n in addItemNum">
                         <div class="flex justify-items-center mx-auto">
                             <InputField :key="'add_item' + n" :name="'add_item' + n" :label="'追加' + n" :errors="errors"
-                            placeholder="積み上げ" @update:field="addItemUpdate($event, n)" :data="item[n]" class="pr-2" />
+                            placeholder="積み上げ" @update:field="addItemUpdate($event, n)" :data="item[n]" class="pr-2 w-1/2" />
                             <InputField :key="'add_plan_time' + n" :name="'add_plan_time' + n" :errors="errors"
-                            placeholder="予定作業時間(分)" @update:field="addPlanTimeUpdate($event, n)" :data="planTime[n]" class="pr-2" />
+                            placeholder="予定時間(分)" @update:field="addPlanTimeUpdate($event, n)" :data="planTime[n]" class="pr-2 w-1/4" />
                             <InputField :key="'add_actual_time' + n" :name="'add_actual_time' + n" :errors="errors"
-                            placeholder="実績作業時間(分)" @update:field="addActualTimeUpdate($event, n)" :data="actualTime[n]" />
+                            placeholder="実績時間(分)" @update:field="addActualTimeUpdate($event, n)" :data="actualTime[n]" class=" w-1/4" />
                         </div>
                     </div>
 
-                    <div class="flex justify-start">
+                    <div class="flex justify-start pl-1">
                         <button v-if="(parseInt(addItemNum) + parseInt(itemNum)) < 10" type="button" class="p-1 rounded text-sm border mr-3 hover:text-blue-800" 
                         @click="addItemNum += 1">
                             積み上げ追加

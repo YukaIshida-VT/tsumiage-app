@@ -9,35 +9,37 @@
         </Datepicker>
 
         <form @submit.prevent="submitForm" class="pt-6">
-    
             <div v-for="n in itemNum">
                 <div class="flex justify-items-center mx-auto">
                     <InputField :key="'item' + n" :name="'add_item' + n" :label="'積み上げ' + n" :errors="errors"
-                    placeholder="積み上げ" @update:field="itemUpdate($event, n)" :data="item[n]" class="pr-2" />
+                    placeholder="積み上げ" @update:field="itemUpdate($event, n)" :data="item[n]" class="pr-2 w-1/2" />
                     <InputField :key="'plan_time' + n" :name="'add_plan_time' + n" :errors="errors"
-                    placeholder="予定作業時間(分)" @update:field="planTimeUpdate($event, n)" :data="planTime[n]" class="pr-2" />
+                    placeholder="予定時間(分)" @update:field="planTimeUpdate($event, n)" :data="planTime[n]" class="pr-2 w-1/4" />
                     <InputField :key="'actual_time' + n" :name="'add_actual_time' + n" :errors="errors"
-                    placeholder="実績作業時間(分)" @update:field="actualTimeUpdate($event, n)" :data="actualTime[n]" />
+                    placeholder="実績時間(分)" @update:field="actualTimeUpdate($event, n)" :data="actualTime[n]" class=" w-1/4" />
                 </div>
             </div>
 
-            <div class="flex justify-start">
-                <button v-if="itemNum < 10" type="button" class="p-1 rounded text-sm border mr-3 hover:text-blue-800" 
-                @click="itemNum += 1">
-                    積み上げ追加
-                </button>
-                <button v-if="itemNum > 0" type="button" class="p-1 rounded text-sm border mr-5 hover:text-red-800"
-                @click="deleteItem()">
-                    積み上げ削除
-                </button>
+            <div class="flex justify-between">
+                <div class="flex">
+                    <button v-if="itemNum < 10" type="button" class="p-1 rounded text-sm border mr-3 hover:text-blue-800" 
+                    @click="itemNum += 1">
+                        積み上げ追加
+                    </button>
+                    <button v-if="itemNum > 0" type="button" class="p-1 rounded text-sm border mr-5 hover:text-red-800"
+                    @click="deleteItem()">
+                        積み上げ削除
+                    </button>
+                </div>
+
+                <div class="flex justify-end">
+                    <router-link to="/home" class="p-1 rounded text-red-700 border mr-5 hover:border-red-700 text-sm py-auto">
+                        キャンセル
+                    </router-link>
+                    <button v-if="itemNum > 0" class="bg-blue-500 p-1 text-white rounded hover:bg-blue-400 text-sm">保存</button>
+                </div>
             </div>
 
-            <div class="flex justify-end">
-                <router-link to="/home" class="py-2 px-4 rounded text-red-700 border mr-5 hover:border-red-700">
-                    キャンセル
-                </router-link>
-                <button v-if="itemNum > 0" class="bg-blue-500 py-2 px-4 text-white rounded hover:bg-blue-400">保存</button>
-            </div>
         </form>
 
         <div class="pt-44"></div>
