@@ -1,5 +1,5 @@
 <template>
-  <div class="">Welcome to Jot!!!!</div>
+  <div class="">Welcome to Tsumiage App!!</div>
 </template>
 
 <script>
