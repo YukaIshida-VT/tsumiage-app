@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import Home from "./views/Home";
 import TsumiageCreate from "./views/TsumiageCreate";
 import TsumiageEdit from "./views/TsumiageEdit";
-import BirthdaysIndex from "./views/BirthdaysIndex";
+import Reports from "./views/Reports";
 import ItemsEdit from "./views/ItemsEdit";
 import Logout from "./Actions/Logout";
 
@@ -24,7 +24,7 @@ export default new VueRouter({
             path: '/items/:id/edit', component: ItemsEdit,
             meta: { title: '積み上げ項目編集' }
         }, {    
-            path: '/birthdays', component: BirthdaysIndex,
+            path: '/reports', component: Reports,
             meta: { title: '積み上げ集計' }
         }, {
             path: '/logout', component: Logout
