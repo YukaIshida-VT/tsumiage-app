@@ -6,6 +6,7 @@ import TsumiageEdit from "./views/TsumiageEdit";
 import Reports from "./views/Reports";
 import ItemsEdit from "./views/ItemsEdit";
 import Logout from "./Actions/Logout";
+import Chart from "./components/Chart";
 
 Vue.use(VueRouter);
 
@@ -26,6 +27,9 @@ export default new VueRouter({
         }, {    
             path: '/reports', component: Reports,
             meta: { title: '積み上げ集計' }
+        }, {
+            path: '/chart', component: Chart,
+            meta: { title: 'チャートサンプル' }
         }, {
             path: '/logout', component: Logout
         }
