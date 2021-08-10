@@ -6,8 +6,8 @@
             :language="ja"
             name="datepicker" class="datapicker-style">
         </Datepicker>
-        <BarChart :chart-data="monthlyDatacollection"></BarChart>
         <BarChart :chart-data="weeklyDatacollection"></BarChart>
+        <BarChart :chart-data="monthlyDatacollection"></BarChart>
 
         <div class="pt-64"></div>
     </div>
