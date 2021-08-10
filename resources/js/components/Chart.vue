@@ -25,8 +25,8 @@ export default {
   },
   data () {
     return {
-      datacollection: null,
-      doughnutcollection: null,
+      datacollection: { labels:[], datasets: [] },
+      doughnutcollection: { labels:[], datasets: [] },
       lines: 3,
     }
   },
