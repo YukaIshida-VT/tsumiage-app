@@ -1972,7 +1972,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _chart_BarChart_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../chart/BarChart.js */ "./resources/js/chart/BarChart.js");
-/* harmony import */ var _chart_DoughnutChart_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../chart/DoughnutChart.js */ "./resources/js/chart/DoughnutChart.js");
 //
 //
 //
@@ -1985,25 +1984,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    BarChart: _chart_BarChart_js__WEBPACK_IMPORTED_MODULE_0__.default,
-    DoughnutChart: _chart_DoughnutChart_js__WEBPACK_IMPORTED_MODULE_1__.default
+    BarChart: _chart_BarChart_js__WEBPACK_IMPORTED_MODULE_0__.default
   },
   data: function data() {
     return {
       datacollection: {
-        labels: [],
-        datasets: []
-      },
-      doughnutcollection: {
         labels: [],
         datasets: []
       },
@@ -2016,11 +2004,8 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     fillData: function fillData() {
       var datasets = [];
-      var dDatasets = [];
       var labels = [];
       var val = 0;
-      var dLabels = [];
-      var dColors = [];
       var min = 0;
       var max = 0;
       var loopCnt = this.lines;
@@ -2041,22 +2026,12 @@ __webpack_require__.r(__webpack_exports__);
           backgroundColor: 'rgba(255,100,100,0.1)',
           data: labels
         });
-        dLabels.push('data-' + (i + 1));
-        dDatasets.push(this.getRandomInt());
         var code = i * 20;
-        dColors.push('rgba(255,' + code + ',' + code + ',0.4)');
       }
 
       this.datacollection = {
         labels: [min, max],
         datasets: datasets
-      };
-      this.doughnutcollection = {
-        labels: dLabels,
-        datasets: [{
-          data: dDatasets,
-          backgroundColor: dColors
-        }]
       };
     },
     randomize: function randomize() {
@@ -3151,31 +3126,6 @@ __webpack_require__.r(__webpack_exports__);
 var reactiveProp = vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.mixins.reactiveProp;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.Bar,
-  mixins: [reactiveProp],
-  props: ['options'],
-  mounted: function mounted() {
-    this.renderChart(this.chartData, this.options);
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/chart/DoughnutChart.js":
-/*!*********************************************!*\
-  !*** ./resources/js/chart/DoughnutChart.js ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
-
-var reactiveProp = vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.mixins.reactiveProp;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.Doughnut,
   mixins: [reactiveProp],
   props: ['options'],
   mounted: function mounted() {
@@ -22552,7 +22502,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".small {\n  margin:  100px auto;\n}\n.half {\n  width: 45%;\n  display: inline-block;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".small {\n  margin:  100px auto;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -76879,74 +76829,63 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "small" }, [
-    _c("h1", [_vm._v("vue-chartjs")]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "half" },
-      [
-        _c("doughnut-chart", {
-          attrs: { "chart-data": _vm.doughnutcollection }
-        })
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "half" },
-      [_c("BarChart", { attrs: { "chart-data": _vm.datacollection } })],
-      1
-    ),
-    _vm._v(" "),
-    _c("div", [
-      _c("input", {
-        directives: [
+  return _c(
+    "div",
+    { staticClass: "small" },
+    [
+      _c("h1", [_vm._v("vue-chartjs")]),
+      _vm._v(" "),
+      _c("BarChart", { attrs: { "chart-data": _vm.datacollection } }),
+      _vm._v(" "),
+      _c("div", [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.lines,
+              expression: "lines"
+            }
+          ],
+          attrs: { type: "text" },
+          domProps: { value: _vm.lines },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.lines = $event.target.value
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
           {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.lines,
-            expression: "lines"
-          }
-        ],
-        attrs: { type: "text" },
-        domProps: { value: _vm.lines },
-        on: {
-          input: function($event) {
-            if ($event.target.composing) {
-              return
+            on: {
+              click: function($event) {
+                return _vm.fillData()
+              }
             }
-            _vm.lines = $event.target.value
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          on: {
-            click: function($event) {
-              return _vm.fillData()
+          },
+          [_vm._v("Repaint")]
+        ),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            on: {
+              click: function($event) {
+                return _vm.randomize()
+              }
             }
-          }
-        },
-        [_vm._v("Repaint")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          on: {
-            click: function($event) {
-              return _vm.randomize()
-            }
-          }
-        },
-        [_vm._v("Randomize")]
-      )
-    ])
-  ])
+          },
+          [_vm._v("Randomize")]
+        )
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
