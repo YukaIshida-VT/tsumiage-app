@@ -6,7 +6,7 @@ use App\Http\Controllers\AuthUserController;
 use App\Http\Controllers\TsumiageItemController;
 use App\Http\Controllers\TsumiageController;
 use App\Http\Controllers\UserTsumiageController;
-use App\Http\Controllers\TsumiageCountController;
+use App\Http\Controllers\TsumiageSumController;
 
 Route::middleware('auth:api')->group(function(){
     Route::get('auth-user', [AuthUserController::class, 'show']);
@@ -21,5 +21,6 @@ Route::middleware('auth:api')->group(function(){
     Route::patch('/tsumiage/{tsumiage}', [TsumiageController::class, 'update']);
     Route::delete('/tsumiage/{tsumiage}', [TsumiageController::class, 'destroy']);
     Route::post('/user-tsumiage', [UserTsumiageController::class, 'show']);
+    Route::get('/tsumiage-sum/{date}', [TsumiageSumController::class, 'show']);
 });
 
