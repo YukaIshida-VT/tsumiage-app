@@ -1981,9 +1981,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -1995,7 +1992,23 @@ __webpack_require__.r(__webpack_exports__);
         labels: [],
         datasets: []
       },
-      lines: 3
+      labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+      // lines: 6,
+      datasets: [{
+        label: 'Bar Dataset',
+        data: [10, 20, 30, 40, 50, 30],
+        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
+        borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+        borderWidth: 1
+      } //   {
+      //     label: 'Line Dataset',
+      //     data: [10, 50, 20, 30, 30, 40],
+      //     borderColor: '#CFD8DC',
+      //     fill: false,
+      //     type: 'line',
+      //     lineTension: 0.3,
+      //   }
+      ]
     };
   },
   mounted: function mounted() {
@@ -2003,43 +2016,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     fillData: function fillData() {
-      var datasets = [];
-      var labels = [];
-      var val = 0;
-      var min = 0;
-      var max = 0;
-      var loopCnt = this.lines;
-
-      for (var i = 0; i < loopCnt; i++) {
-        labels = [this.getRandomInt(), this.getRandomInt()];
-
-        if (max < labels[0]) {
-          max = labels[0];
-        }
-
-        if (max < labels[1]) {
-          max = labels[1];
-        }
-
-        datasets.push({
-          label: 'data-' + (i + 1),
-          backgroundColor: 'rgba(255,100,100,0.1)',
-          data: labels
-        });
-        var code = i * 20;
-      }
-
       this.datacollection = {
-        labels: [min, max],
-        datasets: datasets
+        labels: this.labels,
+        datasets: this.datasets
       };
-    },
-    randomize: function randomize() {
-      this.lines = Math.floor(Math.random() * 10) + 1;
-      this.fillData();
-    },
-    getRandomInt: function getRandomInt() {
-      return Math.floor(Math.random() * (50 - 5 + 1)) + 5;
     }
   }
 });
@@ -76837,52 +76817,7 @@ var render = function() {
       _vm._v(" "),
       _c("BarChart", { attrs: { "chart-data": _vm.datacollection } }),
       _vm._v(" "),
-      _c("div", [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.lines,
-              expression: "lines"
-            }
-          ],
-          attrs: { type: "text" },
-          domProps: { value: _vm.lines },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.lines = $event.target.value
-            }
-          }
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            on: {
-              click: function($event) {
-                return _vm.fillData()
-              }
-            }
-          },
-          [_vm._v("Repaint")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            on: {
-              click: function($event) {
-                return _vm.randomize()
-              }
-            }
-          },
-          [_vm._v("Randomize")]
-        )
-      ])
+      _c("div")
     ],
     1
   )
