@@ -2465,6 +2465,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2499,9 +2500,22 @@ __webpack_require__.r(__webpack_exports__);
       },
       monthlyLabels: [],
       monthlyDatasets: [{
-        label: '今月の積み上げ集計(1日から集計)',
+        label: '今月の積み上げ集計(1日から月末を集計)',
         data: [],
-        backgroundColor: 'lightblue',
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgba(255, 99, 132, 1)',
+        borderWidth: 1
+      }],
+      weeklyDatacollection: {
+        labels: [],
+        datasets: []
+      },
+      weeklyLabels: [],
+      weeklyDatasets: [{
+        label: '今週の積み上げ集計(月曜日から日曜日を集計)',
+        data: [],
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgba(54, 162, 235, 1)',
         borderWidth: 1
       }]
     };
@@ -2540,6 +2554,19 @@ __webpack_require__.r(__webpack_exports__);
         _this.monthlyDatacollection = {
           labels: _this.monthlyLabels,
           datasets: _this.monthlyDatasets
+        };
+        var weeklyTsumiageSum = Object.values(response.data.weekly_tsumiage_sum);
+        var weeklyLabels = [];
+        var weeklyData = [];
+        weeklyTsumiageSum.forEach(function (element, index) {
+          weeklyLabels.push(element.item);
+          weeklyData.push(element.actual_time);
+        });
+        _this.weeklyLabels = weeklyLabels;
+        _this.weeklyDatasets[0].data = weeklyData;
+        _this.weeklyDatacollection = {
+          labels: _this.weeklyLabels,
+          datasets: _this.weeklyDatasets
         };
         _this.loading = false;
       })["catch"](function (error) {
@@ -77494,6 +77521,8 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("BarChart", { attrs: { "chart-data": _vm.monthlyDatacollection } }),
+      _vm._v(" "),
+      _c("BarChart", { attrs: { "chart-data": _vm.weeklyDatacollection } }),
       _vm._v(" "),
       _c("div", { staticClass: "pt-64" })
     ],

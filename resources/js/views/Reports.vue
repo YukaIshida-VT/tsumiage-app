@@ -7,6 +7,7 @@
             name="datepicker" class="datapicker-style">
         </Datepicker>
         <BarChart :chart-data="monthlyDatacollection"></BarChart>
+        <BarChart :chart-data="weeklyDatacollection"></BarChart>
 
         <div class="pt-64"></div>
     </div>
@@ -51,12 +52,25 @@
                 monthlyLabels: [],
                 monthlyDatasets: [
                     {
-                        label: '今月の積み上げ集計(1日から集計)',
+                        label: '今月の積み上げ集計(1日から月末を集計)',
                         data: [],
-                        backgroundColor: 'lightblue',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
                         borderWidth: 1
                     },
-                ]              
+                ],     
+                
+                weeklyDatacollection: { labels:[], datasets: [] },
+                weeklyLabels: [],
+                weeklyDatasets: [
+                    {
+                        label: '今週の積み上げ集計(月曜日から日曜日を集計)',
+                        data: [],
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    },
+                ], 
             }
         },
 
@@ -96,6 +110,23 @@
                         this.monthlyDatacollection = {
                             labels: this.monthlyLabels,
                             datasets: this.monthlyDatasets
+                        };
+
+                        let weeklyTsumiageSum = Object.values(response.data.weekly_tsumiage_sum);
+                        let weeklyLabels = [];
+                        let weeklyData = [];
+
+                        weeklyTsumiageSum.forEach(function(element, index){
+                            weeklyLabels.push(element.item);
+                            weeklyData.push(element.actual_time);
+                        });
+                        
+                        this.weeklyLabels = weeklyLabels;
+                        this.weeklyDatasets[0].data = weeklyData;
+
+                        this.weeklyDatacollection = {
+                            labels: this.weeklyLabels,
+                            datasets: this.weeklyDatasets
                         };
 
                         this.loading = false;
