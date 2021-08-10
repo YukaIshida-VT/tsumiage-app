@@ -5,7 +5,7 @@
       <doughnut-chart :chart-data="doughnutcollection"></doughnut-chart>
     </div>
     <div class="half">
-      <line-chart :chart-data="datacollection"></line-chart>
+      <BarChart :chart-data="datacollection"></BarChart>
     </div>
     <div>
       <input type="text" v-model="lines">
@@ -16,11 +16,11 @@
 </template>
 
 <script>
-import LineChart from   '../chart/LineChart.js'
+import BarChart from   '../chart/BarChart.js'
 import DoughnutChart from '../chart/DoughnutChart.js'
 export default {
   components: {
-    LineChart,
+    BarChart,
     DoughnutChart,
   },
   data () {

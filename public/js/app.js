@@ -1971,7 +1971,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _chart_LineChart_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../chart/LineChart.js */ "./resources/js/chart/LineChart.js");
+/* harmony import */ var _chart_BarChart_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../chart/BarChart.js */ "./resources/js/chart/BarChart.js");
 /* harmony import */ var _chart_DoughnutChart_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../chart/DoughnutChart.js */ "./resources/js/chart/DoughnutChart.js");
 //
 //
@@ -1994,7 +1994,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    LineChart: _chart_LineChart_js__WEBPACK_IMPORTED_MODULE_0__.default,
+    BarChart: _chart_BarChart_js__WEBPACK_IMPORTED_MODULE_0__.default,
     DoughnutChart: _chart_DoughnutChart_js__WEBPACK_IMPORTED_MODULE_1__.default
   },
   data: function data() {
@@ -3135,6 +3135,31 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
+/***/ "./resources/js/chart/BarChart.js":
+/*!****************************************!*\
+  !*** ./resources/js/chart/BarChart.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
+
+var reactiveProp = vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.mixins.reactiveProp;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.Bar,
+  mixins: [reactiveProp],
+  props: ['options'],
+  mounted: function mounted() {
+    this.renderChart(this.chartData, this.options);
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/chart/DoughnutChart.js":
 /*!*********************************************!*\
   !*** ./resources/js/chart/DoughnutChart.js ***!
@@ -3154,33 +3179,6 @@ var reactiveProp = vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.mixins.reactiveProp;
   mixins: [reactiveProp],
   props: ['options'],
   mounted: function mounted() {
-    this.renderChart(this.chartData, this.options);
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/chart/LineChart.js":
-/*!*****************************************!*\
-  !*** ./resources/js/chart/LineChart.js ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var vue_chartjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chartjs */ "./node_modules/vue-chartjs/es/index.js");
-
-var reactiveProp = vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.mixins.reactiveProp;
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  "extends": vue_chartjs__WEBPACK_IMPORTED_MODULE_0__.Line,
-  mixins: [reactiveProp],
-  props: ['options'],
-  mounted: function mounted() {
-    // this.chartData is created in the mixin.
-    // If you want to pass options please create a local options object
     this.renderChart(this.chartData, this.options);
   }
 });
@@ -76898,7 +76896,7 @@ var render = function() {
     _c(
       "div",
       { staticClass: "half" },
-      [_c("line-chart", { attrs: { "chart-data": _vm.datacollection } })],
+      [_c("BarChart", { attrs: { "chart-data": _vm.datacollection } })],
       1
     ),
     _vm._v(" "),
