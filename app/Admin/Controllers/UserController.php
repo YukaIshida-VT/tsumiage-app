@@ -37,6 +37,7 @@ class UserController extends AdminController
         $grid->column('updated_at', __('Updated at'));
         $grid->column('nickname', __('Nickname'));
         $grid->column('avatar', __('Avatar'));
+        $grid->column('role_id', __('Role id'));
 
         return $grid;
     }
@@ -62,6 +63,7 @@ class UserController extends AdminController
         $show->field('updated_at', __('Updated at'));
         $show->field('nickname', __('Nickname'));
         $show->field('avatar', __('Avatar'));
+        $show->field('role_id', __('Role id'));
 
         return $show;
     }
@@ -83,6 +85,7 @@ class UserController extends AdminController
         $form->text('remember_token', __('Remember token'));
         $form->textarea('nickname', __('Nickname'));
         $form->textarea('avatar', __('Avatar'));
+        $form->text('role_id', __('Role id'));
 
         return $form;
     }
