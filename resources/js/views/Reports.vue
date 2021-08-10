@@ -6,6 +6,7 @@
             :language="ja"
             name="datepicker" class="datapicker-style">
         </Datepicker>
+        <BarChart :chart-data="monthlyDatacollection"></BarChart>
 
         <div class="pt-64"></div>
     </div>
@@ -13,16 +14,19 @@
 
 <script>
     import Datepicker from 'vuejs-datepicker';
+    import BarChart from   '../chart/BarChart.js';
 
     export default {
         name: "Reports",
 
         components: {
-            Datepicker
+            Datepicker,
+            BarChart,
         },
 
         mounted() {
-
+            this.getDay();
+            this.getTsumiage();
         },
 
         data: function() {
@@ -41,7 +45,18 @@
                     rtl: false,
                     ymd: 'yyyy-MM-dd',
                     yearSuffix: '年'
-                }
+                },
+
+                monthlyDatacollection: { labels:[], datasets: [] },
+                monthlyLabels: [],
+                monthlyDatasets: [
+                    {
+                        label: '今月の積み上げ集計(1日から集計)',
+                        data: [],
+                        backgroundColor: 'lightblue',
+                        borderWidth: 1
+                    },
+                ]              
             }
         },
 
@@ -62,11 +77,44 @@
                 this.defaultDate = new Date(Year, Month - 1, Day); 
                 this.day = Year + "-" + Month + "-" + Day;
             },
+
+             getTsumiage: function() {
+                axios.post('/api/tsumiage-sum', {yyyymmdd: this.yyyymmdd})
+                    .then(response => {
+                        let monthlyTsumiageSum = Object.values(response.data.monthly_tsumiage_sum);
+                        let monthlyLabels = [];
+                        let monthlyData = [];
+
+                        monthlyTsumiageSum.forEach(function(element, index){
+                            monthlyLabels.push(element.item);
+                            monthlyData.push(element.actual_time);
+                        });
+                        
+                        this.monthlyLabels = monthlyLabels;
+                        this.monthlyDatasets[0].data = monthlyData;
+
+                        this.monthlyDatacollection = {
+                            labels: this.monthlyLabels,
+                            datasets: this.monthlyDatasets
+                        };
+
+                        this.loading = false;
+                    })
+                    .catch(error => {
+                        this.loading = false;
+
+                        // if (error.response.status === 404) {
+                        //     this.$router.push('/home');
+                        // }
+                    });
+
+            },
         },
 
         watch: {
             defaultDate: function () {
                 this.getDay();
+                this.getTsumiage();
             },
         }
     }

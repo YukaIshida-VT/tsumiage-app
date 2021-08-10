@@ -23,9 +23,10 @@ class Tsumiage extends Model
         
         foreach($tsumiages as $tsmiage) {
             if (isset($returnArray[$tsmiage->item])) {
-                $returnArray[$tsmiage->item] += $tsmiage->actual_time;
+                $returnArray[$tsmiage->item]['actual_time'] += $tsmiage->actual_time;
             } else {
-                $returnArray[$tsmiage->item] = $tsmiage->actual_time;
+                $returnArray[$tsmiage->item]['item'] = $tsmiage->item;
+                $returnArray[$tsmiage->item]['actual_time'] = $tsmiage->actual_time;
             }
         }
 

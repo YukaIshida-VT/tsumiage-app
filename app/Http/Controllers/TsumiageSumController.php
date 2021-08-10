@@ -10,8 +10,8 @@ class TsumiageSumController extends Controller
 {
     public function show(Request $request)
     {
-        $ymd = "20210815";
-        $ymd_time = strtotime($ymd);
+        $yyyymmdd = $request->yyyymmdd;
+        $ymd_time = strtotime($yyyymmdd);
         $week_num = date("N", $ymd_time);
 
         if ($week_num == 1){
@@ -33,6 +33,7 @@ class TsumiageSumController extends Controller
             'weekly_tsumiage_sum' => Tsumiage::get_tsumiage_sum(Auth::user()->id, $monday, $sunday),
             'monthly_tsumiage_sum' => Tsumiage::get_tsumiage_sum(Auth::user()->id, $firstDate, $lastDate),
         ];
+
         return json_encode($returnArray);
     }
 }

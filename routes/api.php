@@ -21,6 +21,6 @@ Route::middleware('auth:api')->group(function(){
     Route::patch('/tsumiage/{tsumiage}', [TsumiageController::class, 'update']);
     Route::delete('/tsumiage/{tsumiage}', [TsumiageController::class, 'destroy']);
     Route::post('/user-tsumiage', [UserTsumiageController::class, 'show']);
-    Route::get('/tsumiage-sum/{date}', [TsumiageSumController::class, 'show']);
+    Route::post('/tsumiage-sum', [TsumiageSumController::class, 'show']);
 });
 

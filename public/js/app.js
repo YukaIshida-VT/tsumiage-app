@@ -2450,6 +2450,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
+/* harmony import */ var _chart_BarChart_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../chart/BarChart.js */ "./resources/js/chart/BarChart.js");
+//
 //
 //
 //
@@ -2464,12 +2466,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Reports",
   components: {
-    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__.default
+    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_0__.default,
+    BarChart: _chart_BarChart_js__WEBPACK_IMPORTED_MODULE_1__.default
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    this.getDay();
+    this.getTsumiage();
+  },
   data: function data() {
     return {
       loading: true,
@@ -2485,7 +2492,18 @@ __webpack_require__.r(__webpack_exports__);
         rtl: false,
         ymd: 'yyyy-MM-dd',
         yearSuffix: '年'
-      }
+      },
+      monthlyDatacollection: {
+        labels: [],
+        datasets: []
+      },
+      monthlyLabels: [],
+      monthlyDatasets: [{
+        label: '今月の積み上げ集計(1日から集計)',
+        data: [],
+        backgroundColor: 'lightblue',
+        borderWidth: 1
+      }]
     };
   },
   methods: {
@@ -2503,11 +2521,38 @@ __webpack_require__.r(__webpack_exports__);
       var Day = yyyymmdd.substr(6, 2);
       this.defaultDate = new Date(Year, Month - 1, Day);
       this.day = Year + "-" + Month + "-" + Day;
+    },
+    getTsumiage: function getTsumiage() {
+      var _this = this;
+
+      axios.post('/api/tsumiage-sum', {
+        yyyymmdd: this.yyyymmdd
+      }).then(function (response) {
+        var monthlyTsumiageSum = Object.values(response.data.monthly_tsumiage_sum);
+        var monthlyLabels = [];
+        var monthlyData = [];
+        monthlyTsumiageSum.forEach(function (element, index) {
+          monthlyLabels.push(element.item);
+          monthlyData.push(element.actual_time);
+        });
+        _this.monthlyLabels = monthlyLabels;
+        _this.monthlyDatasets[0].data = monthlyData;
+        _this.monthlyDatacollection = {
+          labels: _this.monthlyLabels,
+          datasets: _this.monthlyDatasets
+        };
+        _this.loading = false;
+      })["catch"](function (error) {
+        _this.loading = false; // if (error.response.status === 404) {
+        //     this.$router.push('/home');
+        // }
+      });
     }
   },
   watch: {
     defaultDate: function defaultDate() {
       this.getDay();
+      this.getTsumiage();
     }
   }
 });
@@ -77447,6 +77492,8 @@ var render = function() {
           expression: "defaultDate"
         }
       }),
+      _vm._v(" "),
+      _c("BarChart", { attrs: { "chart-data": _vm.monthlyDatacollection } }),
       _vm._v(" "),
       _c("div", { staticClass: "pt-64" })
     ],
