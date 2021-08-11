@@ -2506,7 +2506,7 @@ var setUnit = function setUnit(value, index, values) {
       },
       monthlyLabels: [],
       monthlyDatasets: [{
-        label: '今月の積み上げ集計(1日から月末を集計)',
+        label: '1ヶ月の積み上げ(1日から月末を集計)',
         data: [],
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
         borderColor: 'rgba(255, 99, 132, 1)',
@@ -2518,18 +2518,33 @@ var setUnit = function setUnit(value, index, values) {
       },
       weeklyLabels: [],
       weeklyDatasets: [{
-        label: '今週の積み上げ集計(月曜日から日曜日を集計)',
+        label: '1週間の積み上げ(月曜日から日曜日を集計)',
         data: [],
         backgroundColor: 'rgba(54, 162, 235, 0.2)',
         borderColor: 'rgba(54, 162, 235, 1)',
         borderWidth: 1
       }],
-      options: {
+      weeklyOptions: {
         scales: {
           yAxes: [{
             ticks: {
               beginAtZero: true,
               stepSize: 0.25,
+              callback: function callback(value, index, values) {
+                return setUnit(value, index, values);
+              }
+            }
+          }]
+        },
+        responsive: true,
+        maintainAspectRatio: false
+      },
+      monthlyOptions: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              stepSize: 1,
               callback: function callback(value, index, values) {
                 return setUnit(value, index, values);
               }
@@ -77581,11 +77596,17 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("BarChart", {
-        attrs: { "chart-data": _vm.weeklyDatacollection, options: _vm.options }
+        attrs: {
+          "chart-data": _vm.weeklyDatacollection,
+          options: _vm.weeklyOptions
+        }
       }),
       _vm._v(" "),
       _c("BarChart", {
-        attrs: { "chart-data": _vm.monthlyDatacollection, options: _vm.options }
+        attrs: {
+          "chart-data": _vm.monthlyDatacollection,
+          options: _vm.monthlyOptions
+        }
       }),
       _vm._v(" "),
       _c("div", { staticClass: "pt-64" })

@@ -6,8 +6,8 @@
             :language="ja"
             name="datepicker" class="datapicker-style">
         </Datepicker>
-        <BarChart :chart-data="weeklyDatacollection" :options="options"></BarChart>
-        <BarChart :chart-data="monthlyDatacollection" :options="options"></BarChart>
+        <BarChart :chart-data="weeklyDatacollection" :options="weeklyOptions"></BarChart>
+        <BarChart :chart-data="monthlyDatacollection" :options="monthlyOptions"></BarChart>
 
         <div class="pt-64"></div>
     </div>
@@ -56,7 +56,7 @@
                 monthlyLabels: [],
                 monthlyDatasets: [
                     {
-                        label: '今月の積み上げ集計(1日から月末を集計)',
+                        label: '1ヶ月の積み上げ(1日から月末を集計)',
                         data: [],
                         backgroundColor: 'rgba(255, 99, 132, 0.2)',
                         borderColor: 'rgba(255, 99, 132, 1)',
@@ -68,7 +68,7 @@
                 weeklyLabels: [],
                 weeklyDatasets: [
                     {
-                        label: '今週の積み上げ集計(月曜日から日曜日を集計)',
+                        label: '1週間の積み上げ(月曜日から日曜日を集計)',
                         data: [],
                         backgroundColor: 'rgba(54, 162, 235, 0.2)',
                         borderColor: 'rgba(54, 162, 235, 1)',
@@ -76,7 +76,7 @@
                     },
                 ], 
 
-                options: {
+                weeklyOptions: {
                     scales: {
                         yAxes: [{
                             ticks: {
@@ -90,7 +90,23 @@
                     },
                     responsive: true,
                     maintainAspectRatio: false
-                }
+                },
+
+                monthlyOptions: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                stepSize: 1,
+                                callback: function(value, index, values) {
+                                    return setUnit(value, index, values);
+                                },
+                            }
+                        }]
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                },
             }
         },
 
