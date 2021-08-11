@@ -18,7 +18,7 @@
     import BarChart from   '../chart/BarChart.js';
 
     const setUnit = (value, index, values) => {
-        return `${value}分`
+        return `${value}時間`
     }
 
     export default {
@@ -81,9 +81,10 @@
                         yAxes: [{
                             ticks: {
                                 beginAtZero: true,
+                                stepSize: 0.25,
                                 callback: function(value, index, values) {
                                     return setUnit(value, index, values);
-                                }
+                                },
                             }
                         }]
                     },

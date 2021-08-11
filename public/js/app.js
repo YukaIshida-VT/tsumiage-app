@@ -2470,7 +2470,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var setUnit = function setUnit(value, index, values) {
-  return "".concat(value, "\u5206");
+  return "".concat(value, "\u6642\u9593");
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2528,6 +2528,7 @@ var setUnit = function setUnit(value, index, values) {
           yAxes: [{
             ticks: {
               beginAtZero: true,
+              stepSize: 0.25,
               callback: function callback(value, index, values) {
                 return setUnit(value, index, values);
               }

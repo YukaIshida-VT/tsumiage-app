@@ -30,6 +30,10 @@ class Tsumiage extends Model
             }
         }
 
+        foreach($returnArray as $key => $value) {
+            $returnArray[$key]['actual_time'] = $value['actual_time'] / 60;
+        }
+
         return $returnArray;
     }
 }
