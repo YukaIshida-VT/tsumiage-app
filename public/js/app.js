@@ -2468,6 +2468,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 
+
+var setUnit = function setUnit(value, index, values) {
+  return "".concat(value, "\u5206");
+};
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Reports",
   components: {
@@ -2517,7 +2522,21 @@ __webpack_require__.r(__webpack_exports__);
         backgroundColor: 'rgba(54, 162, 235, 0.2)',
         borderColor: 'rgba(54, 162, 235, 1)',
         borderWidth: 1
-      }]
+      }],
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              callback: function callback(value, index, values) {
+                return setUnit(value, index, values);
+              }
+            }
+          }]
+        },
+        responsive: true,
+        maintainAspectRatio: false
+      }
     };
   },
   methods: {
@@ -77520,9 +77539,13 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("BarChart", { attrs: { "chart-data": _vm.weeklyDatacollection } }),
+      _c("BarChart", {
+        attrs: { "chart-data": _vm.weeklyDatacollection, options: _vm.options }
+      }),
       _vm._v(" "),
-      _c("BarChart", { attrs: { "chart-data": _vm.monthlyDatacollection } }),
+      _c("BarChart", {
+        attrs: { "chart-data": _vm.monthlyDatacollection, options: _vm.options }
+      }),
       _vm._v(" "),
       _c("div", { staticClass: "pt-64" })
     ],

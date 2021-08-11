@@ -6,8 +6,8 @@
             :language="ja"
             name="datepicker" class="datapicker-style">
         </Datepicker>
-        <BarChart :chart-data="weeklyDatacollection"></BarChart>
-        <BarChart :chart-data="monthlyDatacollection"></BarChart>
+        <BarChart :chart-data="weeklyDatacollection" :options="options"></BarChart>
+        <BarChart :chart-data="monthlyDatacollection" :options="options"></BarChart>
 
         <div class="pt-64"></div>
     </div>
@@ -16,6 +16,10 @@
 <script>
     import Datepicker from 'vuejs-datepicker';
     import BarChart from   '../chart/BarChart.js';
+
+    const setUnit = (value, index, values) => {
+        return `${value}分`
+    }
 
     export default {
         name: "Reports",
@@ -71,6 +75,21 @@
                         borderWidth: 1
                     },
                 ], 
+
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                                callback: function(value, index, values) {
+                                    return setUnit(value, index, values);
+                                }
+                            }
+                        }]
+                    },
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
             }
         },
 
