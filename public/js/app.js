@@ -2141,7 +2141,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     this.setYyyymmdd();
     this.$store.dispatch('fetchTsumiageCount');
-    this.getTodayPath();
   },
   data: function data() {
     return {
@@ -2168,10 +2167,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     getTodayPath: function getTodayPath() {
       if (this.tsumiageCount > 0) {
-        this.todayPath = '/tsumiage/edit/' + this.yyyymmdd;
+        var todayPath = '/tsumiage/edit/' + this.yyyymmdd;
       } else {
-        this.todayPath = '/tsumiage/create/' + this.yyyymmdd;
+        var todayPath = '/tsumiage/create/' + this.yyyymmdd;
       }
+
+      this.$router.push(todayPath);
     }
   }
 });
@@ -77043,10 +77044,15 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
-        "router-link",
+        "button",
         {
           staticClass: "flex items-center py-2 hover:text-blue-600 text-sm",
-          attrs: { to: _vm.todayPath }
+          attrs: { type: "button" },
+          on: {
+            click: function($event) {
+              return _vm.getTodayPath()
+            }
+          }
         },
         [
           _c(
