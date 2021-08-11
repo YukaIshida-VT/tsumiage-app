@@ -29,7 +29,10 @@ const actions = {
             .catch(error => {
                 console.log('Unable to fetch tsumiage count');
             });
-    }
+    },
+    updateTsumiageCountAction({commit}, payload) {
+        commit('updateTsumiageCount', payload);
+    },
 };
 
 const mutations = {
@@ -46,7 +49,7 @@ const mutations = {
     //     state.yyyymmdd = yyyymmdd;
     // },
     updateTsumiageCount(state, tsumiageCount) {
-        state.yyyymmdd = tsumiageCount;
+        state.tsumiageCount = tsumiageCount;
     },
 };
 

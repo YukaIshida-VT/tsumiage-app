@@ -152,6 +152,12 @@
                         alert("保存しました");
                         this.getTsumiage();
                         this.allDeleteAddItem();
+                        console.log(this.today);
+
+                        if (this.yyyymmdd == this.today) {
+                            console.log("追加");
+                            this.$store.dispatch('updateTsumiageCountAction', this.itemNum);
+                        }
                     })
                     .catch(errors => {
                         this.errors = errors.response.data.errors;
@@ -187,6 +193,10 @@
                             });
                             tweet += '%0a';
                             this.tweet = tweet;
+                        }
+
+                        if (this.yyyymmdd == this.today) {
+                            this.$store.dispatch('updateTsumiageCountAction', response.data.count);
                         }
 
                         this.loading = false;
@@ -261,7 +271,9 @@
 
         computed: {
             ...mapGetters({
-                authUser: 'authUser'
+                authUser: 'authUser',
+                // this.todayをthis.$store.getters.yyyymmddにマッピングさせる
+                today: 'yyyymmdd',
             })
         },
 

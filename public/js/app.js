@@ -2620,6 +2620,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _components_InputField__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/InputField */ "./resources/js/components/InputField.vue");
 /* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2667,6 +2674,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2799,9 +2807,17 @@ __webpack_require__.r(__webpack_exports__);
         if (response.data.count != 0) {
           _this2.$router.push('/tsumiage/edit/' + _this2.yyyymmdd);
         }
+
+        if (_this2.yyyymmdd == _this2.today) {
+          _this2.$store.dispatch('updateTsumiageCountAction', response.data.count);
+        }
       })["catch"](function (error) {});
     }
   },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
+    // this.todayをthis.$store.getters.yyyymmddにマッピングさせる
+    today: 'yyyymmdd'
+  })),
   watch: {
     defaultDate: function defaultDate() {
       this.getDay();
@@ -2999,6 +3015,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.getTsumiage();
 
         _this2.allDeleteAddItem();
+
+        console.log(_this2.today);
+
+        if (_this2.yyyymmdd == _this2.today) {
+          console.log("追加");
+
+          _this2.$store.dispatch('updateTsumiageCountAction', _this2.itemNum);
+        }
       })["catch"](function (errors) {
         _this2.errors = errors.response.data.errors;
       });
@@ -3032,6 +3056,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           });
           tweet += '%0a';
           _this4.tweet = tweet;
+        }
+
+        if (_this4.yyyymmdd == _this4.today) {
+          _this4.$store.dispatch('updateTsumiageCountAction', response.data.count);
         }
 
         _this4.loading = false;
@@ -3095,7 +3123,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
-    authUser: 'authUser'
+    authUser: 'authUser',
+    // this.todayをthis.$store.getters.yyyymmddにマッピングさせる
+    today: 'yyyymmdd'
   })),
   watch: {
     defaultDate: function defaultDate() {
@@ -3355,6 +3385,10 @@ var actions = {
     })["catch"](function (error) {
       console.log('Unable to fetch tsumiage count');
     });
+  },
+  updateTsumiageCountAction: function updateTsumiageCountAction(_ref3, payload) {
+    var commit = _ref3.commit;
+    commit('updateTsumiageCount', payload);
   }
 };
 var mutations = {
@@ -3371,7 +3405,7 @@ var mutations = {
   //     state.yyyymmdd = yyyymmdd;
   // },
   updateTsumiageCount: function updateTsumiageCount(state, tsumiageCount) {
-    state.yyyymmdd = tsumiageCount;
+    state.tsumiageCount = tsumiageCount;
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({

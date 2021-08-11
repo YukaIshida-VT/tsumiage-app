@@ -48,6 +48,7 @@
 <script>
     import InputField from '../components/InputField';
     import Datepicker from 'vuejs-datepicker';
+    import { mapGetters } from 'vuex';
 
     export default {
         name: "TsumiageCreate",
@@ -158,13 +159,24 @@
                     .then(response => {
                         if (response.data.count != 0) {
                             this.$router.push('/tsumiage/edit/' + this.yyyymmdd);
-                        } 
+                        }
+
+                        if (this.yyyymmdd == this.today) {
+                            this.$store.dispatch('updateTsumiageCountAction', response.data.count);
+                        }
                     })
                     .catch(error => {
 
                     });
 
             },
+        },
+
+        computed: {
+            ...mapGetters({
+                // this.todayをthis.$store.getters.yyyymmddにマッピングさせる
+                today: 'yyyymmdd',
+            })
         },
 
         watch: {
