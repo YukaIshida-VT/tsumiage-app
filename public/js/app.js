@@ -1921,6 +1921,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1960,7 +1967,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       title: '',
-      defaultDate: new Date()
+      defaultDate: new Date(),
+      open: false
     };
   },
   watch: {
@@ -77016,27 +77024,75 @@ var render = function() {
                   !_vm.userAgent
                     ? _c("div", [
                         _c(
-                          "svg",
+                          "button",
                           {
-                            staticClass: "w-10 h-10",
-                            attrs: {
-                              xmlns: "http://www.w3.org/2000/svg",
-                              height: "24px",
-                              viewBox: "0 0 24 24",
-                              width: "24px",
-                              fill: "#000000"
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                _vm.open = !_vm.open
+                              }
                             }
                           },
                           [
-                            _c("path", {
-                              attrs: { d: "M0 0h24v24H0V0z", fill: "none" }
-                            }),
-                            _c("path", {
-                              attrs: {
-                                d:
-                                  "M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
-                              }
-                            })
+                            _vm.open
+                              ? _c("div", [
+                                  _c(
+                                    "svg",
+                                    {
+                                      staticClass: "w-10 h-10",
+                                      attrs: {
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        height: "24px",
+                                        viewBox: "0 0 24 24",
+                                        width: "24px",
+                                        fill: "#000000"
+                                      }
+                                    },
+                                    [
+                                      _c("path", {
+                                        attrs: {
+                                          d: "M0 0h24v24H0V0z",
+                                          fill: "none"
+                                        }
+                                      }),
+                                      _c("path", {
+                                        attrs: {
+                                          d:
+                                            "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"
+                                        }
+                                      })
+                                    ]
+                                  )
+                                ])
+                              : _c("div", [
+                                  _c(
+                                    "svg",
+                                    {
+                                      staticClass: "w-10 h-10",
+                                      attrs: {
+                                        xmlns: "http://www.w3.org/2000/svg",
+                                        height: "24px",
+                                        viewBox: "0 0 24 24",
+                                        width: "24px",
+                                        fill: "#000000"
+                                      }
+                                    },
+                                    [
+                                      _c("path", {
+                                        attrs: {
+                                          d: "M0 0h24v24H0V0z",
+                                          fill: "none"
+                                        }
+                                      }),
+                                      _c("path", {
+                                        attrs: {
+                                          d:
+                                            "M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+                                        }
+                                      })
+                                    ]
+                                  )
+                                ])
                           ]
                         )
                       ])
@@ -77044,7 +77100,7 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              !_vm.userAgent
+              !_vm.userAgent && _vm.open
                 ? _c(
                     "div",
                     { staticClass: "absolute mt-16 z-50 w-full" },
