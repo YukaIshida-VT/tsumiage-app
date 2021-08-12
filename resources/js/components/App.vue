@@ -1,7 +1,7 @@
 <template>
     <div class="h-screen bg-white">
-        <div class="flex" v-if="authUser">
-            <div class="pl-6 bg-gray-200 w-48 h-screen border-r-2 border-gray-400">
+        <div :class="[userAgent ? 'flex' : '']" v-if="authUser">
+            <div class="pl-6 bg-gray-200 w-48 h-screen border-r-2 border-gray-400" v-if="userAgent">
                 <Nav />
             </div>
             <div class="flex flex-col flex-1 h-screen overflow-y-hidden">

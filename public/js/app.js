@@ -76907,7 +76907,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "h-screen bg-white" }, [
     _vm.authUser
-      ? _c("div", { staticClass: "flex" }, [
+      ? _c("div", { class: [_vm.userAgent ? "flex" : ""] }, [
           _vm.userAgent
             ? _c(
                 "div",
