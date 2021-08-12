@@ -5,14 +5,14 @@
                 <Nav />
             </div>
             <div class="flex flex-col flex-1 h-screen overflow-y-hidden">
-                <div class="h-16 px-6 border-b border-gray-400 flex items-center justify-between">
-                    <div>
+                <div :class="[userAgent ? 'flex items-center justify-between px-6 ' : 'bg-gray-200 px-3', 'h-16 border-b border-gray-400']">
+                    <div :class="[!userAgent ? 'mx-auto pb-2 py-1 text-xl' : '']">
                         {{ title }}
                     </div>
 
                     <div class="flex items-center">
                         <div class="pr-4 text-sm">{{ authUser.data.attributes.name }}さん</div>
-                        <UserCircle />
+                        <UserCircle v-if="userAgent" />
                     </div>
                 </div>
 

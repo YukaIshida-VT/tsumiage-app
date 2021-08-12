@@ -76927,17 +76927,27 @@ var render = function() {
               _c(
                 "div",
                 {
-                  staticClass:
-                    "h-16 px-6 border-b border-gray-400 flex items-center justify-between"
+                  class: [
+                    _vm.userAgent
+                      ? "flex items-center justify-between px-6 "
+                      : "bg-gray-200 px-3",
+                    "h-16 border-b border-gray-400"
+                  ]
                 },
                 [
-                  _c("div", [
-                    _vm._v(
-                      "\n                    " +
-                        _vm._s(_vm.title) +
-                        "\n                "
-                    )
-                  ]),
+                  _c(
+                    "div",
+                    {
+                      class: [!_vm.userAgent ? "mx-auto pb-2 py-1 text-xl" : ""]
+                    },
+                    [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.title) +
+                          "\n                "
+                      )
+                    ]
+                  ),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -76949,7 +76959,7 @@ var render = function() {
                         )
                       ]),
                       _vm._v(" "),
-                      _c("UserCircle")
+                      _vm.userAgent ? _c("UserCircle") : _vm._e()
                     ],
                     1
                   )
