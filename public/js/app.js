@@ -1908,6 +1908,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2137,6 +2146,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Nav",
@@ -2152,7 +2163,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)({
     authUser: 'authUser',
     yyyymmdd: 'yyyymmdd',
-    tsumiageCount: 'tsumiageCount'
+    tsumiageCount: 'tsumiageCount',
+    userAgent: 'userAgent'
   })),
   methods: {
     setYyyymmdd: function setYyyymmdd() {
@@ -76935,19 +76947,47 @@ var render = function() {
                   ]
                 },
                 [
-                  _c(
-                    "div",
-                    {
-                      class: [!_vm.userAgent ? "mx-auto pb-2 py-1 text-xl" : ""]
-                    },
-                    [
-                      _vm._v(
-                        "\n                    " +
-                          _vm._s(_vm.title) +
-                          "\n                "
-                      )
-                    ]
-                  ),
+                  _vm.userAgent
+                    ? _c("div", [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(_vm.title) +
+                            "\n                "
+                        )
+                      ])
+                    : _c(
+                        "div",
+                        { staticClass: "mx-auto py-1 text-xl" },
+                        [
+                          _c("router-link", { attrs: { to: "/home" } }, [
+                            _c(
+                              "svg",
+                              {
+                                staticClass:
+                                  "fill-current text-blue-600 w-10 h-10",
+                                attrs: {
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  height: "20px",
+                                  viewBox: "0 0 24 24",
+                                  width: "20px"
+                                }
+                              },
+                              [
+                                _c("path", {
+                                  attrs: { d: "M0 0h24v24H0z", fill: "none" }
+                                }),
+                                _c("path", {
+                                  attrs: {
+                                    d:
+                                      "M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"
+                                  }
+                                })
+                              ]
+                            )
+                          ])
+                        ],
+                        1
+                      ),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -76965,6 +77005,8 @@ var render = function() {
                   )
                 ]
               ),
+              _vm._v(" "),
+              !_vm.userAgent ? _c("div", [_c("Nav")], 1) : _vm._e(),
               _vm._v(" "),
               _c(
                 "div",
@@ -77111,82 +77153,97 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "nav",
-    { staticClass: "pt-4" },
+    { class: [_vm.userAgent ? "pt-4" : ""] },
     [
-      _c("router-link", { attrs: { to: "/home" } }, [
-        _c(
-          "svg",
-          {
-            staticClass: "fill-current text-blue-600 w-12 h-12",
-            attrs: {
-              xmlns: "http://www.w3.org/2000/svg",
-              height: "24px",
-              viewBox: "0 0 24 24",
-              width: "24px"
-            }
-          },
-          [
-            _c("path", { attrs: { d: "M0 0h24v24H0z", fill: "none" } }),
-            _c("path", {
-              attrs: {
-                d:
-                  "M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"
-              }
-            })
-          ]
-        )
-      ]),
+      _vm.userAgent
+        ? _c("router-link", { attrs: { to: "/home" } }, [
+            _c(
+              "svg",
+              {
+                staticClass: "fill-current text-blue-600 w-12 h-12",
+                attrs: {
+                  xmlns: "http://www.w3.org/2000/svg",
+                  height: "24px",
+                  viewBox: "0 0 24 24",
+                  width: "24px"
+                }
+              },
+              [
+                _c("path", { attrs: { d: "M0 0h24v24H0z", fill: "none" } }),
+                _c("path", {
+                  attrs: {
+                    d:
+                      "M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"
+                  }
+                })
+              ]
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.userAgent
+        ? _c(
+            "p",
+            { staticClass: "pt-12 text-gray-500 text-xs uppercase font-bold" },
+            [_vm._v("Create")]
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c(
-        "p",
-        { staticClass: "pt-12 text-gray-500 text-xs uppercase font-bold" },
-        [_vm._v("Create")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "flex items-center py-2 hover:text-blue-600 text-sm",
-          attrs: { type: "button" },
-          on: {
-            click: function($event) {
-              return _vm.getTodayPath()
-            }
-          }
-        },
+        "div",
+        { class: [!_vm.userAgent ? "border-b border-gray-400 " : "", ""] },
         [
           _c(
-            "svg",
+            "button",
             {
-              staticClass: "fill-current text-blue-600 w-5 h-5",
-              attrs: { viewBox: "0 0 24 24" }
+              staticClass: "flex items-center py-2 hover:text-blue-600 text-sm",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  return _vm.getTodayPath()
+                }
+              }
             },
             [
-              _c("path", {
-                attrs: {
-                  d:
-                    "M23.3 11.9c0 .9-.6 1.4-1.4 1.4h-8.5v8.5c0 .9-.6 1.4-1.4 1.4s-1.4-.6-1.4-1.4v-8.5H2c-.9 0-1.4-.6-1.4-1.4 0-.9.6-1.4 1.4-1.4h8.5V1.9c0-.9.6-1.4 1.4-1.4s1.4.6 1.4 1.4v8.5h8.5c.9 0 1.5.6 1.5 1.5z"
-                }
-              })
+              _c(
+                "svg",
+                {
+                  staticClass: "fill-current text-blue-600 w-5 h-5",
+                  attrs: { viewBox: "0 0 24 24" }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M23.3 11.9c0 .9-.6 1.4-1.4 1.4h-8.5v8.5c0 .9-.6 1.4-1.4 1.4s-1.4-.6-1.4-1.4v-8.5H2c-.9 0-1.4-.6-1.4-1.4 0-.9.6-1.4 1.4-1.4h8.5V1.9c0-.9.6-1.4 1.4-1.4s1.4.6 1.4 1.4v8.5h8.5c.9 0 1.5.6 1.5 1.5z"
+                    }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "tracking-wide pl-3" }, [
+                _vm._v("積み上げ作成・編集")
+              ])
             ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "tracking-wide pl-3" }, [
-            _vm._v("積み上げ作成・編集")
-          ])
+          )
         ]
       ),
       _vm._v(" "),
-      _c(
-        "p",
-        { staticClass: "pt-12 text-gray-500 text-xs uppercase font-bold" },
-        [_vm._v("General")]
-      ),
+      _vm.userAgent
+        ? _c(
+            "p",
+            { staticClass: "pt-12 text-gray-500 text-xs uppercase font-bold" },
+            [_vm._v("General")]
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "router-link",
         {
-          staticClass: "flex items-center py-2 hover:text-blue-600 text-sm",
+          class: [
+            !_vm.userAgent ? "border-b border-gray-400" : "",
+            "flex items-center py-2 hover:text-blue-600 text-sm"
+          ],
           attrs: { to: "/reports" }
         },
         [
@@ -77215,16 +77272,21 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c(
-        "p",
-        { staticClass: "pt-12 text-gray-500 text-xs uppercase font-bold" },
-        [_vm._v("Settings")]
-      ),
+      _vm.userAgent
+        ? _c(
+            "p",
+            { staticClass: "pt-12 text-gray-500 text-xs uppercase font-bold" },
+            [_vm._v("Settings")]
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "router-link",
         {
-          staticClass: "flex items-center py-2 hover:text-blue-600 text-sm",
+          class: [
+            !_vm.userAgent ? "border-b border-gray-400 " : "",
+            "flex items-center py-2 hover:text-blue-600 text-sm"
+          ],
           attrs: { to: "/logout" }
         },
         [
