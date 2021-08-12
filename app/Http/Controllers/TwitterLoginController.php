@@ -17,7 +17,7 @@ class TwitterLoginController extends Controller
             // ログイン済みのユーザーはhome画面にリダイレクト
             return redirect('/home');
         } else {
-            return view('twitterLogin');
+            return view('twitterLogin')->with('title', 'ログイン | Tsumiage App');
         }
     }
 
