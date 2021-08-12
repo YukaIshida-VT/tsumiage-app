@@ -49,6 +49,10 @@ class TwitterLoginController extends Controller
             $user->save();
 
             $user->tsumiageItem()->create();
+            $user->tsumiages()->create([
+                'date' => '1980-01-01',
+                'item' => 'dummy-item'
+            ]);
          }
          Log::info('Twitterから取得しました。', ['user' => $twitterUser]);
          Auth::login($user);
