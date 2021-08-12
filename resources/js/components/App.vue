@@ -33,7 +33,7 @@
                 </div>
 
                 <div v-if="!userAgent && open" class="absolute mt-16 z-50 w-full">
-                    <Nav />
+                    <Nav @closeNav="close()" />
                 </div>
 
                 <div class="flex flex-col overflow-y-hidden flex-1">
@@ -99,6 +99,12 @@
                 title: '',
                 defaultDate: new Date(),
                 open: false
+            }
+        },
+
+        methods: {
+            close: function() {
+                this.open = false;
             }
         },
 

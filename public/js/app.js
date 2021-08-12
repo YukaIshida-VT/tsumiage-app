@@ -1971,6 +1971,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       open: false
     };
   },
+  methods: {
+    close: function close() {
+      this.open = false;
+    }
+  },
   watch: {
     $route: function $route(to, from) {
       this.title = to.meta.title;
@@ -2195,6 +2200,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         1: yyyy_mm_dd
       });
     },
+    closeNav: function closeNav() {
+      this.$emit('closeNav');
+    },
     getTodayPath: function getTodayPath() {
       if (this.tsumiageCount > 0) {
         var todayPath = '/tsumiage/edit/' + this.yyyymmdd;
@@ -2203,6 +2211,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       this.$router.push(todayPath);
+      this.closeNav();
+    },
+    goReports: function goReports() {
+      this.$router.push('/reports');
+      this.closeNav();
     }
   }
 });
@@ -77104,7 +77117,15 @@ var render = function() {
                 ? _c(
                     "div",
                     { staticClass: "absolute mt-16 z-50 w-full" },
-                    [_c("Nav")],
+                    [
+                      _c("Nav", {
+                        on: {
+                          closeNav: function($event) {
+                            return _vm.close()
+                          }
+                        }
+                      })
+                    ],
                     1
                   )
                 : _vm._e(),
@@ -77343,10 +77364,15 @@ var render = function() {
         { class: [!_vm.userAgent ? "border-b border-gray-400 pl-4" : "", ""] },
         [
           _c(
-            "router-link",
+            "button",
             {
               staticClass: "flex items-center py-2 hover:text-blue-600 text-sm",
-              attrs: { to: "/reports" }
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  return _vm.goReports()
+                }
+              }
             },
             [
               _c(
@@ -77375,8 +77401,7 @@ var render = function() {
               ])
             ]
           )
-        ],
-        1
+        ]
       ),
       _vm._v(" "),
       _vm.userAgent

@@ -16,10 +16,10 @@
         <p class="pt-12 text-gray-500 text-xs uppercase font-bold" v-if="userAgent">General</p>
 
         <div :class="[!userAgent ? 'border-b border-gray-400 pl-4' : '', '']">
-            <router-link to="/reports" class="flex items-center py-2 hover:text-blue-600 text-sm">
+            <button type="button" @click="goReports()" class="flex items-center py-2 hover:text-blue-600 text-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" class="fill-current text-blue-600"><path d="M0 0h24v24H0z" fill="none"/><path d="M10 20h4V4h-4v16zm-6 0h4v-8H4v8zM16 9v11h4V9h-4z"/></svg>
                 <div class="tracking-wide pl-3">積み上げ集計</div>
-            </router-link>
+            </button>
         </div>
 
         <p class="pt-12 text-gray-500 text-xs uppercase font-bold" v-if="userAgent">Settings</p>
@@ -69,6 +69,9 @@
                 let yyyy_mm_dd = Year + "-" + Month + "-" + Day;
                 this.$store.dispatch('setDay', {0: yyyymmdd, 1: yyyy_mm_dd});
             },
+            closeNav: function() {
+                this.$emit('closeNav');
+            },
             getTodayPath: function () {
                 if (this.tsumiageCount > 0) {
                     var todayPath = '/tsumiage/edit/' + this.yyyymmdd;
@@ -77,6 +80,11 @@
                 }
 
                 this.$router.push(todayPath);
+                this.closeNav();
+            },
+            goReports: function() {
+                this.$router.push('/reports');
+                this.closeNav();
             }
         }
     }
