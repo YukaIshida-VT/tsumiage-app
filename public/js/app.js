@@ -3031,11 +3031,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         _this2.allDeleteAddItem();
 
-        console.log(_this2.today);
-
         if (_this2.yyyymmdd == _this2.today) {
-          console.log("追加");
-
           _this2.$store.dispatch('updateTsumiageCountAction', _this2.itemNum);
         }
       })["catch"](function (errors) {

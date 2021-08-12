@@ -152,10 +152,8 @@
                         alert("保存しました");
                         this.getTsumiage();
                         this.allDeleteAddItem();
-                        console.log(this.today);
 
                         if (this.yyyymmdd == this.today) {
-                            console.log("追加");
                             this.$store.dispatch('updateTsumiageCountAction', this.itemNum);
                         }
                     })
