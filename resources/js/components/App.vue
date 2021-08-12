@@ -40,7 +40,8 @@
 
         computed: {
             ...mapGetters({
-                authUser: 'authUser'
+                authUser: 'authUser',
+                userAgent: 'userAgent'
             })
         },
 
@@ -52,6 +53,7 @@
 
         mounted() {
             this.$store.dispatch('fetchAuthUser');
+            this.$store.dispatch('getUserAgent');
         },
 
         created() {
