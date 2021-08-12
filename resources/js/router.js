@@ -28,9 +28,6 @@ export default new VueRouter({
             path: '/reports', component: Reports,
             meta: { title: '積み上げ集計' }
         }, {
-            path: '/chart', component: Chart,
-            meta: { title: 'チャートサンプル' }
-        }, {
             path: '/logout', component: Logout
         }
     ],
