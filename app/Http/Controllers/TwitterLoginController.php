@@ -11,6 +11,16 @@ use App\Models\User;
 
 class TwitterLoginController extends Controller
 {
+    public function index()
+    {
+        if (Auth::user()) {
+            // ログイン済みのユーザーはhome画面にリダイレクト
+            return redirect('/home');
+        } else {
+            return view('twitterLogin');
+        }
+    }
+
     /**
        * Twitterの認証ページヘユーザーをリダイレクト
        *

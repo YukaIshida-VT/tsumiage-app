@@ -15,10 +15,7 @@ use App\Http\Controllers\AppController;
 |
 */
 
-Route::get('/', function () {
-    // TODO ツイッターログイン済であればhomeにリダイレクト
-    return view('twitterLogin');
-})->name('top');
+Route::get('/', [TwitterLoginController::class, 'index'])->name('top');
 
 // ログインURL
 Route::get('auth/twitter/login', [TwitterLoginController::class, 'redirectToProvider'])->name('twitterLogin');
