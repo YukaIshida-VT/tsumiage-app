@@ -1917,6 +1917,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -2117,6 +2121,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
 //
 //
 //
@@ -76934,16 +76942,17 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "flex flex-col flex-1 h-screen overflow-y-hidden" },
+            {
+              staticClass:
+                "flex flex-col flex-1 h-screen overflow-y-hidden relative"
+            },
             [
               _c(
                 "div",
                 {
                   class: [
-                    _vm.userAgent
-                      ? "flex items-center justify-between px-6 "
-                      : "bg-gray-200 px-3",
-                    "h-16 border-b border-gray-400"
+                    _vm.userAgent ? "px-6" : "bg-gray-200 px-3",
+                    "flex  justify-between items-center h-16 border-b border-gray-400"
                   ]
                 },
                 [
@@ -76957,7 +76966,7 @@ var render = function() {
                       ])
                     : _c(
                         "div",
-                        { staticClass: "mx-auto py-1 text-xl" },
+                        { staticClass: "py-1 text-xl" },
                         [
                           _c("router-link", { attrs: { to: "/home" } }, [
                             _c(
@@ -77002,11 +77011,47 @@ var render = function() {
                       _vm.userAgent ? _c("UserCircle") : _vm._e()
                     ],
                     1
-                  )
+                  ),
+                  _vm._v(" "),
+                  !_vm.userAgent
+                    ? _c("div", [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "w-10 h-10",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              height: "24px",
+                              viewBox: "0 0 24 24",
+                              width: "24px",
+                              fill: "#000000"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: { d: "M0 0h24v24H0V0z", fill: "none" }
+                            }),
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"
+                              }
+                            })
+                          ]
+                        )
+                      ])
+                    : _vm._e()
                 ]
               ),
               _vm._v(" "),
-              !_vm.userAgent ? _c("div", [_c("Nav")], 1) : _vm._e(),
+              !_vm.userAgent
+                ? _c(
+                    "div",
+                    { staticClass: "absolute mt-16 z-50 w-full" },
+                    [_c("Nav")],
+                    1
+                  )
+                : _vm._e(),
               _vm._v(" "),
               _c(
                 "div",
@@ -77153,7 +77198,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "nav",
-    { class: [_vm.userAgent ? "pt-4" : ""] },
+    { class: [_vm.userAgent ? "pt-4" : "bg-white"] },
     [
       _vm.userAgent
         ? _c("router-link", { attrs: { to: "/home" } }, [
@@ -77191,7 +77236,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { class: [!_vm.userAgent ? "border-b border-gray-400 " : "", ""] },
+        { class: [!_vm.userAgent ? "border-b border-gray-400 pl-4" : "", ""] },
         [
           _c(
             "button",
@@ -77238,38 +77283,44 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _c(
-        "router-link",
-        {
-          class: [
-            !_vm.userAgent ? "border-b border-gray-400" : "",
-            "flex items-center py-2 hover:text-blue-600 text-sm"
-          ],
-          attrs: { to: "/reports" }
-        },
+        "div",
+        { class: [!_vm.userAgent ? "border-b border-gray-400 pl-4" : "", ""] },
         [
           _c(
-            "svg",
+            "router-link",
             {
-              staticClass: "fill-current text-blue-600",
-              attrs: {
-                xmlns: "http://www.w3.org/2000/svg",
-                height: "24px",
-                viewBox: "0 0 24 24",
-                width: "24px"
-              }
+              staticClass: "flex items-center py-2 hover:text-blue-600 text-sm",
+              attrs: { to: "/reports" }
             },
             [
-              _c("path", { attrs: { d: "M0 0h24v24H0z", fill: "none" } }),
-              _c("path", {
-                attrs: { d: "M10 20h4V4h-4v16zm-6 0h4v-8H4v8zM16 9v11h4V9h-4z" }
-              })
+              _c(
+                "svg",
+                {
+                  staticClass: "fill-current text-blue-600",
+                  attrs: {
+                    xmlns: "http://www.w3.org/2000/svg",
+                    height: "24px",
+                    viewBox: "0 0 24 24",
+                    width: "24px"
+                  }
+                },
+                [
+                  _c("path", { attrs: { d: "M0 0h24v24H0z", fill: "none" } }),
+                  _c("path", {
+                    attrs: {
+                      d: "M10 20h4V4h-4v16zm-6 0h4v-8H4v8zM16 9v11h4V9h-4z"
+                    }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "tracking-wide pl-3" }, [
+                _vm._v("積み上げ集計")
+              ])
             ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "tracking-wide pl-3" }, [
-            _vm._v("積み上げ集計")
-          ])
-        ]
+          )
+        ],
+        1
       ),
       _vm._v(" "),
       _vm.userAgent
@@ -77281,35 +77332,39 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _c(
-        "router-link",
-        {
-          class: [
-            !_vm.userAgent ? "border-b border-gray-400 " : "",
-            "flex items-center py-2 hover:text-blue-600 text-sm"
-          ],
-          attrs: { to: "/logout" }
-        },
+        "div",
+        { class: [!_vm.userAgent ? "border-b border-gray-400 pl-4" : "", ""] },
         [
           _c(
-            "svg",
+            "router-link",
             {
-              staticClass: "fill-current text-blue-600 w-5 h-5",
-              attrs: { viewBox: "0 0 24 24" }
+              staticClass: "flex items-center py-2 hover:text-blue-600 text-sm",
+              attrs: { to: "/logout" }
             },
             [
-              _c("path", {
-                attrs: {
-                  d:
-                    "M21 3h-3.8c-.7 0-1.3-.6-1.3-1.3S16.5.4 17.2.4h5.1c.7 0 1.3.6 1.3 1.3v20.5c0 .7-.6 1.3-1.3 1.3h-5.1c-.7 0-1.3-.6-1.3-1.3 0-.7.6-1.3 1.3-1.3H21V3zm-6.9 7.7L8.6 5.2c-.5-.5-.6-1.3-.1-1.8s1.3-.5 1.8 0l7.7 7.7c.8.8.2 2.2-.9 2.2H1.8c-.7 0-1.3-.6-1.3-1.3 0-.7.6-1.3 1.3-1.3h12.3zm-1.6 4.8c.5-.5 1.3-.4 1.8.1s.4 1.3-.1 1.8l-3.8 3.2c-.5.5-1.3.4-1.8-.1-.6-.5-.5-1.3 0-1.7l3.9-3.3z"
-                }
-              })
+              _c(
+                "svg",
+                {
+                  staticClass: "fill-current text-blue-600 w-5 h-5",
+                  attrs: { viewBox: "0 0 24 24" }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M21 3h-3.8c-.7 0-1.3-.6-1.3-1.3S16.5.4 17.2.4h5.1c.7 0 1.3.6 1.3 1.3v20.5c0 .7-.6 1.3-1.3 1.3h-5.1c-.7 0-1.3-.6-1.3-1.3 0-.7.6-1.3 1.3-1.3H21V3zm-6.9 7.7L8.6 5.2c-.5-.5-.6-1.3-.1-1.8s1.3-.5 1.8 0l7.7 7.7c.8.8.2 2.2-.9 2.2H1.8c-.7 0-1.3-.6-1.3-1.3 0-.7.6-1.3 1.3-1.3h12.3zm-1.6 4.8c.5-.5 1.3-.4 1.8.1s.4 1.3-.1 1.8l-3.8 3.2c-.5.5-1.3.4-1.8-.1-.6-.5-.5-1.3 0-1.7l3.9-3.3z"
+                    }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "tracking-wide pl-3" }, [
+                _vm._v("ログアウト")
+              ])
             ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "tracking-wide pl-3" }, [
-            _vm._v("ログアウト")
-          ])
-        ]
+          )
+        ],
+        1
       )
     ],
     1
