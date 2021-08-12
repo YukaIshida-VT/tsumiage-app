@@ -19,6 +19,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link rel="shortcut icon" href="{{ asset('favicon.png') }}">
 </head>
 <body>
     <div id="app">
@@ -29,6 +31,7 @@
         href="{{ route('twitterLogout') }}">
             ログアウト
         </a>
+
     </nav>
     @endif
 
