@@ -30,13 +30,6 @@
             </div>
             <p class="text-sm">※予定時間・実績時間は分で入力して下さい</p>
 
-            <div v-if="addItemNum == 0" class="pl-1">
-                <br>
-                <a :href="tweet" target="_blank" class="pt-2">
-                    <div class="w-24 bg-green-400 text-sm text-white p-1 rounded hover:bg-green-300 text-center">ツイート投稿</div>
-                </a>
-            </div>
-
             <form @submit.prevent="submitAddItem()" class="pt-6">
                 <div>
                     <div v-for="n in addItemNum">
@@ -67,6 +60,13 @@
                     </div>
                 </div>
             </form>
+
+            <div v-if="addItemNum == 0" class="pl-1">
+                <br>
+                <a :href="tweet" target="_blank" class="pt-2">
+                    <div class="w-24 bg-green-400 text-sm text-white p-1 rounded hover:bg-green-300 text-center">ツイート投稿</div>
+                </a>
+            </div>
             <div class="pt-44"></div>
         </div>
 
