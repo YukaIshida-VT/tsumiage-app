@@ -1974,6 +1974,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     close: function close() {
       this.open = false;
+    },
+    goHome: function goHome() {
+      if (this.$route.path != '/home') {
+        this.$router.push('/home');
+      }
+
+      this.open = false;
     }
   },
   watch: {
@@ -77013,11 +77020,18 @@ var render = function() {
                             "\n                "
                         )
                       ])
-                    : _c(
-                        "div",
-                        { staticClass: "py-1 text-xl" },
-                        [
-                          _c("router-link", { attrs: { to: "/home" } }, [
+                    : _c("div", { staticClass: "py-1 text-xl" }, [
+                        _c(
+                          "button",
+                          {
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.goHome()
+                              }
+                            }
+                          },
+                          [
                             _c(
                               "svg",
                               {
@@ -77042,10 +77056,9 @@ var render = function() {
                                 })
                               ]
                             )
-                          ])
-                        ],
-                        1
-                      ),
+                          ]
+                        )
+                      ]),
                   _vm._v(" "),
                   _c(
                     "div",
