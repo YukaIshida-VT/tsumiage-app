@@ -78421,7 +78421,7 @@ var render = function() {
                                 attrs: {
                                   name: "add_plan_time" + n,
                                   errors: _vm.errors,
-                                  placeholder: "予定時間(分)",
+                                  placeholder: "予定時間",
                                   data: _vm.planTime[n]
                                 },
                                 on: {
@@ -78437,7 +78437,7 @@ var render = function() {
                                 attrs: {
                                   name: "add_actual_time" + n,
                                   errors: _vm.errors,
-                                  placeholder: "実績時間(分)",
+                                  placeholder: "実績時間",
                                   data: _vm.actualTime[n]
                                 },
                                 on: {
