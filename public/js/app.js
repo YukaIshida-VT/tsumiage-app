@@ -3008,6 +3008,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3215,7 +3222,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
     authUser: 'authUser',
     // this.todayをthis.$store.getters.yyyymmddにマッピングさせる
-    today: 'yyyymmdd'
+    today: 'yyyymmdd',
+    userAgent: 'userAgent'
   })),
   watch: {
     defaultDate: function defaultDate() {
@@ -78274,7 +78282,7 @@ var render = function() {
                             "button",
                             {
                               staticClass:
-                                "p-1 mt-5 rounded text-red-700 border mr-3 hover:border-red-700 h-9 text-sm w-12",
+                                "p-1 mt-5 rounded text-red-700 border mr-3 hover:border-red-700 h-9 w-12",
                               attrs: { type: "button" },
                               on: {
                                 click: function($event) {
@@ -78284,7 +78292,19 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("削除")]
+                            [
+                              _vm.userAgent
+                                ? _c("div", { staticClass: "text-sm" }, [
+                                    _vm._v(
+                                      "\n                            削除\n                        "
+                                    )
+                                  ])
+                                : _c("div", { staticClass: "text-xl" }, [
+                                    _vm._v(
+                                      "\n                            ×\n                        "
+                                    )
+                                  ])
+                            ]
                           ),
                           _vm._v(" "),
                           _c(

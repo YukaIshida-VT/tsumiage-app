@@ -20,7 +20,14 @@
                         <InputField :key="'actual_time' + tsumiageKey" :name="'actual_time' + tsumiageKey" :errors="errors"
                         placeholder="実績時間(分)" @update:field="actualTimeUpdate($event, tsumiageKey)" :data="tsumiage.data.attributes.actual_time" class="pr-2 w-1/4" />
 
-                        <button type="button" @click="deleteItem(tsumiage.data.tsumiage_id)" class="p-1 mt-5 rounded text-red-700 border mr-3 hover:border-red-700 h-9 text-sm w-12">削除</button>
+                        <button type="button" @click="deleteItem(tsumiage.data.tsumiage_id)" class="p-1 mt-5 rounded text-red-700 border mr-3 hover:border-red-700 h-9 w-12">
+                            <div v-if="userAgent" class="text-sm">
+                                削除
+                            </div>
+                            <div v-else class="text-xl">
+                                ×
+                            </div>
+                        </button>
                         <button class="bg-blue-500 p-1  mt-5 h-9 text-white rounded hover:bg-blue-400 text-sm w-12">保存</button>
                     </div>
                 </form>
@@ -272,6 +279,7 @@
                 authUser: 'authUser',
                 // this.todayをthis.$store.getters.yyyymmddにマッピングさせる
                 today: 'yyyymmdd',
+                userAgent: 'userAgent'
             })
         },
 
