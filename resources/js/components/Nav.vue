@@ -7,7 +7,7 @@
         <p class="pt-12 text-gray-500 text-xs uppercase font-bold" v-if="userAgent">Create</p>
 
         <div :class="[!userAgent && spTopNav ? 'border-b border-gray-400 pl-4' : '', '']">
-            <button type="button" @click="getTodayPath()" class="flex items-center py-2 hover:text-blue-600 text-sm">
+            <button type="button" @click="getTodayPath()" :class="[spTopNav? 'block w-full' : '', 'flex items-center py-2 hover:text-blue-600 text-sm']">
                 <svg viewBox="0 0 24 24" class="fill-current text-blue-600 w-5 h-5"><path d="M23.3 11.9c0 .9-.6 1.4-1.4 1.4h-8.5v8.5c0 .9-.6 1.4-1.4 1.4s-1.4-.6-1.4-1.4v-8.5H2c-.9 0-1.4-.6-1.4-1.4 0-.9.6-1.4 1.4-1.4h8.5V1.9c0-.9.6-1.4 1.4-1.4s1.4.6 1.4 1.4v8.5h8.5c.9 0 1.5.6 1.5 1.5z"/></svg>
                 <div :class="[!userAgent? 'text-lg' : '', 'tracking-wide pl-3']">積み上げ作成・編集</div>
             </button>
@@ -16,7 +16,7 @@
         <p class="pt-12 text-gray-500 text-xs uppercase font-bold" v-if="userAgent">General</p>
 
         <div :class="[!userAgent && spTopNav ? 'border-b border-gray-400 pl-4' : '', '']">
-            <button type="button" @click="goReports()" class="flex items-center py-2 hover:text-blue-600 text-sm">
+            <button type="button" @click="goReports()" :class="[spTopNav? 'block w-full' : '', 'flex items-center py-2 hover:text-blue-600 text-sm']">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" class="fill-current text-blue-600"><path d="M0 0h24v24H0z" fill="none"/><path d="M10 20h4V4h-4v16zm-6 0h4v-8H4v8zM16 9v11h4V9h-4z"/></svg>
                 <div :class="[!userAgent? 'text-lg' : '', 'tracking-wide pl-3']">積み上げ集計</div>
             </button>
@@ -25,7 +25,7 @@
         <p class="pt-12 text-gray-500 text-xs uppercase font-bold" v-if="userAgent">Settings</p>
 
         <div :class="[!userAgent && spTopNav ? 'border-b border-gray-400 pl-4' : '', '']">
-            <router-link to="/logout" class="flex items-center py-2 hover:text-blue-600 text-sm">
+            <router-link to="/logout" :class="[spTopNav? 'block w-full' : '', 'flex items-center py-2 hover:text-blue-600 text-sm']">
                 <svg viewBox="0 0 24 24" class="fill-current text-blue-600 w-5 h-5"><path d="M21 3h-3.8c-.7 0-1.3-.6-1.3-1.3S16.5.4 17.2.4h5.1c.7 0 1.3.6 1.3 1.3v20.5c0 .7-.6 1.3-1.3 1.3h-5.1c-.7 0-1.3-.6-1.3-1.3 0-.7.6-1.3 1.3-1.3H21V3zm-6.9 7.7L8.6 5.2c-.5-.5-.6-1.3-.1-1.8s1.3-.5 1.8 0l7.7 7.7c.8.8.2 2.2-.9 2.2H1.8c-.7 0-1.3-.6-1.3-1.3 0-.7.6-1.3 1.3-1.3h12.3zm-1.6 4.8c.5-.5 1.3-.4 1.8.1s.4 1.3-.1 1.8l-3.8 3.2c-.5.5-1.3.4-1.8-.1-.6-.5-.5-1.3 0-1.7l3.9-3.3z"/></svg>
                 <div :class="[!userAgent? 'text-lg' : '', 'tracking-wide pl-3']">ログアウト</div>
             </router-link>
