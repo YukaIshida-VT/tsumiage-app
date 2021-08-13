@@ -13,11 +13,12 @@
                     <InputField :key="'item' + n" :name="'add_item' + n" :label="'積み上げ' + n" :errors="errors"
                     placeholder="積み上げ" @update:field="itemUpdate($event, n)" :data="item[n]" class="pr-2 w-1/2" />
                     <InputField :key="'plan_time' + n" :name="'add_plan_time' + n" :errors="errors"
-                    placeholder="予定時間(分)" @update:field="planTimeUpdate($event, n)" :data="planTime[n]" class="pr-2 w-1/4" />
+                    placeholder="予定時間" @update:field="planTimeUpdate($event, n)" :data="planTime[n]" class="pr-2 w-1/4" />
                     <InputField :key="'actual_time' + n" :name="'add_actual_time' + n" :errors="errors"
-                    placeholder="実績時間(分)" @update:field="actualTimeUpdate($event, n)" :data="actualTime[n]" class=" w-1/4" />
+                    placeholder="実績時間" @update:field="actualTimeUpdate($event, n)" :data="actualTime[n]" class=" w-1/4" />
                 </div>
             </div>
+            <p class="text-sm">※予定時間・実績時間は単位:分で入力して下さい</p><br>
 
             <div class="flex justify-between">
                 <div class="flex">

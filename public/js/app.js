@@ -2768,6 +2768,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -78060,7 +78061,7 @@ var render = function() {
                     attrs: {
                       name: "add_plan_time" + n,
                       errors: _vm.errors,
-                      placeholder: "予定時間(分)",
+                      placeholder: "予定時間",
                       data: _vm.planTime[n]
                     },
                     on: {
@@ -78076,7 +78077,7 @@ var render = function() {
                     attrs: {
                       name: "add_actual_time" + n,
                       errors: _vm.errors,
-                      placeholder: "実績時間(分)",
+                      placeholder: "実績時間",
                       data: _vm.actualTime[n]
                     },
                     on: {
@@ -78090,6 +78091,11 @@ var render = function() {
               )
             ])
           }),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-sm" }, [
+            _vm._v("※予定時間・実績時間は単位:分で入力して下さい")
+          ]),
+          _c("br"),
           _vm._v(" "),
           _c("div", { staticClass: "flex justify-between" }, [
             _c("div", { staticClass: "flex" }, [
