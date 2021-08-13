@@ -77699,7 +77699,10 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "text-center" }, [
-    _vm._v("\n    積み上げアプリへようこそ\n\n    "),
+    _c("span", { class: [!_vm.userAgent ? "font-bold text-indigo-900" : ""] }, [
+      _vm._v("積み上げアプリへようこそ")
+    ]),
+    _vm._v(" "),
     !_vm.userAgent
       ? _c(
           "div",

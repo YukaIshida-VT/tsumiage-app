@@ -1,9 +1,9 @@
 <template>
-    <div class="">
-        積み上げアプリへようこそ
+    <div class="text-center">
+        <span :class="[!userAgent ? 'font-bold text-indigo-900' : '']">積み上げアプリへようこそ</span>
 
-        <div v-if="!userAgent" class="mt-10">
-            <Nav />
+        <div v-if="!userAgent" class="mt-10 flex justify-center">
+            <Nav  :spTopNav="false" />
         </div>
     </div>
 </template>
