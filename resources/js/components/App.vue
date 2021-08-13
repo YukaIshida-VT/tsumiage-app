@@ -16,7 +16,7 @@
                     </div>
 
                     <div class="flex items-center">
-                        <div class="pr-4 text-sm">{{ authUser.data.attributes.name }}さん</div>
+                        <div :class="[userAgent? 'text-sm' : 'text-base', 'pr-4']">{{ authUser.data.attributes.name }}さん</div>
                         <UserCircle v-if="userAgent" />
                     </div>
 

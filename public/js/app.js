@@ -77064,11 +77064,20 @@ var render = function() {
                     "div",
                     { staticClass: "flex items-center" },
                     [
-                      _c("div", { staticClass: "pr-4 text-sm" }, [
-                        _vm._v(
-                          _vm._s(_vm.authUser.data.attributes.name) + "さん"
-                        )
-                      ]),
+                      _c(
+                        "div",
+                        {
+                          class: [
+                            _vm.userAgent ? "text-sm" : "text-base",
+                            "pr-4"
+                          ]
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(_vm.authUser.data.attributes.name) + "さん"
+                          )
+                        ]
+                      ),
                       _vm._v(" "),
                       _vm.userAgent ? _c("UserCircle") : _vm._e()
                     ],
