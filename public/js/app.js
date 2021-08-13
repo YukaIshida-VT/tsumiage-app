@@ -77379,9 +77379,13 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "tracking-wide pl-3" }, [
-                _vm._v("積み上げ作成・編集")
-              ])
+              _c(
+                "div",
+                {
+                  class: [!_vm.userAgent ? "text-lg" : "", "tracking-wide pl-3"]
+                },
+                [_vm._v("積み上げ作成・編集")]
+              )
             ]
           )
         ]
@@ -77439,9 +77443,13 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "tracking-wide pl-3" }, [
-                _vm._v("積み上げ集計")
-              ])
+              _c(
+                "div",
+                {
+                  class: [!_vm.userAgent ? "text-lg" : "", "tracking-wide pl-3"]
+                },
+                [_vm._v("積み上げ集計")]
+              )
             ]
           )
         ]
@@ -77489,9 +77497,13 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "tracking-wide pl-3" }, [
-                _vm._v("ログアウト")
-              ])
+              _c(
+                "div",
+                {
+                  class: [!_vm.userAgent ? "text-lg" : "", "tracking-wide pl-3"]
+                },
+                [_vm._v("ログアウト")]
+              )
             ]
           )
         ],
