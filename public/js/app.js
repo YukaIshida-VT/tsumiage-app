@@ -2172,6 +2172,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Nav",
+  props: ['spTopNav'],
   mounted: function mounted() {
     this.setYyyymmdd();
     this.$store.dispatch('fetchTsumiageCount');
@@ -2353,12 +2354,34 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _components_Nav__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/Nav */ "./resources/js/components/Nav.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  name: "Start"
+  name: "Home",
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)({
+    userAgent: 'userAgent'
+  })),
+  components: {
+    Nav: _components_Nav__WEBPACK_IMPORTED_MODULE_0__.default
+  }
 });
 
 /***/ }),
@@ -76961,7 +76984,7 @@ var render = function() {
                   staticClass:
                     "pl-6 bg-gray-200 w-48 h-screen border-r-2 border-gray-400"
                 },
-                [_c("Nav")],
+                [_c("Nav", { attrs: { spTopNav: false } })],
                 1
               )
             : _vm._e(),
@@ -77124,6 +77147,7 @@ var render = function() {
                     { staticClass: "absolute mt-16 z-50 w-full" },
                     [
                       _c("Nav", {
+                        attrs: { spTopNav: true },
                         on: {
                           closeNav: function($event) {
                             return _vm.close()
@@ -77318,7 +77342,14 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { class: [!_vm.userAgent ? "border-b border-gray-400 pl-4" : "", ""] },
+        {
+          class: [
+            !_vm.userAgent && _vm.spTopNav
+              ? "border-b border-gray-400 pl-4"
+              : "",
+            ""
+          ]
+        },
         [
           _c(
             "button",
@@ -77366,7 +77397,14 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { class: [!_vm.userAgent ? "border-b border-gray-400 pl-4" : "", ""] },
+        {
+          class: [
+            !_vm.userAgent && _vm.spTopNav
+              ? "border-b border-gray-400 pl-4"
+              : "",
+            ""
+          ]
+        },
         [
           _c(
             "button",
@@ -77419,7 +77457,14 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { class: [!_vm.userAgent ? "border-b border-gray-400 pl-4" : "", ""] },
+        {
+          class: [
+            !_vm.userAgent && _vm.spTopNav
+              ? "border-b border-gray-400 pl-4"
+              : "",
+            ""
+          ]
+        },
         [
           _c(
             "router-link",
@@ -77653,7 +77698,17 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {}, [_vm._v("Welcome to Tsumiage App!!")])
+  return _c("div", { staticClass: "text-center" }, [
+    _vm._v("\n    積み上げアプリへようこそ\n\n    "),
+    !_vm.userAgent
+      ? _c(
+          "div",
+          { staticClass: "mt-10 flex justify-center" },
+          [_c("Nav", { attrs: { spTopNav: false } })],
+          1
+        )
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -2,7 +2,7 @@
     <div class="h-screen bg-white">
         <div :class="[userAgent ? 'flex' : '']" v-if="authUser">
             <div class="pl-6 bg-gray-200 w-48 h-screen border-r-2 border-gray-400" v-if="userAgent">
-                <Nav />
+                <Nav :spTopNav="false" />
             </div>
             <div class="flex flex-col flex-1 h-screen overflow-y-hidden relative">
                 <div :class="[userAgent ? 'px-6' : 'bg-gray-200 px-3', 'flex  justify-between items-center h-16 border-b border-gray-400']">
@@ -33,7 +33,7 @@
                 </div>
 
                 <div v-if="!userAgent && open" class="absolute mt-16 z-50 w-full">
-                    <Nav @closeNav="close()" />
+                    <Nav @closeNav="close()" :spTopNav="true" />
                 </div>
 
                 <div class="flex flex-col overflow-y-hidden flex-1">
