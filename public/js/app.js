@@ -3541,7 +3541,6 @@ var actions = {
   getUserAgent: function getUserAgent(_ref) {
     var commit = _ref.commit;
     axios.post('/api/get-ua').then(function (res) {
-      console.log(res.data);
       commit('setUserAgent', res.data);
     })["catch"](function (error) {
       console.log('Unable to detect userAgent');

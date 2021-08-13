@@ -12,7 +12,6 @@ const actions = {
     getUserAgent({commit}) {
         axios.post('/api/get-ua')
             .then(res => {
-                console.log(res.data);
                 commit('setUserAgent', res.data);
             })
             .catch(error => {
