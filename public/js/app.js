@@ -77397,7 +77397,10 @@ var render = function() {
           _c(
             "button",
             {
-              staticClass: "flex items-center py-2 hover:text-blue-600 text-sm",
+              class: [
+                _vm.spTopNav ? "block w-full" : "",
+                "flex items-center py-2 hover:text-blue-600 text-sm"
+              ],
               attrs: { type: "button" },
               on: {
                 click: function($event) {
@@ -77456,7 +77459,10 @@ var render = function() {
           _c(
             "button",
             {
-              staticClass: "flex items-center py-2 hover:text-blue-600 text-sm",
+              class: [
+                _vm.spTopNav ? "block w-full" : "",
+                "flex items-center py-2 hover:text-blue-600 text-sm"
+              ],
               attrs: { type: "button" },
               on: {
                 click: function($event) {
@@ -77520,7 +77526,10 @@ var render = function() {
           _c(
             "router-link",
             {
-              staticClass: "flex items-center py-2 hover:text-blue-600 text-sm",
+              class: [
+                _vm.spTopNav ? "block w-full" : "",
+                "flex items-center py-2 hover:text-blue-600 text-sm"
+              ],
               attrs: { to: "/logout" }
             },
             [
