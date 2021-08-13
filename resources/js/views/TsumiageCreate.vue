@@ -18,25 +18,27 @@
                     placeholder="実績時間" @update:field="actualTimeUpdate($event, n)" :data="actualTime[n]" class=" w-1/4" />
                 </div>
             </div>
-            <p class="text-sm">※予定時間・実績時間は単位:分で入力して下さい</p><br>
+            <p class="text-sm">※予定時間・実績時間は分で入力して下さい</p><br>
 
             <div class="flex justify-between">
                 <div class="flex">
                     <button v-if="itemNum < 10" type="button" class="p-1 rounded text-sm border mr-3 hover:text-blue-800" 
                     @click="itemNum += 1">
-                        積み上げ追加
+                        <div v-if="userAgent">積み上げ追加</div>
+                        <div v-else>積み上げ<br>追加</div>
                     </button>
                     <button v-if="itemNum > 0" type="button" class="p-1 rounded text-sm border mr-5 hover:text-red-800"
                     @click="deleteItem()">
-                        積み上げ削除
+                        <div v-if="userAgent">積み上げ削除</div>
+                        <div v-else>積み上げ<br>削除</div>
                     </button>
                 </div>
 
                 <div class="flex justify-end">
-                    <router-link to="/home" class="p-1 rounded text-red-700 border mr-5 hover:border-red-700 text-sm py-auto">
-                        キャンセル
+                    <router-link to="/home" class="p-1 rounded text-red-700 border mr-3 hover:border-red-700 text-sm flex items-center">
+                        <div>キャンセル</div>
                     </router-link>
-                    <button v-if="itemNum > 0" class="bg-blue-500 p-1 text-white rounded hover:bg-blue-400 text-sm">保存</button>
+                    <button v-if="itemNum > 0" class="bg-blue-500 px-3 text-white rounded hover:bg-blue-400 text-sm">保存</button>
                 </div>
             </div>
 
@@ -177,6 +179,7 @@
             ...mapGetters({
                 // this.todayをthis.$store.getters.yyyymmddにマッピングさせる
                 today: 'yyyymmdd',
+                userAgent: 'userAgent'
             })
         },
 

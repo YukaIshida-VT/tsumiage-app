@@ -2769,6 +2769,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -2911,7 +2913,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
     // this.todayをthis.$store.getters.yyyymmddにマッピングさせる
-    today: 'yyyymmdd'
+    today: 'yyyymmdd',
+    userAgent: 'userAgent'
   })),
   watch: {
     defaultDate: function defaultDate() {
@@ -78093,7 +78096,7 @@ var render = function() {
           }),
           _vm._v(" "),
           _c("p", { staticClass: "text-sm" }, [
-            _vm._v("※予定時間・実績時間は単位:分で入力して下さい")
+            _vm._v("※予定時間・実績時間は分で入力して下さい")
           ]),
           _c("br"),
           _vm._v(" "),
@@ -78113,9 +78116,13 @@ var render = function() {
                       }
                     },
                     [
-                      _vm._v(
-                        "\n                    積み上げ追加\n                "
-                      )
+                      _vm.userAgent
+                        ? _c("div", [_vm._v("積み上げ追加")])
+                        : _c("div", [
+                            _vm._v("積み上げ"),
+                            _c("br"),
+                            _vm._v("追加")
+                          ])
                     ]
                   )
                 : _vm._e(),
@@ -78134,9 +78141,13 @@ var render = function() {
                       }
                     },
                     [
-                      _vm._v(
-                        "\n                    積み上げ削除\n                "
-                      )
+                      _vm.userAgent
+                        ? _c("div", [_vm._v("積み上げ削除")])
+                        : _c("div", [
+                            _vm._v("積み上げ"),
+                            _c("br"),
+                            _vm._v("削除")
+                          ])
                     ]
                   )
                 : _vm._e()
@@ -78150,10 +78161,10 @@ var render = function() {
                   "router-link",
                   {
                     staticClass:
-                      "p-1 rounded text-red-700 border mr-5 hover:border-red-700 text-sm py-auto",
+                      "p-1 rounded text-red-700 border mr-3 hover:border-red-700 text-sm flex items-center",
                     attrs: { to: "/home" }
                   },
-                  [_vm._v("\n                    キャンセル\n                ")]
+                  [_c("div", [_vm._v("キャンセル")])]
                 ),
                 _vm._v(" "),
                 _vm.itemNum > 0
@@ -78161,7 +78172,7 @@ var render = function() {
                       "button",
                       {
                         staticClass:
-                          "bg-blue-500 p-1 text-white rounded hover:bg-blue-400 text-sm"
+                          "bg-blue-500 px-3 text-white rounded hover:bg-blue-400 text-sm"
                       },
                       [_vm._v("保存")]
                     )
@@ -78337,7 +78348,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("p", { staticClass: "text-sm" }, [
-                _vm._v("※予定時間・実績時間は単位:分で入力して下さい")
+                _vm._v("※予定時間・実績時間は分で入力して下さい")
               ]),
               _vm._v(" "),
               _vm.addItemNum == 0

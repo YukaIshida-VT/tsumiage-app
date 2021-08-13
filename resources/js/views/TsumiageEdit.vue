@@ -28,7 +28,7 @@
                     </div>
                 </form>
             </div>
-            <p class="text-sm">※予定時間・実績時間は単位:分で入力して下さい</p>
+            <p class="text-sm">※予定時間・実績時間は分で入力して下さい</p>
 
             <div v-if="addItemNum == 0" class="pl-1">
                 <br>
