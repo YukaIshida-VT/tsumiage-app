@@ -82,9 +82,14 @@
                             ticks: {
                                 beginAtZero: true,
                                 stepSize: 0.25,
-                                callback: function(value, index, values) {
-                                    return setUnit(value, index, values);
-                                },
+                                // callback: function(value, index, values) {
+                                //     return setUnit(value, index, values);
+                                // },
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: "時間",
+                                fontSize: 13
                             }
                         }]
                     },
@@ -98,9 +103,14 @@
                             ticks: {
                                 beginAtZero: true,
                                 stepSize: 1,
-                                callback: function(value, index, values) {
-                                    return setUnit(value, index, values);
-                                },
+                                // callback: function(value, index, values) {
+                                //     return setUnit(value, index, values);
+                                // },
+                            },
+                            scaleLabel: {
+                                display: true,
+                                labelString: "時間",
+                                fontSize: 13
                             }
                         }]
                     },
