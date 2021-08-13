@@ -2210,11 +2210,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         var todayPath = '/tsumiage/create/' + this.yyyymmdd;
       }
 
-      this.$router.push(todayPath);
+      if (this.$route.path != todayPath) {
+        this.$router.push(todayPath);
+      }
+
       this.closeNav();
     },
     goReports: function goReports() {
-      this.$router.push('/reports');
+      if (this.$route.path != '/reports') {
+        this.$router.push('/reports');
+      }
+
       this.closeNav();
     }
   }

@@ -79,11 +79,16 @@
                     var todayPath = '/tsumiage/create/' + this.yyyymmdd;
                 }
 
-                this.$router.push(todayPath);
+                if (this.$route.path != todayPath) {
+                    this.$router.push(todayPath);
+                }
+
                 this.closeNav();
             },
             goReports: function() {
-                this.$router.push('/reports');
+                if (this.$route.path != '/reports') {
+                    this.$router.push('/reports');
+                }
                 this.closeNav();
             }
         }
