@@ -1974,6 +1974,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     close: function close() {
       this.open = false;
+    },
+    goHome: function goHome() {
+      if (this.$route.path != '/home') {
+        this.$router.push('/home');
+      }
+
+      this.open = false;
     }
   },
   watch: {
@@ -2761,6 +2768,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 
@@ -2903,7 +2913,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
     // this.todayをthis.$store.getters.yyyymmddにマッピングさせる
-    today: 'yyyymmdd'
+    today: 'yyyymmdd',
+    userAgent: 'userAgent'
   })),
   watch: {
     defaultDate: function defaultDate() {
@@ -2935,6 +2946,15 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3208,7 +3228,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
     authUser: 'authUser',
     // this.todayをthis.$store.getters.yyyymmddにマッピングさせる
-    today: 'yyyymmdd'
+    today: 'yyyymmdd',
+    userAgent: 'userAgent'
   })),
   watch: {
     defaultDate: function defaultDate() {
@@ -77013,11 +77034,18 @@ var render = function() {
                             "\n                "
                         )
                       ])
-                    : _c(
-                        "div",
-                        { staticClass: "py-1 text-xl" },
-                        [
-                          _c("router-link", { attrs: { to: "/home" } }, [
+                    : _c("div", { staticClass: "py-1 text-xl" }, [
+                        _c(
+                          "button",
+                          {
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.goHome()
+                              }
+                            }
+                          },
+                          [
                             _c(
                               "svg",
                               {
@@ -77042,20 +77070,28 @@ var render = function() {
                                 })
                               ]
                             )
-                          ])
-                        ],
-                        1
-                      ),
+                          ]
+                        )
+                      ]),
                   _vm._v(" "),
                   _c(
                     "div",
                     { staticClass: "flex items-center" },
                     [
-                      _c("div", { staticClass: "pr-4 text-sm" }, [
-                        _vm._v(
-                          _vm._s(_vm.authUser.data.attributes.name) + "さん"
-                        )
-                      ]),
+                      _c(
+                        "div",
+                        {
+                          class: [
+                            _vm.userAgent ? "text-sm" : "text-base",
+                            "pr-4"
+                          ]
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(_vm.authUser.data.attributes.name) + "さん"
+                          )
+                        ]
+                      ),
                       _vm._v(" "),
                       _vm.userAgent ? _c("UserCircle") : _vm._e()
                     ],
@@ -77162,7 +77198,14 @@ var render = function() {
               _c(
                 "div",
                 { staticClass: "flex flex-col overflow-y-hidden flex-1" },
-                [_c("router-view", { staticClass: "p-6 overflow-x-hidden" })],
+                [
+                  _c("router-view", {
+                    class: [
+                      _vm.userAgent ? "p-6" : "px-2 py-4",
+                      "overflow-x-hidden"
+                    ]
+                  })
+                ],
                 1
               )
             ]
@@ -77379,9 +77422,13 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "tracking-wide pl-3" }, [
-                _vm._v("積み上げ作成・編集")
-              ])
+              _c(
+                "div",
+                {
+                  class: [!_vm.userAgent ? "text-lg" : "", "tracking-wide pl-3"]
+                },
+                [_vm._v("積み上げ作成・編集")]
+              )
             ]
           )
         ]
@@ -77439,9 +77486,13 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "tracking-wide pl-3" }, [
-                _vm._v("積み上げ集計")
-              ])
+              _c(
+                "div",
+                {
+                  class: [!_vm.userAgent ? "text-lg" : "", "tracking-wide pl-3"]
+                },
+                [_vm._v("積み上げ集計")]
+              )
             ]
           )
         ]
@@ -77489,9 +77540,13 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c("div", { staticClass: "tracking-wide pl-3" }, [
-                _vm._v("ログアウト")
-              ])
+              _c(
+                "div",
+                {
+                  class: [!_vm.userAgent ? "text-lg" : "", "tracking-wide pl-3"]
+                },
+                [_vm._v("ログアウト")]
+              )
             ]
           )
         ],
@@ -78009,7 +78064,7 @@ var render = function() {
                     attrs: {
                       name: "add_plan_time" + n,
                       errors: _vm.errors,
-                      placeholder: "予定時間(分)",
+                      placeholder: "予定時間",
                       data: _vm.planTime[n]
                     },
                     on: {
@@ -78025,7 +78080,7 @@ var render = function() {
                     attrs: {
                       name: "add_actual_time" + n,
                       errors: _vm.errors,
-                      placeholder: "実績時間(分)",
+                      placeholder: "実績時間",
                       data: _vm.actualTime[n]
                     },
                     on: {
@@ -78039,6 +78094,11 @@ var render = function() {
               )
             ])
           }),
+          _vm._v(" "),
+          _c("p", { staticClass: "text-sm" }, [
+            _vm._v("※予定時間・実績時間は分で入力して下さい")
+          ]),
+          _c("br"),
           _vm._v(" "),
           _c("div", { staticClass: "flex justify-between" }, [
             _c("div", { staticClass: "flex" }, [
@@ -78056,9 +78116,13 @@ var render = function() {
                       }
                     },
                     [
-                      _vm._v(
-                        "\n                    積み上げ追加\n                "
-                      )
+                      _vm.userAgent
+                        ? _c("div", [_vm._v("積み上げ追加")])
+                        : _c("div", [
+                            _vm._v("積み上げ"),
+                            _c("br"),
+                            _vm._v("追加")
+                          ])
                     ]
                   )
                 : _vm._e(),
@@ -78077,9 +78141,13 @@ var render = function() {
                       }
                     },
                     [
-                      _vm._v(
-                        "\n                    積み上げ削除\n                "
-                      )
+                      _vm.userAgent
+                        ? _c("div", [_vm._v("積み上げ削除")])
+                        : _c("div", [
+                            _vm._v("積み上げ"),
+                            _c("br"),
+                            _vm._v("削除")
+                          ])
                     ]
                   )
                 : _vm._e()
@@ -78093,10 +78161,10 @@ var render = function() {
                   "router-link",
                   {
                     staticClass:
-                      "p-1 rounded text-red-700 border mr-5 hover:border-red-700 text-sm py-auto",
+                      "p-1 rounded text-red-700 border mr-3 hover:border-red-700 text-sm flex items-center",
                     attrs: { to: "/home" }
                   },
-                  [_vm._v("\n                    キャンセル\n                ")]
+                  [_c("div", [_vm._v("キャンセル")])]
                 ),
                 _vm._v(" "),
                 _vm.itemNum > 0
@@ -78104,7 +78172,7 @@ var render = function() {
                       "button",
                       {
                         staticClass:
-                          "bg-blue-500 p-1 text-white rounded hover:bg-blue-400 text-sm"
+                          "bg-blue-500 px-3 text-white rounded hover:bg-blue-400 text-sm"
                       },
                       [_vm._v("保存")]
                     )
@@ -78210,7 +78278,7 @@ var render = function() {
                             attrs: {
                               name: "plan_time" + tsumiageKey,
                               errors: _vm.errors,
-                              placeholder: "予定時間(分)",
+                              placeholder: "予定時間",
                               data: tsumiage.data.attributes.plan_time
                             },
                             on: {
@@ -78226,7 +78294,7 @@ var render = function() {
                             attrs: {
                               name: "actual_time" + tsumiageKey,
                               errors: _vm.errors,
-                              placeholder: "実績時間(分)",
+                              placeholder: "実績時間",
                               data: tsumiage.data.attributes.actual_time
                             },
                             on: {
@@ -78239,8 +78307,10 @@ var render = function() {
                           _c(
                             "button",
                             {
-                              staticClass:
-                                "p-1 mt-5 rounded text-red-700 border mr-3 hover:border-red-700 h-9 text-sm w-12",
+                              class: [
+                                _vm.userAgent ? "mr-3" : "mr-1",
+                                "p-1 mt-5 rounded text-red-700 border hover:border-red-700 h-9 w-12"
+                              ],
                               attrs: { type: "button" },
                               on: {
                                 click: function($event) {
@@ -78250,7 +78320,15 @@ var render = function() {
                                 }
                               }
                             },
-                            [_vm._v("削除")]
+                            [
+                              _vm.userAgent
+                                ? _c("div", { staticClass: "text-sm" }, [
+                                    _vm._v("削除")
+                                  ])
+                                : _c("div", { staticClass: "text-xl" }, [
+                                    _vm._v("×")
+                                  ])
+                            ]
                           ),
                           _vm._v(" "),
                           _c(
@@ -78269,8 +78347,14 @@ var render = function() {
                 ])
               }),
               _vm._v(" "),
+              _c("p", { staticClass: "text-sm" }, [
+                _vm._v("※予定時間・実績時間は分で入力して下さい")
+              ]),
+              _vm._v(" "),
               _vm.addItemNum == 0
                 ? _c("div", { staticClass: "pl-1" }, [
+                    _c("br"),
+                    _vm._v(" "),
                     _c(
                       "a",
                       {
@@ -78368,61 +78452,82 @@ var render = function() {
                         ])
                       }),
                       _vm._v(" "),
-                      _c("div", { staticClass: "flex justify-start pl-1" }, [
-                        parseInt(_vm.addItemNum) + parseInt(_vm.itemNum) < 10
-                          ? _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "p-1 rounded text-sm border mr-3 hover:text-blue-800",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    _vm.addItemNum += 1
+                      _c(
+                        "div",
+                        {
+                          class: [
+                            _vm.userAgent ? "justify-start" : "justify-between",
+                            "flex pl-1"
+                          ]
+                        },
+                        [
+                          parseInt(_vm.addItemNum) + parseInt(_vm.itemNum) < 10
+                            ? _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "p-1 rounded text-sm border mr-3 hover:text-blue-800",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.addItemNum += 1
+                                    }
                                   }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                        積み上げ追加\n                    "
-                                )
-                              ]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.addItemNum > 0
-                          ? _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "p-1 rounded text-sm border mr-3 hover:text-blue-800",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    _vm.deleteAddItem(_vm.addItemNum)
-                                    _vm.addItemNum -= 1
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        積み上げ追加\n                    "
+                                  )
+                                ]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.addItemNum > 0
+                            ? _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "p-1 rounded text-sm border mr-3 hover:text-blue-800",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.deleteAddItem(_vm.addItemNum)
+                                      _vm.addItemNum -= 1
+                                    }
                                   }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                        追加積み上げ削除\n                    "
-                                )
-                              ]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.addItemNum > 0
-                          ? _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "bg-blue-500 p-1 text-sm text-white rounded hover:bg-blue-400"
-                              },
-                              [_vm._v("追加積み上げ保存")]
-                            )
-                          : _vm._e()
-                      ])
+                                },
+                                [
+                                  _vm.userAgent
+                                    ? _c("div", [_vm._v("追加積み上げ削除")])
+                                    : _c("div", [
+                                        _vm._v("追加積み上げ"),
+                                        _c("br"),
+                                        _vm._v("削除")
+                                      ])
+                                ]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.addItemNum > 0
+                            ? _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "bg-blue-500 p-1 text-sm text-white rounded hover:bg-blue-400"
+                                },
+                                [
+                                  _vm.userAgent
+                                    ? _c("div", [_vm._v("追加積み上げ保存")])
+                                    : _c("div", [
+                                        _vm._v("追加積み上げ"),
+                                        _c("br"),
+                                        _vm._v("保存")
+                                      ])
+                                ]
+                              )
+                            : _vm._e()
+                        ]
+                      )
                     ],
                     2
                   )
