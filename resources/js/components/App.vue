@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="flex flex-col overflow-y-hidden flex-1">
-                    <router-view class="p-6 overflow-x-hidden"></router-view>
+                    <router-view :class="[userAgent? 'p-6' : 'px-2 py-4', 'overflow-x-hidden']"></router-view>
                 </div>
             </div>
         </div>

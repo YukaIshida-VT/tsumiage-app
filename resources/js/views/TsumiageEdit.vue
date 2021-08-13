@@ -16,24 +16,22 @@
                         <InputField :key="'item' + tsumiageKey" :name="'item' + tsumiageKey" :label="'積み上げ' + String(parseInt(index) + 1)" :errors="errors"
                         placeholder="積み上げ" @update:field="itemUpdate($event, tsumiageKey)" :data="tsumiage.data.attributes.item" class="pr-2 w-1/2" />
                         <InputField :key="'plan_time' + tsumiageKey" :name="'plan_time' + tsumiageKey" :errors="errors"
-                        placeholder="予定時間(分)" @update:field="planTimeUpdate($event, tsumiageKey)" :data="tsumiage.data.attributes.plan_time" class="pr-2 w-1/4" />
+                        placeholder="予定時間" @update:field="planTimeUpdate($event, tsumiageKey)" :data="tsumiage.data.attributes.plan_time" class="pr-2 w-1/4" />
                         <InputField :key="'actual_time' + tsumiageKey" :name="'actual_time' + tsumiageKey" :errors="errors"
-                        placeholder="実績時間(分)" @update:field="actualTimeUpdate($event, tsumiageKey)" :data="tsumiage.data.attributes.actual_time" class="pr-2 w-1/4" />
+                        placeholder="実績時間" @update:field="actualTimeUpdate($event, tsumiageKey)" :data="tsumiage.data.attributes.actual_time" class="pr-2 w-1/4" />
 
-                        <button type="button" @click="deleteItem(tsumiage.data.tsumiage_id)" class="p-1 mt-5 rounded text-red-700 border mr-3 hover:border-red-700 h-9 w-12">
-                            <div v-if="userAgent" class="text-sm">
-                                削除
-                            </div>
-                            <div v-else class="text-xl">
-                                ×
-                            </div>
+                        <button type="button" @click="deleteItem(tsumiage.data.tsumiage_id)" :class="[userAgent? 'mr-3' : 'mr-1', 'p-1 mt-5 rounded text-red-700 border hover:border-red-700 h-9 w-12']">
+                            <div v-if="userAgent" class="text-sm">削除</div>
+                            <div v-else class="text-xl">×</div>
                         </button>
                         <button class="bg-blue-500 p-1  mt-5 h-9 text-white rounded hover:bg-blue-400 text-sm w-12">保存</button>
                     </div>
                 </form>
             </div>
+            <p class="text-sm">※予定時間・実績時間は単位:分で入力して下さい</p>
 
             <div v-if="addItemNum == 0" class="pl-1">
+                <br>
                 <a :href="tweet" target="_blank" class="pt-2">
                     <div class="w-24 bg-green-400 text-sm text-white p-1 rounded hover:bg-green-300 text-center">ツイート投稿</div>
                 </a>
@@ -52,16 +50,20 @@
                         </div>
                     </div>
 
-                    <div class="flex justify-start pl-1">
+                    <div :class="[userAgent? 'justify-start' : 'justify-between', 'flex pl-1']">
                         <button v-if="(parseInt(addItemNum) + parseInt(itemNum)) < 10" type="button" class="p-1 rounded text-sm border mr-3 hover:text-blue-800" 
                         @click="addItemNum += 1">
                             積み上げ追加
                         </button>
                         <button v-if="addItemNum > 0" type="button" class="p-1 rounded text-sm border mr-3 hover:text-blue-800" 
                         @click="deleteAddItem(addItemNum); addItemNum -= 1;">
-                            追加積み上げ削除
+                            <div v-if="userAgent">追加積み上げ削除</div>
+                            <div v-else>追加積み上げ<br>削除</div>
                         </button>
-                        <button v-if="addItemNum > 0" class="bg-blue-500 p-1 text-sm text-white rounded hover:bg-blue-400">追加積み上げ保存</button>
+                        <button v-if="addItemNum > 0" class="bg-blue-500 p-1 text-sm text-white rounded hover:bg-blue-400">
+                            <div v-if="userAgent">追加積み上げ保存</div>
+                            <div v-else>追加積み上げ<br>保存</div>
+                        </button>
                     </div>
                 </div>
             </form>

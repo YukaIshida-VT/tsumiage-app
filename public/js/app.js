@@ -3015,6 +3015,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -77192,7 +77194,14 @@ var render = function() {
               _c(
                 "div",
                 { staticClass: "flex flex-col overflow-y-hidden flex-1" },
-                [_c("router-view", { staticClass: "p-6 overflow-x-hidden" })],
+                [
+                  _c("router-view", {
+                    class: [
+                      _vm.userAgent ? "p-6" : "px-2 py-4",
+                      "overflow-x-hidden"
+                    ]
+                  })
+                ],
                 1
               )
             ]
@@ -78252,7 +78261,7 @@ var render = function() {
                             attrs: {
                               name: "plan_time" + tsumiageKey,
                               errors: _vm.errors,
-                              placeholder: "予定時間(分)",
+                              placeholder: "予定時間",
                               data: tsumiage.data.attributes.plan_time
                             },
                             on: {
@@ -78268,7 +78277,7 @@ var render = function() {
                             attrs: {
                               name: "actual_time" + tsumiageKey,
                               errors: _vm.errors,
-                              placeholder: "実績時間(分)",
+                              placeholder: "実績時間",
                               data: tsumiage.data.attributes.actual_time
                             },
                             on: {
@@ -78281,8 +78290,10 @@ var render = function() {
                           _c(
                             "button",
                             {
-                              staticClass:
-                                "p-1 mt-5 rounded text-red-700 border mr-3 hover:border-red-700 h-9 w-12",
+                              class: [
+                                _vm.userAgent ? "mr-3" : "mr-1",
+                                "p-1 mt-5 rounded text-red-700 border hover:border-red-700 h-9 w-12"
+                              ],
                               attrs: { type: "button" },
                               on: {
                                 click: function($event) {
@@ -78295,14 +78306,10 @@ var render = function() {
                             [
                               _vm.userAgent
                                 ? _c("div", { staticClass: "text-sm" }, [
-                                    _vm._v(
-                                      "\n                            削除\n                        "
-                                    )
+                                    _vm._v("削除")
                                   ])
                                 : _c("div", { staticClass: "text-xl" }, [
-                                    _vm._v(
-                                      "\n                            ×\n                        "
-                                    )
+                                    _vm._v("×")
                                   ])
                             ]
                           ),
@@ -78323,8 +78330,14 @@ var render = function() {
                 ])
               }),
               _vm._v(" "),
+              _c("p", { staticClass: "text-sm" }, [
+                _vm._v("※予定時間・実績時間は単位:分で入力して下さい")
+              ]),
+              _vm._v(" "),
               _vm.addItemNum == 0
                 ? _c("div", { staticClass: "pl-1" }, [
+                    _c("br"),
+                    _vm._v(" "),
                     _c(
                       "a",
                       {
@@ -78422,61 +78435,82 @@ var render = function() {
                         ])
                       }),
                       _vm._v(" "),
-                      _c("div", { staticClass: "flex justify-start pl-1" }, [
-                        parseInt(_vm.addItemNum) + parseInt(_vm.itemNum) < 10
-                          ? _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "p-1 rounded text-sm border mr-3 hover:text-blue-800",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    _vm.addItemNum += 1
+                      _c(
+                        "div",
+                        {
+                          class: [
+                            _vm.userAgent ? "justify-start" : "justify-between",
+                            "flex pl-1"
+                          ]
+                        },
+                        [
+                          parseInt(_vm.addItemNum) + parseInt(_vm.itemNum) < 10
+                            ? _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "p-1 rounded text-sm border mr-3 hover:text-blue-800",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.addItemNum += 1
+                                    }
                                   }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                        積み上げ追加\n                    "
-                                )
-                              ]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.addItemNum > 0
-                          ? _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "p-1 rounded text-sm border mr-3 hover:text-blue-800",
-                                attrs: { type: "button" },
-                                on: {
-                                  click: function($event) {
-                                    _vm.deleteAddItem(_vm.addItemNum)
-                                    _vm.addItemNum -= 1
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        積み上げ追加\n                    "
+                                  )
+                                ]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.addItemNum > 0
+                            ? _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "p-1 rounded text-sm border mr-3 hover:text-blue-800",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      _vm.deleteAddItem(_vm.addItemNum)
+                                      _vm.addItemNum -= 1
+                                    }
                                   }
-                                }
-                              },
-                              [
-                                _vm._v(
-                                  "\n                        追加積み上げ削除\n                    "
-                                )
-                              ]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        _vm.addItemNum > 0
-                          ? _c(
-                              "button",
-                              {
-                                staticClass:
-                                  "bg-blue-500 p-1 text-sm text-white rounded hover:bg-blue-400"
-                              },
-                              [_vm._v("追加積み上げ保存")]
-                            )
-                          : _vm._e()
-                      ])
+                                },
+                                [
+                                  _vm.userAgent
+                                    ? _c("div", [_vm._v("追加積み上げ削除")])
+                                    : _c("div", [
+                                        _vm._v("追加積み上げ"),
+                                        _c("br"),
+                                        _vm._v("削除")
+                                      ])
+                                ]
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _vm.addItemNum > 0
+                            ? _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "bg-blue-500 p-1 text-sm text-white rounded hover:bg-blue-400"
+                                },
+                                [
+                                  _vm.userAgent
+                                    ? _c("div", [_vm._v("追加積み上げ保存")])
+                                    : _c("div", [
+                                        _vm._v("追加積み上げ"),
+                                        _c("br"),
+                                        _vm._v("保存")
+                                      ])
+                                ]
+                              )
+                            : _vm._e()
+                        ]
+                      )
                     ],
                     2
                   )
