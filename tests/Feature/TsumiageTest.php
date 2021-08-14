@@ -168,4 +168,30 @@ class TsumiageTest extends TestCase
 
         $response->assertStatus(403);
     }  
+
+    /** @test **/ 
+    public function tsumiage_sum()
+    {
+        $user = User::factory()->create();
+        Tsumiage::factory(1)->create(['item' => 'item1', 'user_id' => $user->id, 'date' => '2021-08-14', 'actual_time' => 30, 'plan_time' => 60]);
+        Tsumiage::factory(1)->create(['item' => 'item1', 'user_id' => $user->id, 'date' => '2021-08-15', 'actual_time' => 30, 'plan_time' => 60]);
+        Tsumiage::factory(1)->create(['item' => 'item1', 'user_id' => $user->id, 'date' => '2021-08-16', 'actual_time' => 30, 'plan_time' => 60]);
+
+        $response = $this->post('/api/tsumiage-sum/', ['api_token' => $user->api_token, 'yyyymmdd' => 20210815]);
+        $response->assertStatus(Response::HTTP_OK);
+        print_r($response->getcontent());
+
+        $response->assertJson([
+            'weekly_tsumiage_sum' => [
+                'item1' => [
+                    'actual_time' => 1,
+                ]
+            ],
+            'monthly_tsumiage_sum' => [
+                'item1' => [
+                    'actual_time' => 1.5,
+                ]
+            ],
+        ]);
+    }  
 }
