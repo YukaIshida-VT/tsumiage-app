@@ -95,11 +95,40 @@ class TsumiageTest extends TestCase
         $user = User::factory()->create();
 
         $response = $this->post('/api/tsumiage', 
-        ['api_token' => $user->api_token, 'add_item1' => '', 'date' => '2021-08-15',
+        ['api_token' => $user->api_token, 'add_item1' => 'item1', 'date' => '2021-08-15',
             'add_plan_time1' => 'not numeric', 'add_actual_time1' => 'not numeric']);
 
         $response->assertSessionHasErrors('add_plan_time1');
         $response->assertSessionHasErrors('add_actual_time1');
         $this->assertCount(0, Tsumiage::all());
     }
+
+    /** @test **/ 
+    public function a_tsumiage_can_be_patched()
+    {
+        $user = User::factory()->create();
+        $tsumiage = Tsumiage::factory()->create(['user_id' => $user->id]);
+        // factoryで作ったレコードを$this->data()で上書き
+        $response = $this->patch('api/tsumiage/' . $tsumiage->id, 
+        ['api_token' => $user->api_token, 'key' => '1', 'item1' => 'item1',
+            'plan_time1' => '15', 'actual_time1' => '30']);
+
+        $tsumiage = $tsumiage->fresh();
+
+        $this->assertEquals('item1', $tsumiage->item);
+        $this->assertEquals('15', $tsumiage->plan_time);
+        $this->assertEquals('30', $tsumiage->actual_time);
+
+        $response->assertStatus(Response::HTTP_OK);
+        $response->assertJson([
+            'data' => [
+                'tsumiage_id' => $tsumiage->id,
+                'attributes'=> [
+                    'item' => $tsumiage->item,
+                    'plan_time' => $tsumiage->plan_time,
+                    'actual_time' => $tsumiage->actual_time,
+                ]
+            ],
+        ]);
+    }  
 }
