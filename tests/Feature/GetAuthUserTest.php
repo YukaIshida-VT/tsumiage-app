@@ -10,12 +10,7 @@ use App\Models\User;
 class GetAuthUserTest extends TestCase
 {
     use RefreshDatabase;
-    
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+
     public function test_authenticated_user_can_be_fetched()
     {
         $this->withoutExceptionHandling();
