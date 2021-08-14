@@ -11,6 +11,7 @@ class GetAuthUserTest extends TestCase
 {
     use RefreshDatabase;
 
+    /** @test **/ 
     public function test_authenticated_user_can_be_fetched()
     {
         $this->withoutExceptionHandling();

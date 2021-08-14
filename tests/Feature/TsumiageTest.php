@@ -12,6 +12,7 @@ class TsumiageTest extends TestCase
 {
     use RefreshDatabase;
 
+    /** @test **/ 
     public function only_the_users_tsumiages_can_be_retrieved()
     {
         $user = User::factory()->create();
