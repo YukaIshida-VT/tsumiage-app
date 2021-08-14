@@ -58,7 +58,7 @@ class TsumiageController extends Controller
     {
         $this->authorize('delete', $tsumiage);
         $tsumiage->delete();
-        return response([], Response::HTTP_OK); 
+        return response([], Response::HTTP_NO_CONTENT); 
     }
 
 }

@@ -143,4 +143,16 @@ class TsumiageTest extends TestCase
             ['api_token' => $anotherUser->api_token, 'key' => '1', 'item1' => 'item1']);
         $response->assertStatus(403);
     }  
+
+    /** @test **/ 
+    public function a_tsumiage_can_be_deleted()
+    {
+        $user = User::factory()->create();
+        $tsumiage = Tsumiage::factory()->create(['user_id' => $user->id]);
+
+        $response = $this->delete('/api/tsumiage/' . $tsumiage->id, 
+            ['api_token' => $user->api_token]);
+        $this->assertCount(0, Tsumiage::all());
+        $response->assertStatus(Response::HTTP_NO_CONTENT);
+    }  
 }
