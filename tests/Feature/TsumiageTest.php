@@ -44,7 +44,7 @@ class TsumiageTest extends TestCase
     {
         $user = User::factory()->create();
         $response = $this->post('/api/tsumiage', 
-            ['api_token' => $user->api_token, 'add_item1' => 'item', 'date' => '2021-08-15']);
+            ['api_token' => $user->api_token, 'add_item1' => 'item', 'add_item2' => 'item', 'date' => '2021-08-15']);
 
         $tsumiage = Tsumiage::first();
 
@@ -70,7 +70,7 @@ class TsumiageTest extends TestCase
                         ]
                     ],
                 ],
-                'count' => 1,
+                'count' => 2,
                 'links' => [
                     'self' => url('/tsumiage'),
                 ]
@@ -179,7 +179,7 @@ class TsumiageTest extends TestCase
 
         $response = $this->post('/api/tsumiage-sum/', ['api_token' => $user->api_token, 'yyyymmdd' => 20210815]);
         $response->assertStatus(Response::HTTP_OK);
-        print_r($response->getcontent());
+        // print_r($response->getcontent());
 
         $response->assertJson([
             'weekly_tsumiage_sum' => [
