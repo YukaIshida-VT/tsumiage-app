@@ -52,7 +52,7 @@ class TsumiageTest extends TestCase
         $this->assertEquals($tsumiage->user_id, $user->id);
  
         $response->assertStatus(Response::HTTP_CREATED);
-        print_r($response->getdata());
+        // print_r($response->getdata());
 
         $response
             ->assertJson([
@@ -75,5 +75,18 @@ class TsumiageTest extends TestCase
                     'self' => url('/tsumiage'),
                 ]
             ]);
+    }
+
+    /** @test **/ 
+    public function fields_are_required()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->post('/api/tsumiage', 
+        ['api_token' => $user->api_token, 'add_item1' => '', 'date' => '2021-08-15']);
+
+        $response->assertSessionHasErrors('add_item1');
+        $this->assertCount(0, Tsumiage::all());
+
     }
 }
