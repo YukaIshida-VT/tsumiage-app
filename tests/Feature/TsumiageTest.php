@@ -155,4 +155,17 @@ class TsumiageTest extends TestCase
         $this->assertCount(0, Tsumiage::all());
         $response->assertStatus(Response::HTTP_NO_CONTENT);
     }  
+
+    /** @test **/ 
+    public function only_the_owner_can_delete_the_tsumiage()
+    {
+        $user = User::factory()->create();
+        $tsumiage = Tsumiage::factory()->create(['user_id' => $user->id]);
+        $anotherUser = User::factory()->create();
+
+        $response = $this->delete('/api/tsumiage/' . $tsumiage->id, 
+            ['api_token' => $anotherUser->api_token]);
+
+        $response->assertStatus(403);
+    }  
 }
