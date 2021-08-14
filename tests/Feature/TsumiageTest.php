@@ -131,4 +131,16 @@ class TsumiageTest extends TestCase
             ],
         ]);
     }  
+
+    /** @test **/ 
+    public function only_the_owner_of_the_tsumiage_can_patch_the_contact()
+    {
+        $user = User::factory()->create();
+        $tsumiage = Tsumiage::factory()->create(['user_id' => $user->id]);
+        $anotherUser = User::factory()->create();
+
+        $response = $this->patch('api/tsumiage/' . $tsumiage->id, 
+            ['api_token' => $anotherUser->api_token, 'key' => '1', 'item1' => 'item1']);
+        $response->assertStatus(403);
+    }  
 }
