@@ -26,5 +26,13 @@ class TsumiageTest extends TestCase
                     'self' => url('/tsumiage'),
                 ]
             ]);
-    }  
+    }
+
+    /** @test **/ 
+    public function an_authenticated_user_should_redirected_to_login()
+    {
+        $response = $this->post('/api/tsumiage', ['api_token' => '', 'item1' => 'test_item']);
+        $response->assertRedirect('/');
+        $this->assertCount(0, Tsumiage::all());
+    }
 }
