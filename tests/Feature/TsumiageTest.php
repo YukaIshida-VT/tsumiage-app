@@ -87,6 +87,19 @@ class TsumiageTest extends TestCase
 
         $response->assertSessionHasErrors('add_item1');
         $this->assertCount(0, Tsumiage::all());
+    }
 
+    /** @test **/ 
+    public function time_must_be_numeric()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->post('/api/tsumiage', 
+        ['api_token' => $user->api_token, 'add_item1' => '', 'date' => '2021-08-15',
+            'add_plan_time1' => 'not numeric', 'add_actual_time1' => 'not numeric']);
+
+        $response->assertSessionHasErrors('add_plan_time1');
+        $response->assertSessionHasErrors('add_actual_time1');
+        $this->assertCount(0, Tsumiage::all());
     }
 }
