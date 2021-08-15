@@ -1,5 +1,5 @@
 const state = {
-    userAgent: false,
+    userAgent: true,
 };
 
 const getters = {
