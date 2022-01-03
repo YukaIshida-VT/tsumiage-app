@@ -22,6 +22,7 @@ class Tsumiage extends JsonResource
                     'item' => $this->item,
                     'plan_time' => $this->plan_time,
                     'actual_time' => $this->actual_time,
+                    'due' => $this->due,
                 ]
             ],
             'links' => [

@@ -7,8 +7,12 @@
             name="datepicker" class="datapicker-style">
         </Datepicker>
 
+        <div class="flex justify-end pr-12">
+            <label class="text-gray-600 pt-2 uppercase text-xs font-bold absolute">期日</label>
+        </div>
+
         <form @submit.prevent="submitForm" class="pt-6">
-            <div v-for="n in itemNum">
+            <div v-for="n in itemNum" class="item-div">
                 <div class="flex justify-items-center mx-auto">
                     <InputField :key="'item' + n" :name="'add_item' + n" :label="'積み上げ' + n" :errors="errors"
                     placeholder="積み上げ" @update:field="itemUpdate($event, n)" :data="item[n]" class="pr-2 w-1/2" />
@@ -16,6 +20,12 @@
                     placeholder="予定時間" @update:field="planTimeUpdate($event, n)" :data="planTime[n]" class="pr-2 w-1/4" />
                     <InputField :key="'actual_time' + n" :name="'add_actual_time' + n" :errors="errors"
                     placeholder="実績時間" @update:field="actualTimeUpdate($event, n)" :data="actualTime[n]" class=" w-1/4" />
+                    <Datepicker
+                        v-model="due[n]"
+                        :format="DatePickerFormat"
+                        :language="ja"
+                        name="datepicker" class="datapicker-style pl-2 py-7">
+                    </Datepicker>
                 </div>
             </div>
             <p class="text-sm">※予定時間・実績時間は分で入力して下さい</p><br>
@@ -44,7 +54,7 @@
 
         </form>
 
-        <div class="pt-44"></div>
+        <div class="pt-48"></div>
     </div>
 </template>
 
@@ -77,6 +87,9 @@
                 actualTime: {
                     1 : '', 2 : '', 3 : '', 4 : '', 5 : '', 6 : '', 7 : '', 8 : '', 9 : '', 10 : '',
                 },
+                due: {
+                    1 : '', 2 : '', 3 : '', 4 : '', 5 : '', 6 : '', 7 : '', 8 : '', 9 : '', 10 : '',
+                },
 
                 errors: null,
                 itemNum: 3,
@@ -107,6 +120,13 @@
                     submitArray['add_item' + i] = this.item[i];
                     submitArray['add_plan_time' + i] = this.planTime[i];
                     submitArray['add_actual_time' + i] = this.actualTime[i];
+
+                    let now = this.due[i];
+                    let Year = now.getFullYear();
+                    let Month = ("00" + (now.getMonth()+1)).slice(-2);
+                    let Day = ("00" + now.getDate()).slice(-2);
+                    let due = Year + "-" + Month + "-" + Day;
+                    submitArray['add_due' + i] = due;
                 }
 
                 axios.post('/api/tsumiage', submitArray)
@@ -198,5 +218,8 @@
         border-radius: 3px;
         text-align: center;
     }
-    
+
+    .item-div .vdp-datepicker__calendar {
+        right: 0px;
+    }
 </style>

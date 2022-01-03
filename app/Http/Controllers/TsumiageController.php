@@ -22,10 +22,11 @@ class TsumiageController extends Controller
             $itemKey = 'add_item' . $i;
             $planTimeKey = 'add_plan_time' . $i;
             $actualTimeKey = 'add_actual_time' . $i;
+            $dueKey = 'add_due' . $i;
 
             if ($request->has($itemKey)) {
                 $dataArray[] = ['item' => $request->$itemKey, 'plan_time' => $request->$planTimeKey,
-                                 'actual_time' => $request->$actualTimeKey, 'date' => $request->date];
+                   'actual_time' => $request->$actualTimeKey, 'date' => $request->date, 'due' => $request->$dueKey];
             }
         }
         $tsumiages = request()->user()->tsumiages()->createMany($dataArray);
@@ -42,11 +43,13 @@ class TsumiageController extends Controller
         $itemKey = 'item' . $request->key;
         $planTimeKey = 'plan_time' . $request->key;
         $actualTimeKey = 'actual_time' . $request->key;
+        $dueKey = 'due' . $request->key;
 
         $tsumiage->update([
             'item' => $request->$itemKey,
             'plan_time' => $request->$planTimeKey,
             'actual_time' => $request->$actualTimeKey,
+            'due' => $request->$dueKey,
         ]);
 
         return (new TsumiageResource($tsumiage))

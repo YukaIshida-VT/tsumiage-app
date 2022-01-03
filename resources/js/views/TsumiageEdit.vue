@@ -14,11 +14,17 @@
                 <form @submit.prevent="submitForm(tsumiageKey)" class="pt-6">
                     <div class="flex justify-items-center mx-auto">
                         <InputField :key="'item' + tsumiageKey" :name="'item' + tsumiageKey" :label="'積み上げ' + String(parseInt(index) + 1)" :errors="errors"
-                        placeholder="積み上げ" @update:field="itemUpdate($event, tsumiageKey)" :data="tsumiage.data.attributes.item" class="pr-2 w-1/2" />
+                        placeholder="積み上げ" @update:field="itemUpdate($event, tsumiageKey)" :data="tsumiage.data.attributes.item" class="pr-2 w-1/3" />
                         <InputField :key="'plan_time' + tsumiageKey" :name="'plan_time' + tsumiageKey" :errors="errors"
-                        placeholder="予定時間" @update:field="planTimeUpdate($event, tsumiageKey)" :data="tsumiage.data.attributes.plan_time" class="pr-2 w-1/4" />
+                        placeholder="予定時間" @update:field="planTimeUpdate($event, tsumiageKey)" :data="tsumiage.data.attributes.plan_time" class="pr-2 w-1/5" />
                         <InputField :key="'actual_time' + tsumiageKey" :name="'actual_time' + tsumiageKey" :errors="errors"
-                        placeholder="実績時間" @update:field="actualTimeUpdate($event, tsumiageKey)" :data="tsumiage.data.attributes.actual_time" class="pr-2 w-1/4" />
+                        placeholder="実績時間" @update:field="actualTimeUpdate($event, tsumiageKey)" :data="tsumiage.data.attributes.actual_time" class="pr-2 w-1/5" />
+                        <Datepicker
+                                v-model="tsumiage.data.attributes.due"
+                                :format="DatePickerFormat"
+                                :language="ja"
+                                name="datepicker" class="datapicker-style pr-2 py-7">
+                        </Datepicker>
 
                         <button type="button" @click="deleteItem(tsumiage.data.tsumiage_id)" :class="[userAgent? 'mr-3' : 'mr-1', 'p-1 mt-5 rounded text-red-700 border hover:border-red-700 h-9 w-12']">
                             <div v-if="userAgent" class="text-sm">削除</div>
@@ -40,6 +46,12 @@
                             placeholder="予定時間" @update:field="addPlanTimeUpdate($event, n)" :data="planTime[n]" class="pr-2 w-1/4" />
                             <InputField :key="'add_actual_time' + n" :name="'add_actual_time' + n" :errors="errors"
                             placeholder="実績時間" @update:field="addActualTimeUpdate($event, n)" :data="actualTime[n]" class=" w-1/4" />
+                            <Datepicker
+                                v-model="due[n]"
+                                :format="DatePickerFormat"
+                                :language="ja"
+                                name="datepicker" class="datapicker-style pl-2 py-7">
+                            </Datepicker>
                         </div>
                     </div>
 
@@ -69,7 +81,6 @@
             </div>
             <div class="pt-44"></div>
         </div>
-
     </div>
 </template>
 
@@ -125,6 +136,9 @@
                 actualTime: {
                     1 : '', 2 : '', 3 : '', 4 : '', 5 : '', 6 : '', 7 : '', 8 : '', 9 : '', 10 : '',
                 },
+                due: {
+                    1 : '', 2 : '', 3 : '', 4 : '', 5 : '', 6 : '', 7 : '', 8 : '', 9 : '', 10 : '',
+                },
             }
         },
 
@@ -136,6 +150,13 @@
                 submitArray['item' + key] = this.tsumiages[key]['data']['attributes']['item'];
                 submitArray['plan_time' + key] = this.tsumiages[key]['data']['attributes']['plan_time'];
                 submitArray['actual_time' + key] = this.tsumiages[key]['data']['attributes']['actual_time'];
+                
+                let now = this.tsumiages[key]['data']['attributes']['due'];
+                let Year = now.getFullYear();
+                let Month = ("00" + (now.getMonth()+1)).slice(-2);
+                let Day = ("00" + now.getDate()).slice(-2);
+                let due = Year + "-" + Month + "-" + Day;
+                submitArray['due' + key] = due;
 
                 axios.patch('/api/tsumiage/' + tsumiage_id, submitArray)
                     .then(response => {
@@ -154,6 +175,13 @@
                     submitArray['add_item' + i] = this.item[i];
                     submitArray['add_plan_time' + i] = this.planTime[i];
                     submitArray['add_actual_time' + i] = this.actualTime[i];
+
+                    let now = this.due[i];
+                    let Year = now.getFullYear();
+                    let Month = ("00" + (now.getMonth()+1)).slice(-2);
+                    let Day = ("00" + now.getDate()).slice(-2);
+                    let due = Year + "-" + Month + "-" + Day;
+                    submitArray['add_due' + i] = due;
                 }
 
                 axios.post('/api/tsumiage', submitArray)
@@ -223,6 +251,7 @@
                 self.item[addItemNum] = '';
                 self.planTime[addItemNum] = '';
                 self.actualTime[addItemNum] = '';
+                self.due[addItemNum] = '';
             },
 
             allDeleteAddItem: function() {
