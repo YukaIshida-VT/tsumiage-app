@@ -33,8 +33,9 @@ docker-compose rm -v
 docker-compose down -v
 docker volume prune
 docker-compose up -d
+コンテナに入って
+php artisan migrate
 ```
-その後php artisan migrate
 https://gamushiros.hatenablog.com/entry/2018/07/29/211219
 
 ### 一般画面
