@@ -7,6 +7,10 @@
             name="datepicker" class="datapicker-style">
         </Datepicker>
 
+        <div class="flex justify-end pr-44">
+            <label class="text-gray-600 pt-2 uppercase text-xs font-bold absolute">期日</label>
+        </div>
+
         <div v-if="loading">Loading...</div>
         <div v-else class="item-div">
         
