@@ -24,6 +24,7 @@ Route::get('auth/twitter/callback',[TwitterLoginController::class, 'handleProvid
 // ログアウトURL
 Route::get('auth/twitter/logout', [TwitterLoginController::class, 'logout'])->name('twitterLogout');
 
+//　Laravel Breezeで作成した認証機能の画面(Auth::routes())には一般ユーザーをアクセスさせない
 Route::group(['middleware' => 'can:manage_member'], function () {
     Auth::routes();
 });
