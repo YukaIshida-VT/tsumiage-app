@@ -22921,7 +22921,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".datapicker-style div input {\n  border: 1px ridge #dcdcdc;\n  border-radius: 3px;\n  text-align: center;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".datapicker-style div input {\n  border: 1px ridge #dcdcdc;\n  border-radius: 3px;\n  text-align: center;\n}\n.item-div .vdp-datepicker__calendar {\n  right: 0px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -78351,6 +78351,7 @@ var render = function() {
         ? _c("div", [_vm._v("Loading...")])
         : _c(
             "div",
+            { staticClass: "item-div" },
             [
               _vm._l(_vm.tsumiages, function(tsumiage, tsumiageKey, index) {
                 return _c("div", [

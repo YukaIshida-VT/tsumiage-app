@@ -8,7 +8,7 @@
         </Datepicker>
 
         <div v-if="loading">Loading...</div>
-        <div v-else>
+        <div v-else class="item-div">
         
             <div v-for="(tsumiage, tsumiageKey, index) in tsumiages">
                 <form @submit.prevent="submitForm(tsumiageKey)" class="pt-6">
@@ -329,5 +329,9 @@
         border: 1px ridge #dcdcdc;
         border-radius: 3px;
         text-align: center;
+    }
+
+    .item-div .vdp-datepicker__calendar {
+        right: 0px;
     }
 </style>
