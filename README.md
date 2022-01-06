@@ -48,6 +48,7 @@ http://127.0.0.1:40040/
 
 ```
 http://127.0.0.1:40040/admin
-
+最初にシーダーを実行してアドミンユーザー追加
+php artisan db:seed
 admin / admin
 ```
