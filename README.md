@@ -27,6 +27,16 @@ docker-compose up -d
 docker-compose down
 ```
 
+- SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo failed対策
+```
+docker-compose rm -v
+docker-compose down -v
+docker volume prune
+docker-compose up -d
+```
+その後php artisan migrate
+https://gamushiros.hatenablog.com/entry/2018/07/29/211219
+
 ### 一般画面
 
 ```
