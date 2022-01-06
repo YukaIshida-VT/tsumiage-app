@@ -120,13 +120,16 @@
                     submitArray['add_item' + i] = this.item[i];
                     submitArray['add_plan_time' + i] = this.planTime[i];
                     submitArray['add_actual_time' + i] = this.actualTime[i];
+                    console.log(this.due[i]);
 
-                    let now = this.due[i];
-                    let Year = now.getFullYear();
-                    let Month = ("00" + (now.getMonth()+1)).slice(-2);
-                    let Day = ("00" + now.getDate()).slice(-2);
-                    let due = Year + "-" + Month + "-" + Day;
-                    submitArray['add_due' + i] = due;
+                    if (this.due[i] != '') {
+                        let now = this.due[i];
+                        let Year = now.getFullYear();
+                        let Month = ("00" + (now.getMonth()+1)).slice(-2);
+                        let Day = ("00" + now.getDate()).slice(-2);
+                        let due = Year + "-" + Month + "-" + Day;
+                        submitArray['add_due' + i] = due;
+                    }
                 }
 
                 axios.post('/api/tsumiage', submitArray)

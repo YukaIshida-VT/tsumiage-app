@@ -2883,12 +2883,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         submitArray['add_item' + i] = this.item[i];
         submitArray['add_plan_time' + i] = this.planTime[i];
         submitArray['add_actual_time' + i] = this.actualTime[i];
-        var now = this.due[i];
-        var Year = now.getFullYear();
-        var Month = ("00" + (now.getMonth() + 1)).slice(-2);
-        var Day = ("00" + now.getDate()).slice(-2);
-        var due = Year + "-" + Month + "-" + Day;
-        submitArray['add_due' + i] = due;
+        console.log(this.due[i]);
+
+        if (this.due[i] != '') {
+          var now = this.due[i];
+          var Year = now.getFullYear();
+          var Month = ("00" + (now.getMonth() + 1)).slice(-2);
+          var Day = ("00" + now.getDate()).slice(-2);
+          var due = Year + "-" + Month + "-" + Day;
+          submitArray['add_due' + i] = due;
+        }
       }
 
       axios.post('/api/tsumiage', submitArray).then(function (response) {
@@ -3158,12 +3162,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       submitArray['item' + key] = this.tsumiages[key]['data']['attributes']['item'];
       submitArray['plan_time' + key] = this.tsumiages[key]['data']['attributes']['plan_time'];
       submitArray['actual_time' + key] = this.tsumiages[key]['data']['attributes']['actual_time'];
-      var now = this.tsumiages[key]['data']['attributes']['due'];
-      var Year = now.getFullYear();
-      var Month = ("00" + (now.getMonth() + 1)).slice(-2);
-      var Day = ("00" + now.getDate()).slice(-2);
-      var due = Year + "-" + Month + "-" + Day;
-      submitArray['due' + key] = due;
+
+      if (this.tsumiages[key]['data']['attributes']['due'] !== null) {
+        var now = this.tsumiages[key]['data']['attributes']['due'];
+        var Year = now.getFullYear();
+        var Month = ("00" + (now.getMonth() + 1)).slice(-2);
+        var Day = ("00" + now.getDate()).slice(-2);
+        var due = Year + "-" + Month + "-" + Day;
+        submitArray['due' + key] = due;
+      }
+
       axios.patch('/api/tsumiage/' + tsumiage_id, submitArray).then(function (response) {
         alert("保存しました");
       })["catch"](function (errors) {
@@ -3180,12 +3188,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         submitArray['add_item' + i] = this.item[i];
         submitArray['add_plan_time' + i] = this.planTime[i];
         submitArray['add_actual_time' + i] = this.actualTime[i];
-        var now = this.due[i];
-        var Year = now.getFullYear();
-        var Month = ("00" + (now.getMonth() + 1)).slice(-2);
-        var Day = ("00" + now.getDate()).slice(-2);
-        var due = Year + "-" + Month + "-" + Day;
-        submitArray['add_due' + i] = due;
+
+        if (this.due[i] != '') {
+          var now = this.due[i];
+          var Year = now.getFullYear();
+          var Month = ("00" + (now.getMonth() + 1)).slice(-2);
+          var Day = ("00" + now.getDate()).slice(-2);
+          var due = Year + "-" + Month + "-" + Day;
+          submitArray['add_due' + i] = due;
+        }
       }
 
       axios.post('/api/tsumiage', submitArray).then(function (response) {

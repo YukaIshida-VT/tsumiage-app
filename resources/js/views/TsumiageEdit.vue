@@ -151,12 +151,14 @@
                 submitArray['plan_time' + key] = this.tsumiages[key]['data']['attributes']['plan_time'];
                 submitArray['actual_time' + key] = this.tsumiages[key]['data']['attributes']['actual_time'];
                 
-                let now = this.tsumiages[key]['data']['attributes']['due'];
-                let Year = now.getFullYear();
-                let Month = ("00" + (now.getMonth()+1)).slice(-2);
-                let Day = ("00" + now.getDate()).slice(-2);
-                let due = Year + "-" + Month + "-" + Day;
-                submitArray['due' + key] = due;
+                if (this.tsumiages[key]['data']['attributes']['due'] !== null) {
+                    let now = this.tsumiages[key]['data']['attributes']['due'];
+                    let Year = now.getFullYear();
+                    let Month = ("00" + (now.getMonth()+1)).slice(-2);
+                    let Day = ("00" + now.getDate()).slice(-2);
+                    let due = Year + "-" + Month + "-" + Day;
+                    submitArray['due' + key] = due;
+                }
 
                 axios.patch('/api/tsumiage/' + tsumiage_id, submitArray)
                     .then(response => {
@@ -176,12 +178,14 @@
                     submitArray['add_plan_time' + i] = this.planTime[i];
                     submitArray['add_actual_time' + i] = this.actualTime[i];
 
-                    let now = this.due[i];
-                    let Year = now.getFullYear();
-                    let Month = ("00" + (now.getMonth()+1)).slice(-2);
-                    let Day = ("00" + now.getDate()).slice(-2);
-                    let due = Year + "-" + Month + "-" + Day;
-                    submitArray['add_due' + i] = due;
+                    if (this.due[i] != '') {
+                        let now = this.due[i];
+                        let Year = now.getFullYear();
+                        let Month = ("00" + (now.getMonth()+1)).slice(-2);
+                        let Day = ("00" + now.getDate()).slice(-2);
+                        let due = Year + "-" + Month + "-" + Day;
+                        submitArray['add_due' + i] = due;
+                    }
                 }
 
                 axios.post('/api/tsumiage', submitArray)
