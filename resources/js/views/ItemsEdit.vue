@@ -46,7 +46,7 @@
         },
 
         mounted() {
-            axios.get('/api/items/' + this.$route.params.id)
+            get('/api/items/' + this.$route.params.id)
                 .then(response => {
                     this.form = response.data.data.attributes;
                     this.itemNum = response.data.data.item_num;

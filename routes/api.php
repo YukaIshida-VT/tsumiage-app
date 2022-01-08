@@ -8,6 +8,7 @@ use App\Http\Controllers\TsumiageController;
 use App\Http\Controllers\UserTsumiageController;
 use App\Http\Controllers\TsumiageSumController;
 use App\Http\Controllers\GetUaController;
+use App\Http\Controllers\WeightController;
 
 Route::middleware('auth:api')->group(function(){
     Route::get('auth-user', [AuthUserController::class, 'show']);
@@ -22,6 +23,9 @@ Route::middleware('auth:api')->group(function(){
     Route::patch('/tsumiage/{tsumiage}', [TsumiageController::class, 'update']);
     Route::delete('/tsumiage/{tsumiage}', [TsumiageController::class, 'destroy']);
     Route::post('/user-tsumiage', [UserTsumiageController::class, 'show']);
+    Route::post('/daily-weight', [WeightController::class, 'show']);
+    Route::post('/weight', [WeightController::class, 'store']);
+    Route::patch('/weight/{weight}', [WeightController::class, 'update']);
     Route::post('/tsumiage-sum', [TsumiageSumController::class, 'show']);
     Route::post('/get-ua', [GetUaController::class, '__invoke']);
 });

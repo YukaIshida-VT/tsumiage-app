@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Home from "./views/Home";
 import TsumiageCreate from "./views/TsumiageCreate";
 import TsumiageEdit from "./views/TsumiageEdit";
+import WeightManage from "./views/WeightManage";
 import Reports from "./views/Reports";
 import ItemsEdit from "./views/ItemsEdit";
 import Logout from "./Actions/Logout";
@@ -21,6 +22,9 @@ export default new VueRouter({
         }, {
             path: '/tsumiage/edit/:day', component: TsumiageEdit,
             meta: { title: '積み上げ編集' }
+        }, {
+            path: '/weight/:day', component: WeightManage,
+            meta: { title: '体重・食事管理' }
         }, {
             path: '/items/:id/edit', component: ItemsEdit,
             meta: { title: '積み上げ項目編集' }

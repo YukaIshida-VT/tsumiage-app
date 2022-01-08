@@ -52,6 +52,11 @@ class User extends Authenticatable
         return $this->hasMany(Tsumiage::class);
     }
 
+    public function weights()
+    {
+        return $this->hasMany(Weight::class);
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class);

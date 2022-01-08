@@ -2451,7 +2451,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    axios.get('/api/items/' + this.$route.params.id).then(function (response) {
+    get('/api/items/' + this.$route.params.id).then(function (response) {
       _this.form = response.data.data.attributes;
       _this.itemNum = response.data.data.item_num;
       _this.loading = false;
@@ -3330,6 +3330,233 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/WeightManage.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/WeightManage.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _components_InputField__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/InputField */ "./resources/js/components/InputField.vue");
+/* harmony import */ var vuejs_datepicker__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuejs-datepicker */ "./node_modules/vuejs-datepicker/dist/vuejs-datepicker.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  name: "WeightManage",
+  components: {
+    InputField: _components_InputField__WEBPACK_IMPORTED_MODULE_0__.default,
+    Datepicker: vuejs_datepicker__WEBPACK_IMPORTED_MODULE_1__.default
+  },
+  mounted: function mounted() {
+    this.getDate(this.$route.params.day);
+    this.getWeight();
+  },
+  data: function data() {
+    var _ref;
+
+    return _ref = {
+      weight: {},
+      errors: null,
+      loading: true,
+      day: null,
+      yyyymmdd: null
+    }, _defineProperty(_ref, "loading", true), _defineProperty(_ref, "tweet", ''), _defineProperty(_ref, "recordExists", false), _defineProperty(_ref, "record_id", ''), _defineProperty(_ref, "defaultDate", new Date()), _defineProperty(_ref, "DatePickerFormat", 'yyyy-MM-dd'), _defineProperty(_ref, "ja", {
+      language: 'Japanese',
+      months: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+      monthsAbbr: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+      days: ['日', '月', '火', '水', '木', '金', '土'],
+      rtl: false,
+      ymd: 'yyyy-MM-dd',
+      yearSuffix: '年'
+    }), _defineProperty(_ref, "form", {
+      'weight': '',
+      'breakfast': '',
+      'lunch': '',
+      'supper': '',
+      'snack': '',
+      'breakfast_calories': '0',
+      'lunch_calories': '0',
+      'supper_calories': '0',
+      'snack_calories': '0',
+      'total_calories': '0',
+      'record_id': ''
+    }), _ref;
+  },
+  methods: {
+    submitForm: function submitForm() {
+      var _this = this;
+
+      var submitArray = {};
+      submitArray['date'] = this.day;
+      submitArray['weight'] = this.form.weight;
+      submitArray['breakfast'] = this.form.breakfast;
+      submitArray['lunch'] = this.form.lunch;
+      submitArray['supper'] = this.form.supper;
+      submitArray['snack'] = this.form.snack;
+      submitArray['breakfast_calories'] = this.form.breakfast_calories;
+      submitArray['lunch_calories'] = this.form.lunch_calories;
+      submitArray['supper_calories'] = this.form.supper_calories;
+      submitArray['snack_calories'] = this.form.snack_calories;
+      submitArray['total_calories'] = this.form.total_calories;
+
+      if (this.recordExists) {
+        // データ更新
+        axios.patch('/api/weight/' + this.record_id, submitArray).then(function (response) {
+          alert("保存しました");
+        })["catch"](function (errors) {
+          _this.errors = errors.response.data.errors;
+        });
+      } else {
+        // データ新規作成
+        axios.post('/api/weight', submitArray).then(function (response) {
+          alert("保存しました");
+        })["catch"](function (errors) {
+          _this.errors = errors.response.data.errors;
+        });
+      }
+    },
+    getWeight: function getWeight() {
+      var _this2 = this;
+
+      axios.post('/api/daily-weight', {
+        date: this.day
+      }).then(function (response) {
+        if (response.data) {
+          _this2.form = response.data.data.attributes;
+          _this2.recordExists = true;
+          _this2.record_id = response.data.data.weight_id;
+        } else {
+          _this2.form.weight = "";
+          _this2.form.breakfast = "";
+          _this2.form.lunch = "";
+          _this2.form.supper = "";
+          _this2.form.snack = "";
+          _this2.form.breakfast_calories = "0";
+          _this2.form.lunch_calories = "0";
+          _this2.form.supper_calories = "0";
+          _this2.form.snack_calories = "0";
+          _this2.form.total_calories = "0";
+          _this2.recordExists = false;
+          _this2.record_id = "";
+        }
+
+        _this2.loading = false;
+      })["catch"](function (error) {
+        _this2.loading = false; // if (error.response.status === 404) {
+        //     this.$router.push('/home');
+        // }
+      });
+    },
+    totalCalUpdate: function totalCalUpdate() {
+      this.form.total_calories = Number(this.form.breakfast_calories) + Number(this.form.lunch_calories) + Number(this.form.supper_calories) + Number(this.form.snack_calories);
+    },
+    getDay: function getDay() {
+      var now = this.defaultDate;
+      var Year = now.getFullYear();
+      var Month = ("00" + (now.getMonth() + 1)).slice(-2);
+      var Day = ("00" + now.getDate()).slice(-2);
+      this.day = Year + "-" + Month + "-" + Day;
+      this.yyyymmdd = Year + Month + Day;
+    },
+    getDate: function getDate(yyyymmdd) {
+      var Year = yyyymmdd.substr(0, 4);
+      var Month = yyyymmdd.substr(4, 2);
+      var Day = yyyymmdd.substr(6, 2);
+      this.defaultDate = new Date(Year, Month - 1, Day);
+      this.day = Year + "-" + Month + "-" + Day;
+    }
+  },
+  computed: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_2__.mapGetters)({
+    authUser: 'authUser',
+    // this.todayをthis.$store.getters.yyyymmddにマッピングさせる
+    today: 'yyyymmdd',
+    userAgent: 'userAgent'
+  })),
+  watch: {
+    defaultDate: function defaultDate() {
+      this.getDay();
+      this.getWeight();
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -3440,15 +3667,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _views_Home__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./views/Home */ "./resources/js/views/Home.vue");
 /* harmony import */ var _views_TsumiageCreate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./views/TsumiageCreate */ "./resources/js/views/TsumiageCreate.vue");
 /* harmony import */ var _views_TsumiageEdit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./views/TsumiageEdit */ "./resources/js/views/TsumiageEdit.vue");
-/* harmony import */ var _views_Reports__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./views/Reports */ "./resources/js/views/Reports.vue");
-/* harmony import */ var _views_ItemsEdit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./views/ItemsEdit */ "./resources/js/views/ItemsEdit.vue");
-/* harmony import */ var _Actions_Logout__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Actions/Logout */ "./resources/js/Actions/Logout.vue");
-/* harmony import */ var _components_Chart__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Chart */ "./resources/js/components/Chart.vue");
+/* harmony import */ var _views_WeightManage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./views/WeightManage */ "./resources/js/views/WeightManage.vue");
+/* harmony import */ var _views_Reports__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./views/Reports */ "./resources/js/views/Reports.vue");
+/* harmony import */ var _views_ItemsEdit__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./views/ItemsEdit */ "./resources/js/views/ItemsEdit.vue");
+/* harmony import */ var _Actions_Logout__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Actions/Logout */ "./resources/js/Actions/Logout.vue");
+/* harmony import */ var _components_Chart__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Chart */ "./resources/js/components/Chart.vue");
 
 
 
@@ -3458,8 +3686,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_7__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_8__.default);
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vue_router__WEBPACK_IMPORTED_MODULE_8__.default({
+
+vue__WEBPACK_IMPORTED_MODULE_8__.default.use(vue_router__WEBPACK_IMPORTED_MODULE_9__.default);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vue_router__WEBPACK_IMPORTED_MODULE_9__.default({
   routes: [{
     path: '/home',
     component: _views_Home__WEBPACK_IMPORTED_MODULE_0__.default,
@@ -3479,20 +3708,26 @@ vue__WEBPACK_IMPORTED_MODULE_7__.default.use(vue_router__WEBPACK_IMPORTED_MODULE
       title: '積み上げ編集'
     }
   }, {
+    path: '/weight/:day',
+    component: _views_WeightManage__WEBPACK_IMPORTED_MODULE_3__.default,
+    meta: {
+      title: '体重・食事管理'
+    }
+  }, {
     path: '/items/:id/edit',
-    component: _views_ItemsEdit__WEBPACK_IMPORTED_MODULE_4__.default,
+    component: _views_ItemsEdit__WEBPACK_IMPORTED_MODULE_5__.default,
     meta: {
       title: '積み上げ項目編集'
     }
   }, {
     path: '/reports',
-    component: _views_Reports__WEBPACK_IMPORTED_MODULE_3__.default,
+    component: _views_Reports__WEBPACK_IMPORTED_MODULE_4__.default,
     meta: {
       title: '積み上げ集計'
     }
   }, {
     path: '/logout',
-    component: _Actions_Logout__WEBPACK_IMPORTED_MODULE_5__.default
+    component: _Actions_Logout__WEBPACK_IMPORTED_MODULE_6__.default
   }],
   mode: 'history'
 }));
@@ -22922,6 +23157,30 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".datapicker-style div input {\n  borde
 /***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/TsumiageEdit.vue?vue&type=style&index=0&lang=css&":
 /*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/TsumiageEdit.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".datapicker-style div input {\n  border: 1px ridge #dcdcdc;\n  border-radius: 3px;\n  text-align: center;\n}\n.item-div .vdp-datepicker__calendar {\n  right: 0px;\n}\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/WeightManage.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/WeightManage.vue?vue&type=style&index=0&lang=css& ***!
   \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -75545,6 +75804,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/WeightManage.vue?vue&type=style&index=0&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/WeightManage.vue?vue&type=style&index=0&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_WeightManage_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./WeightManage.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/WeightManage.vue?vue&type=style&index=0&lang=css&");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_WeightManage_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default, options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_WeightManage_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_1__.default.locals || {});
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js":
 /*!****************************************************************************!*\
   !*** ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js ***!
@@ -76581,6 +76870,47 @@ component.options.__file = "resources/js/views/TsumiageEdit.vue"
 
 /***/ }),
 
+/***/ "./resources/js/views/WeightManage.vue":
+/*!*********************************************!*\
+  !*** ./resources/js/views/WeightManage.vue ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _WeightManage_vue_vue_type_template_id_d06497c8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./WeightManage.vue?vue&type=template&id=d06497c8& */ "./resources/js/views/WeightManage.vue?vue&type=template&id=d06497c8&");
+/* harmony import */ var _WeightManage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./WeightManage.vue?vue&type=script&lang=js& */ "./resources/js/views/WeightManage.vue?vue&type=script&lang=js&");
+/* harmony import */ var _WeightManage_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./WeightManage.vue?vue&type=style&index=0&lang=css& */ "./resources/js/views/WeightManage.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+;
+
+
+/* normalize component */
+
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__.default)(
+  _WeightManage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _WeightManage_vue_vue_type_template_id_d06497c8___WEBPACK_IMPORTED_MODULE_0__.render,
+  _WeightManage_vue_vue_type_template_id_d06497c8___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/WeightManage.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/Actions/Logout.vue?vue&type=script&lang=js&":
 /*!******************************************************************!*\
   !*** ./resources/js/Actions/Logout.vue?vue&type=script&lang=js& ***!
@@ -76773,6 +77103,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/views/WeightManage.vue?vue&type=script&lang=js&":
+/*!**********************************************************************!*\
+  !*** ./resources/js/views/WeightManage.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WeightManage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./WeightManage.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/WeightManage.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_WeightManage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/Chart.vue?vue&type=style&index=0&lang=css&":
 /*!****************************************************************************!*\
   !*** ./resources/js/components/Chart.vue?vue&type=style&index=0&lang=css& ***!
@@ -76834,6 +77180,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_TsumiageEdit_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TsumiageEdit.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/TsumiageEdit.vue?vue&type=style&index=0&lang=css&");
+
+
+/***/ }),
+
+/***/ "./resources/js/views/WeightManage.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/views/WeightManage.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_dist_cjs_js_clonedRuleSet_9_0_rules_0_use_2_node_modules_vue_loader_lib_index_js_vue_loader_options_WeightManage_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader/dist/cjs.js!../../../node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./WeightManage.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/WeightManage.vue?vue&type=style&index=0&lang=css&");
 
 
 /***/ }),
@@ -77038,6 +77397,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TsumiageEdit_vue_vue_type_template_id_25aeb296___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TsumiageEdit_vue_vue_type_template_id_25aeb296___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./TsumiageEdit.vue?vue&type=template&id=25aeb296& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/TsumiageEdit.vue?vue&type=template&id=25aeb296&");
+
+
+/***/ }),
+
+/***/ "./resources/js/views/WeightManage.vue?vue&type=template&id=d06497c8&":
+/*!****************************************************************************!*\
+  !*** ./resources/js/views/WeightManage.vue?vue&type=template&id=d06497c8& ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WeightManage_vue_vue_type_template_id_d06497c8___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WeightManage_vue_vue_type_template_id_d06497c8___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WeightManage_vue_vue_type_template_id_d06497c8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./WeightManage.vue?vue&type=template&id=d06497c8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/WeightManage.vue?vue&type=template&id=d06497c8&");
 
 
 /***/ }),
@@ -78723,6 +79099,292 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/WeightManage.vue?vue&type=template&id=d06497c8&":
+/*!*******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/views/WeightManage.vue?vue&type=template&id=d06497c8& ***!
+  \*******************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("Datepicker", {
+        staticClass: "datapicker-style",
+        attrs: {
+          format: _vm.DatePickerFormat,
+          language: _vm.ja,
+          name: "datepicker"
+        },
+        model: {
+          value: _vm.defaultDate,
+          callback: function($$v) {
+            _vm.defaultDate = $$v
+          },
+          expression: "defaultDate"
+        }
+      }),
+      _vm._v(" "),
+      _vm.loading
+        ? _c("div", [_vm._v("Loading...")])
+        : _c("div", { staticClass: "item-div" }, [
+            _c(
+              "form",
+              {
+                staticClass: "pt-6",
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.submitForm.apply(null, arguments)
+                  }
+                }
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "flex justify-items-center mx-auto" },
+                  [
+                    _c("InputField", {
+                      attrs: {
+                        name: "weight",
+                        label: "体重",
+                        errors: _vm.errors,
+                        placeholder: "体重[kg]",
+                        data: _vm.form.weight
+                      },
+                      on: {
+                        "update:field": function($event) {
+                          _vm.form.weight = $event
+                        }
+                      }
+                    }),
+                    _c("br")
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "flex justify-items-center mx-auto" },
+                  [
+                    _c("InputField", {
+                      staticClass: "pr-2 w-1/4",
+                      attrs: {
+                        name: "breakfast",
+                        label: "朝食",
+                        errors: _vm.errors,
+                        placeholder: "朝食内容",
+                        data: _vm.form.breakfast
+                      },
+                      on: {
+                        "update:field": function($event) {
+                          _vm.form.breakfast = $event
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("InputField", {
+                      staticClass: "pr-2 w-1/4",
+                      attrs: {
+                        name: "lunch",
+                        label: "昼食",
+                        errors: _vm.errors,
+                        placeholder: "昼食内容",
+                        data: _vm.form.lunch
+                      },
+                      on: {
+                        "update:field": function($event) {
+                          _vm.form.lunch = $event
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("InputField", {
+                      staticClass: "pr-2 w-1/4",
+                      attrs: {
+                        name: "supper",
+                        label: "晩飯",
+                        errors: _vm.errors,
+                        placeholder: "晩飯内容",
+                        data: _vm.form.supper
+                      },
+                      on: {
+                        "update:field": function($event) {
+                          _vm.form.supper = $event
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("InputField", {
+                      staticClass: "pr-2 w-1/4",
+                      attrs: {
+                        name: "snack",
+                        label: "間食",
+                        errors: _vm.errors,
+                        placeholder: "間食内容",
+                        data: _vm.form.snack
+                      },
+                      on: {
+                        "update:field": function($event) {
+                          _vm.form.snack = $event
+                        }
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "flex justify-items-center mx-auto" },
+                  [
+                    _c("InputField", {
+                      staticClass: "pr-2 w-1/4",
+                      attrs: {
+                        name: "breakfast_calories",
+                        errors: _vm.errors,
+                        placeholder: "朝食のカロリー",
+                        data: _vm.form.breakfast_calories
+                      },
+                      on: {
+                        "update:field": function($event) {
+                          _vm.form.breakfast_calories = $event
+                          _vm.totalCalUpdate()
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("InputField", {
+                      staticClass: "pr-2 w-1/4",
+                      attrs: {
+                        name: "lunch_calories",
+                        errors: _vm.errors,
+                        placeholder: "昼食のカロリー",
+                        data: _vm.form.lunch_calories
+                      },
+                      on: {
+                        "update:field": function($event) {
+                          _vm.form.lunch_calories = $event
+                          _vm.totalCalUpdate()
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("InputField", {
+                      staticClass: "pr-2 w-1/4",
+                      attrs: {
+                        name: "supper_calories",
+                        errors: _vm.errors,
+                        placeholder: "晩飯のカロリー",
+                        data: _vm.form.supper_calories
+                      },
+                      on: {
+                        "update:field": function($event) {
+                          _vm.form.supper_calories = $event
+                          _vm.totalCalUpdate()
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("InputField", {
+                      staticClass: "pr-2 w-1/4",
+                      attrs: {
+                        name: "snack_calories",
+                        errors: _vm.errors,
+                        placeholder: "間食のカロリー",
+                        data: _vm.form.snack_calories
+                      },
+                      on: {
+                        "update:field": function($event) {
+                          _vm.form.snack_calories = $event
+                          _vm.totalCalUpdate()
+                        }
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("div", [
+                  _vm._v(
+                    "\n                合計 " +
+                      _vm._s(_vm.form.total_calories) +
+                      "kcal\n            "
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "flex justify-end" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass:
+                          "p-1 rounded text-red-700 border mr-3 hover:border-red-700 text-sm flex items-center",
+                        attrs: { to: "/home" }
+                      },
+                      [_c("div", [_vm._v("キャンセル")])]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass:
+                          "bg-blue-500 px-3 text-white rounded hover:bg-blue-400 text-sm"
+                      },
+                      [_vm._v("保存")]
+                    )
+                  ],
+                  1
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "pl-1" }, [
+              _c("br"),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "pt-2",
+                  attrs: { href: _vm.tweet, target: "_blank" }
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "w-24 bg-green-400 text-sm text-white p-1 rounded hover:bg-green-300 text-center"
+                    },
+                    [_vm._v("ツイート投稿")]
+                  )
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "pt-44" })
+          ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
