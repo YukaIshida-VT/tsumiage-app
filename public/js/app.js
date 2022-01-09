@@ -2176,6 +2176,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "Nav",
@@ -2227,6 +2232,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     goReports: function goReports() {
       if (this.$route.path != '/reports') {
         this.$router.push('/reports');
+      }
+
+      this.closeNav();
+    },
+    goWeight: function goWeight() {
+      var todayWeightPath = '/weight/' + this.yyyymmdd;
+
+      if (this.$route.path != todayWeightPath) {
+        this.$router.push(todayWeightPath);
       }
 
       this.closeNav();
@@ -77895,6 +77909,47 @@ var render = function() {
                   class: [!_vm.userAgent ? "text-lg" : "", "tracking-wide pl-3"]
                 },
                 [_vm._v("積み上げ作成・編集")]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              class: [
+                _vm.spTopNav ? "block w-full" : "",
+                "flex items-center py-2 hover:text-blue-600 text-sm"
+              ],
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  return _vm.goWeight()
+                }
+              }
+            },
+            [
+              _c(
+                "svg",
+                {
+                  staticClass: "fill-current text-blue-600 w-5 h-5",
+                  attrs: { viewBox: "0 0 24 24" }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M23.3 11.9c0 .9-.6 1.4-1.4 1.4h-8.5v8.5c0 .9-.6 1.4-1.4 1.4s-1.4-.6-1.4-1.4v-8.5H2c-.9 0-1.4-.6-1.4-1.4 0-.9.6-1.4 1.4-1.4h8.5V1.9c0-.9.6-1.4 1.4-1.4s1.4.6 1.4 1.4v8.5h8.5c.9 0 1.5.6 1.5 1.5z"
+                    }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  class: [!_vm.userAgent ? "text-lg" : "", "tracking-wide pl-3"]
+                },
+                [_vm._v("体重管理")]
               )
             ]
           )
