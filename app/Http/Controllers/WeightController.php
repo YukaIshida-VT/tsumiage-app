@@ -7,13 +7,14 @@ use Illuminate\Http\Response;
 use App\Http\Resources\Weight as WeightResource;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Weight;
+use App\Http\Requests\StoreWeight;
+use App\Http\Requests\UpdateWeight;
 
 class WeightController extends Controller
 {
     public function show(Request $request)
     {
         $weight = Auth::user()->weights->where('date', $request->date)->first();
-        info($request->date);
 
         if($weight) {
             return new WeightResource($weight);
@@ -22,8 +23,9 @@ class WeightController extends Controller
         }
     }
 
-    public function store(Request $request) 
+    public function store(StoreWeight $request) 
     {
+        info($request);
         $this->authorize('create', Weight::class);
 
         $dataArray = [];
@@ -48,7 +50,7 @@ class WeightController extends Controller
         ->setStatusCode(Response::HTTP_CREATED);
     }
 
-    public function update(Request $request, Weight $weight)
+    public function update(UpdateWeight $request, Weight $weight)
     {
         $this->authorize('update', $weight);
 

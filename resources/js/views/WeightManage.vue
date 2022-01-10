@@ -110,11 +110,11 @@
                     'lunch': '',
                     'supper': '',
                     'snack': '',
-                    'breakfast_calories': '0',
-                    'lunch_calories': '0',
-                    'supper_calories': '0',
-                    'snack_calories': '0',
-                    'total_calories': '0',
+                    'breakfast_calories': '',
+                    'lunch_calories': '',
+                    'supper_calories': '',
+                    'snack_calories': '',
+                    'total_calories': '',
                     'record_id' : '',
                 },
             }
@@ -150,6 +150,8 @@
                     axios.post('/api/weight', submitArray)
                         .then(response => {
                             alert("保存しました");
+                            this.recordExists = true;
+                            this.record_id = response.data.data.weight_id;
                         })
                         .catch(errors => {
                             this.errors = errors.response.data.errors;
@@ -171,11 +173,11 @@
                             this.form.lunch = "";
                             this.form.supper = "";
                             this.form.snack = "";
-                            this.form.breakfast_calories = "0";
-                            this.form.lunch_calories = "0";
-                            this.form.supper_calories = "0";
-                            this.form.snack_calories = "0";
-                            this.form.total_calories = "0";
+                            this.form.breakfast_calories = "";
+                            this.form.lunch_calories = "";
+                            this.form.supper_calories = "";
+                            this.form.snack_calories = "";
+                            this.form.total_calories = "";
                             this.recordExists = false;
                             this.record_id = "";
                         }

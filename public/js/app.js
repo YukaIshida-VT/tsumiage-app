@@ -3463,11 +3463,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       'lunch': '',
       'supper': '',
       'snack': '',
-      'breakfast_calories': '0',
-      'lunch_calories': '0',
-      'supper_calories': '0',
-      'snack_calories': '0',
-      'total_calories': '0',
+      'breakfast_calories': '',
+      'lunch_calories': '',
+      'supper_calories': '',
+      'snack_calories': '',
+      'total_calories': '',
       'record_id': ''
     }), _ref;
   },
@@ -3499,6 +3499,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         // データ新規作成
         axios.post('/api/weight', submitArray).then(function (response) {
           alert("保存しました");
+          _this.recordExists = true;
+          _this.record_id = response.data.data.weight_id;
         })["catch"](function (errors) {
           _this.errors = errors.response.data.errors;
         });
@@ -3520,11 +3522,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           _this2.form.lunch = "";
           _this2.form.supper = "";
           _this2.form.snack = "";
-          _this2.form.breakfast_calories = "0";
-          _this2.form.lunch_calories = "0";
-          _this2.form.supper_calories = "0";
-          _this2.form.snack_calories = "0";
-          _this2.form.total_calories = "0";
+          _this2.form.breakfast_calories = "";
+          _this2.form.lunch_calories = "";
+          _this2.form.supper_calories = "";
+          _this2.form.snack_calories = "";
+          _this2.form.total_calories = "";
           _this2.recordExists = false;
           _this2.record_id = "";
         }
