@@ -19,11 +19,12 @@ class WeightController extends Controller
             return new WeightResource($weight);
         } else {
             return false;
-        };
+        }
     }
 
     public function store(Request $request) 
     {
+        $this->authorize('create', Weight::class);
 
         $dataArray = [];
         $dataArray = [
@@ -49,6 +50,8 @@ class WeightController extends Controller
 
     public function update(Request $request, Weight $weight)
     {
+        $this->authorize('update', $weight);
+
         $weight->update([
             'weight' => $request->weight,
             'breakfast' => $request->breakfast, 
